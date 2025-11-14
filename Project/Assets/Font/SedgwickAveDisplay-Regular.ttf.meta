@@ -11,10 +11,10 @@ TrueTypeFontImporter:
   fontNames:
   - Sedgwick Ave Display
   fallbackFontReferences: []
-  customCharacters: 
+  customCharacters: 0x4E-9FA5
   fontRenderingMode: 0
   ascentCalculationMode: 1
-  useLegacyBoundsCalculation: 0
+  useLegacyBoundsCalculation: 1
   shouldRoundAdvanceValue: 1
   userData: 
   assetBundleName: 
