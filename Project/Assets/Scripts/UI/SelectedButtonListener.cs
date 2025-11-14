@@ -6,14 +6,16 @@ using UnityEngine.UI;
 public class SelectedButtonListener : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
-    private TextMeshProUGUI buttonText;
+    private Text buttonText;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        buttonText.text = $"<u>{buttonText.text}</u>";
+        buttonText.text = "<color=white><b><i>" + buttonText.text + "</i></b></color>";
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        buttonText.text = buttonText.text.Replace("<u>", "").Replace("</u>", "");
+        buttonText.text = buttonText.text.Replace("<i>", "").Replace("</i>", "")
+            .Replace("<b>", "").Replace("</b>", "")
+            .Replace("<color=white>", "").Replace("</color>", "");
     }
 }

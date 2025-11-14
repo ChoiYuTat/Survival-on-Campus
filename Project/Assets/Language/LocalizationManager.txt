@@ -3,3 +3,8 @@ Start
 Load
 Option
 Exit
+Music
+Sound
+Language
+Back
+Option_Title
