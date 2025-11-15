@@ -11,9 +11,6 @@ public class EnemyPathfindingSystem : MonoBehaviour
     public float viewAngle = 70f;
     public float loseSightTime = 2f;
 
-    [SerializeField]
-    private Text disText, AngleText, rayText;
-
     private int currentIndex = 0;
     private NavMeshAgent agent;
     private float lostTimer = 0f;
@@ -68,24 +65,12 @@ public class EnemyPathfindingSystem : MonoBehaviour
         //Debug.Log($"Direction to player: {dirToPlayer}");
 
         float distance = Vector3.Distance(transform.position, playerVector);
-        disText.text = distance.ToString();
         Debug.DrawRay(transform.position, dirToPlayer * distance, Color.green);
-        if (Physics.Raycast(transform.position, dirToPlayer, out hit, distance))
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                rayText.text = "Hit Player";
-            }
-            else
-            {
-                rayText.text = "Hit " + hit.collider.gameObject.name;
-            }
-        }
+
 
         if (distance <= sightRange)
         {
             float angle = Vector3.Angle(transform.forward, dirToPlayer);
-            AngleText.text = angle.ToString();
             if (angle <= viewAngle / 2f)
             {
                 if (Physics.Raycast(transform.position, dirToPlayer, out hit, distance))
