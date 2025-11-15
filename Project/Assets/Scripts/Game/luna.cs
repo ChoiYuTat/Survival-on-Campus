@@ -7,11 +7,13 @@ public class luna : MonoBehaviour
     private Rigidbody RD;
     public float movespeed;
     private Vector2 move;
-    private int maxHealth = 5;
-    public int MaxHealth { get { return maxHealth; } }
 
-    private int currentHealth;
-    public int Health { get { return currentHealth; } }
+    private Vector2 lastMoveDir = Vector2.down;
+    //private int maxHealth = 5;
+    //public int MaxHealth { get { return maxHealth; } }
+
+    //private int currentHealth;
+    //public int Health { get { return currentHealth; } }
 
 
     private Animator animator;
@@ -20,8 +22,8 @@ public class luna : MonoBehaviour
     void Start()
     {
         RD = GetComponent<Rigidbody>();
-        currentHealth = 5;
-        int LunaHp = GetChurrentHp();
+        //currentHealth = 5;
+        //int LunaHp = GetChurrentHp();
         animator = GetComponentInChildren<Animator>();
 
         //chang frame
@@ -42,8 +44,13 @@ public class luna : MonoBehaviour
             looDirection.Normalize();
         }
 
-        animator.SetFloat("LookX", looDirection.x);
-        animator.SetFloat("LookY", looDirection.y);
+        if (h == 0 || v == 0)
+        {
+            lastMoveDir = move;
+        }
+
+        animator.SetFloat("LookX", lastMoveDir.x);
+        animator.SetFloat("LookY", lastMoveDir.y);
         moveScacle = move.magnitude;
         movespeed = 2;
         if (move.magnitude > 0)
@@ -77,15 +84,15 @@ public class luna : MonoBehaviour
         //transform.position = position;
         RD.MovePosition(transform.position + position);
     }
-    public void ChangHealth(int amount)
-    {
-        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-        Debug.Log(currentHealth+"/"+maxHealth);
-    }
-    private  int GetChurrentHp()
-    {
-        return currentHealth;
-    }
+    //public void ChangHealth(int amount)
+    //{
+        //currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        //Debug.Log(currentHealth+"/"+maxHealth);
+   //}
+    //private  int GetChurrentHp()
+    //{
+        //return currentHealth;
+    //}
 
 }
 
