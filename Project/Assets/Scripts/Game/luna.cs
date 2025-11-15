@@ -52,7 +52,7 @@ public class luna : MonoBehaviour
         animator.SetFloat("LookX", lastMoveDir.x);
         animator.SetFloat("LookY", lastMoveDir.y);
         moveScacle = move.magnitude;
-        movespeed = 2;
+        movespeed = 3;
         if (move.magnitude > 0)
         {
             if (Input.GetKey(KeyCode.LeftShift))
