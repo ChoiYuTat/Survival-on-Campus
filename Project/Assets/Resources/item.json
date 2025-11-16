@@ -1,0 +1,50 @@
+{
+  "item": 
+  [
+    {
+      "itemName": "Bandage",
+      "itemID": 0,
+      "quantity": 1,
+      "description": "The simplest medical tools, suitable for treating minor wounds. +10HP",
+      "effect": "AddHP10",
+      "isUsable": true
+      
+    }
+    ,
+    {
+      "itemName": "Hamburger",
+      "itemID": 1,
+      "quantity": 1,
+      "description": "Who doesn't like hamburgers? +12HP",
+      "effect": "AddHP12",
+      "isUsable": true
+    }
+    ,
+    {
+      "itemName": "Medical kit",
+      "itemID": 2,
+      "quantity": 1,
+      "description": "Who doesn't like hamburgers? +35HP",
+      "effect": "AddHP35",
+      "isUsable": true
+    }
+    ,
+    {
+      "itemName": "Lock picking tools",
+      "itemID": 3,
+      "quantity": 1,
+      "description": "Used to unlock the classroom lock",
+      "effect": "UnlockClassroom",
+      "isUsable": false
+    }
+    ,
+    {
+      "itemName": "Principal's Key",
+      "itemID": 4,
+      "quantity": 1,
+      "description": "Used to open the principal's office door",
+      "effect": "UnlockPrincipalroom",
+      "isUsable": false
+    }
+  ]
+}

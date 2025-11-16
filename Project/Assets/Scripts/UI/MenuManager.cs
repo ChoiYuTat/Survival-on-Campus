@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,18 +14,11 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private GameObject ItemView, ItemPrefab;
 
+    private List<GameObject> itemObjects = new List<GameObject>();
+
     void Start()
     {
-        data.Inventory.Add(new PlayerInvertory { itemID = 1, itemName = "Health Potion", quantity = 5, effect = "AddHP20", isUsable = true});
-        data.Inventory.Add(new PlayerInvertory { itemID = 2, itemName = "Key", quantity = 1, isUsable = false});
-
         UpdateUI();
-
-        foreach (var item in data.Inventory)
-        {
-            GameObject itemObj = Instantiate(ItemPrefab, ItemView.transform);
-            itemObj.GetComponent<ItemManager>().SetItem(item.itemName, item.quantity, item.isUsable);
-        }
     }
 
     public void UpdateUI()
@@ -34,5 +29,17 @@ public class MenuManager : MonoBehaviour
         Level.text = data.Level.ToString();
         EXP.text = data.CurrentExp.ToString();
         nextEXP.text = data.RequiredExp.ToString();
+
+        for (int i = 0; i < itemObjects.Count; i++)
+        {
+            Destroy(itemObjects[i]);
+        }
+
+        foreach (var item in data.Inventory)
+        {
+            GameObject itemObj = Instantiate(ItemPrefab, ItemView.transform);
+            itemObj.GetComponent<ItemManager>().SetItem(item.itemName, item.quantity, item.isUsable);
+            itemObjects.Add(itemObj);
+        }
     }
 }
