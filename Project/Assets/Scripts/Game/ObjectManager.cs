@@ -44,7 +44,7 @@ public class ObjectManager : MonoBehaviour
         if (isPickUp) 
         {
             isPickUp = false;
-            PickUpObject();
+            PickUpObject(objectItemID);
         }
     }
 
@@ -69,26 +69,53 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
-    void PickUpObject()
+    void PickUpObject(int id)
     {
         for (int i = 0; i < itemDatabase.item.Length; i++)
         {
             if (itemDatabase.item[i].itemID == objectItemID)
             {
-                data.Inventory.Add(new PlayerInvertory
+                if (IsItemInInventory(id))
                 {
-                    itemID = itemDatabase.item[i].itemID,
-                    itemName = itemDatabase.item[i].itemName,
-                    quantity = itemDatabase.item[i].quantity,
-                    effect = itemDatabase.item[i].effect,
-                    description = itemDatabase.item[i].description,
-                    isUsable = itemDatabase.item[i].isUsable
-                });
+                    for (int x = 0; x < data.Inventory.Count; x++)
+                    {
+                        if (data.Inventory[x].itemID == id)
+                        {
+                            data.Inventory[x].quantity++;
+                            break;
+                        }
+                    }
+                }
+                else 
+                {
+                    data.Inventory.Add(new PlayerInvertory
+                    {
+                        itemID = itemDatabase.item[i].itemID,
+                        itemName = itemDatabase.item[i].itemName,
+                        quantity = itemDatabase.item[i].quantity,
+                        effect = itemDatabase.item[i].effect,
+                        description = itemDatabase.item[i].description,
+                        isUsable = itemDatabase.item[i].isUsable
+                    });
+                }
 
-                Debug.Log($"已拾取: {itemDatabase.item[i].itemName}");
+
+                    Debug.Log($"已拾取: {itemDatabase.item[i].itemName}");
                 Destroy(gameObject);
                 return;
             }
         }
+    }
+
+    bool IsItemInInventory(int id)
+    {
+        for (int x = 0; x < data.Inventory.Count; x++)
+        {
+            if (data.Inventory[x].itemID == id)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
