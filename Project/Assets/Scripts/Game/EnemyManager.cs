@@ -32,8 +32,6 @@ public class EnemyManager : MonoBehaviour
 {
     private EnemyDatabase enemyDatabase;
 
-    public UnityEngine.UI.Text text;
-
     void Start()
     {
         LoadEnemyData();
@@ -61,7 +59,6 @@ public class EnemyManager : MonoBehaviour
         EnemyData enemy = GetEnemyById(id);
         if (enemy != null)
         {
-            text.text = enemy.name; 
             Debug.Log($"µÐÈË: {enemy.name}, HP: {enemy.hp}, ¹¥»÷: {enemy.attack}, ¾­Ñé: {enemy.exp}");
             foreach (var skill in enemy.skills)
             {
