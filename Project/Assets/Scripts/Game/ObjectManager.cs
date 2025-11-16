@@ -65,6 +65,10 @@ public class ObjectManager : MonoBehaviour
                     isPickUp = true;
                 }
                 
+                if (objectTypeID == 1)
+                {
+                    Debug.Log($"√Ë ˆ: {description}");
+                }
             }
         }
     }
