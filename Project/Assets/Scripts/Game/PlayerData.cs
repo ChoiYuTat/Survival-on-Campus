@@ -1,8 +1,11 @@
 using Microsoft.Unity.VisualStudio.Editor;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Game/PlayerData")]
+[System.Serializable]
 public class PlayerData : ScriptableObject
 {
     public int HP;
@@ -14,14 +17,18 @@ public class PlayerData : ScriptableObject
     public int RequiredExp;
     public List<PlayerSkillData> Skills = new List<PlayerSkillData>();
     public List<PlayerInvertory> Inventory = new List<PlayerInvertory>();
+    public Vector3 PlayerPosition;
+    public List<int> interactiveItemsID = new List<int>();
 }
 
+[System.Serializable]
 public class PlayerSkillData
 {
     public string name;
     public float damageMultiplier;
 }
 
+[System.Serializable]
 public class PlayerInvertory
 {
     public string itemName;

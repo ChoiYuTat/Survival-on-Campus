@@ -23,6 +23,8 @@ public class ObjectManager : MonoBehaviour
     private int objectTypeID = 0; // 0: Item, 1: Description
     [SerializeField]
     private int objectItemID = 0;
+    [SerializeField]
+    private int objectID = 0;
 
     [SerializeField]
     private string description;
@@ -99,12 +101,11 @@ public class ObjectManager : MonoBehaviour
                         quantity = itemDatabase.item[i].quantity,
                         effect = itemDatabase.item[i].effect,
                         description = itemDatabase.item[i].description,
-                        isUsable = itemDatabase.item[i].isUsable
+                        isUsable = itemDatabase.item[i].isUsable,
                     });
                 }
 
-
-                    Debug.Log($"ÒÑÊ°È¡: {itemDatabase.item[i].itemName}");
+                data.interactiveItemsID.Add(objectID);
                 Destroy(gameObject);
                 return;
             }
