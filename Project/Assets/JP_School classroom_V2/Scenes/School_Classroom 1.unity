@@ -1539,11 +1539,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2730655359773158557, guid: 49404998e040ceb4686c4730f57e3711, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8882513
+      value: 0.9860276
       objectReference: {fileID: 0}
     - target: {fileID: 2730655359773158557, guid: 49404998e040ceb4686c4730f57e3711, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.45935792
+      value: 0.16658238
       objectReference: {fileID: 0}
     - target: {fileID: 2730655359773158557, guid: 49404998e040ceb4686c4730f57e3711, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1555,7 +1555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2730655359773158557, guid: 49404998e040ceb4686c4730f57e3711, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 54.691
+      value: 19.178
       objectReference: {fileID: 0}
     - target: {fileID: 2730655359773158557, guid: 49404998e040ceb4686c4730f57e3711, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -4134,7 +4134,6 @@ GameObject:
   - component: {fileID: 461609407}
   - component: {fileID: 461609406}
   - component: {fileID: 461609409}
-  - component: {fileID: 461609408}
   - component: {fileID: 461609410}
   m_Layer: 0
   m_Name: CinemachineCamera
@@ -4195,29 +4194,12 @@ Transform:
   m_GameObject: {fileID: 461609403}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.3609998, y: 0.3362546, z: -7.8409147}
+  m_LocalPosition: {x: -1.3609998, y: 0.3362546, z: -8.382211}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1376454880}
   m_LocalEulerAnglesHint: {x: 31.467, y: 0.679, z: -6.434}
---- !u!114 &461609408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 461609403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Weight: 1
-  FocusTracking: 0
-  FocusTarget: {fileID: 0}
-  FocusOffset: 0
-  Profile: {fileID: 11400000, guid: 5c9b18ac257785f44b452318b8b195ef, type: 2}
 --- !u!114 &461609409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6811,6 +6793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 774005590}
   - component: {fileID: 774005589}
+  - component: {fileID: 774005591}
   m_Layer: 0
   m_Name: 01
   m_TagString: Door
@@ -6848,12 +6831,28 @@ Transform:
   m_GameObject: {fileID: 774005588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1376454880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &774005591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774005588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d3e14c244d3442900016dd78352a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetDoor: {fileID: 1645618946}
+  existPosition: {fileID: 1493620259}
+  targetCamera: {fileID: 461609403}
+  enterState: 0
 --- !u!1001 &776186107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8203,6 +8202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 956530899}
   - component: {fileID: 956530898}
+  - component: {fileID: 956530900}
   m_Layer: 0
   m_Name: 02
   m_TagString: Door
@@ -8240,12 +8240,28 @@ Transform:
   m_GameObject: {fileID: 956530897}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: -1, z: 0}
+  m_LocalPosition: {x: -7, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1376454880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &956530900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956530897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d3e14c244d3442900016dd78352a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetDoor: {fileID: 1791940417}
+  existPosition: {fileID: 1493620259}
+  targetCamera: {fileID: 461609403}
+  enterState: 0
 --- !u!1001 &980461424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12587,7 +12603,6 @@ GameObject:
   - component: {fileID: 1475996066}
   - component: {fileID: 1475996065}
   - component: {fileID: 1475996064}
-  - component: {fileID: 1475996063}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -12595,23 +12610,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1475996063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1475996062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Weight: 1
-  FocusTracking: 0
-  FocusTarget: {fileID: 0}
-  FocusOffset: 0
-  Profile: {fileID: 11400000, guid: 5c9b18ac257785f44b452318b8b195ef, type: 2}
 --- !u!114 &1475996064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12944,6 +12942,7 @@ MonoBehaviour:
   classroom: {fileID: 0}
   isOpen: 0
   door: {fileID: 0}
+  doorSystem: {fileID: 0}
 --- !u!1001 &1494658620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14096,6 +14095,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1645618948}
   - component: {fileID: 1645618947}
+  - component: {fileID: 1645618949}
   m_Layer: 0
   m_Name: 10
   m_TagString: Door
@@ -14133,12 +14133,28 @@ Transform:
   m_GameObject: {fileID: 1645618946}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: -2}
+  m_LocalPosition: {x: 0, y: -2, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1376454880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1645618949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645618946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d3e14c244d3442900016dd78352a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetDoor: {fileID: 774005588}
+  existPosition: {fileID: 1493620259}
+  targetCamera: {fileID: 461609403}
+  enterState: 1
 --- !u!1001 &1652029298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15875,6 +15891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1791940419}
   - component: {fileID: 1791940418}
+  - component: {fileID: 1791940420}
   m_Layer: 0
   m_Name: 20
   m_TagString: Door
@@ -15912,12 +15929,28 @@ Transform:
   m_GameObject: {fileID: 1791940417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.8, y: -1, z: -2}
+  m_LocalPosition: {x: -7.8, y: -2, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1376454880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1791940420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791940417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d3e14c244d3442900016dd78352a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetDoor: {fileID: 956530897}
+  existPosition: {fileID: 1493620259}
+  targetCamera: {fileID: 461609403}
+  enterState: 1
 --- !u!1 &1807787111
 GameObject:
   m_ObjectHideFlags: 0
@@ -16070,7 +16103,7 @@ MonoBehaviour:
     Enabled: 0
     DefaultMode: 2
   DefaultBlend:
-    Style: 1
+    Style: 0
     Time: 2
     CustomCurve:
       serializedVersion: 2
