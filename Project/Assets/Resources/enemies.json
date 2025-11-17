@@ -1,0 +1,25 @@
+{
+  "enemies": [
+    {
+      "id": 1,
+      "name": "Normal Infector",
+      "hp": 30,
+      "attack": 5,
+      "defense": 3,
+      "exp": 10,
+      "skills": [
+        {
+          "name": "Bite",
+          "damageMultiplier": 1.0,
+          "duration": 1.0
+        },
+        {
+          "name": "Trip",
+          "damageMultiplier": 1.0,
+          "duration": 3.0
+        }
+      ]
+    }
+
+  ]
+}
