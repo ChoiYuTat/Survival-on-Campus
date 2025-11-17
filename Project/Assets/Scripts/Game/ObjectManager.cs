@@ -30,7 +30,7 @@ public class ObjectManager : MonoBehaviour
     private string description;
 
     [SerializeField]
-    private PlayerData data;
+    private LoadPlayerData player;
 
     private ItemDatabase itemDatabase;
 
@@ -38,7 +38,8 @@ public class ObjectManager : MonoBehaviour
 
     void Start()
     {
-        loadItems();
+        Invoke("loadItems", 0.1f);
+        //loadItems();
     }
 
     private void Update()
@@ -54,6 +55,15 @@ public class ObjectManager : MonoBehaviour
     {
         TextAsset jsonFile = Resources.Load<TextAsset>("item");
         itemDatabase = JsonUtility.FromJson<ItemDatabase>(jsonFile.text);
+
+        for (int i = 0; i < player.data.interactiveItemsID.Count; i++) 
+        {
+            if (player.data.interactiveItemsID[i] == objectID)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -83,18 +93,18 @@ public class ObjectManager : MonoBehaviour
             {
                 if (IsItemInInventory(id))
                 {
-                    for (int x = 0; x < data.Inventory.Count; x++)
+                    for (int x = 0; x < player.data.Inventory.Count; x++)
                     {
-                        if (data.Inventory[x].itemID == id)
+                        if (player.data.Inventory[x].itemID == id)
                         {
-                            data.Inventory[x].quantity++;
+                            player.data.Inventory[x].quantity++;
                             break;
                         }
                     }
                 }
                 else 
                 {
-                    data.Inventory.Add(new PlayerInvertory
+                    player.data.Inventory.Add(new PlayerInvertory
                     {
                         itemID = itemDatabase.item[i].itemID,
                         itemName = itemDatabase.item[i].itemName,
@@ -105,7 +115,7 @@ public class ObjectManager : MonoBehaviour
                     });
                 }
 
-                data.interactiveItemsID.Add(objectID);
+                player.data.interactiveItemsID.Add(objectID);
                 Destroy(gameObject);
                 return;
             }
@@ -114,9 +124,9 @@ public class ObjectManager : MonoBehaviour
 
     bool IsItemInInventory(int id)
     {
-        for (int x = 0; x < data.Inventory.Count; x++)
+        for (int x = 0; x < player.data.Inventory.Count; x++)
         {
-            if (data.Inventory[x].itemID == id)
+            if (player.data.Inventory[x].itemID == id)
             {
                 return true;
             }

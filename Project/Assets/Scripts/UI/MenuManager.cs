@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField]
-    private PlayerData data;
+    private LoadPlayerData player;
 
     [SerializeField]
     private Text HP, ATK, DEF, EXP, nextEXP, Level;
@@ -23,19 +23,19 @@ public class MenuManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        HP.text = data.HP.ToString();
-        ATK.text = data.Attack.ToString();
-        DEF.text = data.Defense.ToString();
-        Level.text = data.Level.ToString();
-        EXP.text = data.CurrentExp.ToString();
-        nextEXP.text = data.RequiredExp.ToString();
+        HP.text = player.data.HP.ToString();
+        ATK.text = player.data.Attack.ToString();
+        DEF.text = player.data.Defense.ToString();
+        Level.text = player.data.Level.ToString();
+        EXP.text = player.data.CurrentExp.ToString();
+        nextEXP.text = player.data.RequiredExp.ToString();
 
         for (int i = 0; i < itemObjects.Count; i++)
         {
             Destroy(itemObjects[i]);
         }
 
-        foreach (var item in data.Inventory)
+        foreach (var item in player.data.Inventory)
         {
             GameObject itemObj = Instantiate(ItemPrefab, ItemView.transform);
             itemObj.GetComponent<ItemManager>().SetItem(item.itemName, item.quantity, item.isUsable);

@@ -12,7 +12,7 @@ public class ItemManager : MonoBehaviour
     private int itemCount;
 
     [SerializeField]
-    private PlayerData data;
+    private LoadPlayerData player;
 
     public void SetItem(string name, int count, bool usable)
     {
@@ -38,11 +38,11 @@ public class ItemManager : MonoBehaviour
         if (itemCount <= 0)
         {
             // Remove item from inventory
-            for (int i = 0; i < data.Inventory.Count; i++)
+            for (int i = 0; i < player.data.Inventory.Count; i++)
             {
-                if (data.Inventory[i].itemName == itemName.text)
+                if (player.data.Inventory[i].itemName == itemName.text)
                 {
-                    data.Inventory.RemoveAt(i);
+                    player.data.Inventory.RemoveAt(i);
                     break;
                 }
             }
