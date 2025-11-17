@@ -85,7 +85,15 @@ public class EnemyPathfindingSystem : MonoBehaviour
         }
     }
 
-        void Chase()
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player") 
+        {
+            Destroy(gameObject);    
+        }
+    }
+
+    void Chase()
         {
             agent.destination = player.position;
 
