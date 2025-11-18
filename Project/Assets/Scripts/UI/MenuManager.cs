@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
 
     public void UpdateUI()
     {
-        HP.text = player.data.HP.ToString();
+        HP.text = player.data.HP.ToString() + " / " + player.data.MaxHP.ToString();
         ATK.text = player.data.Attack.ToString();
         DEF.text = player.data.Defense.ToString();
         Level.text = player.data.Level.ToString();

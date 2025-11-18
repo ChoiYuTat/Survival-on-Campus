@@ -84,4 +84,24 @@ public class LoadPlayerData : MonoBehaviour
     {
         gameObject.transform.position = data.PlayerPosition;
     }
+
+    public void HealPlayer(int healAmount)
+    {
+        data.HP += healAmount;
+        if (data.HP > data.MaxHP)
+        {
+            data.HP = data.MaxHP;
+        }
+        Debug.Log("Player Healed by " + healAmount + ". Current HP: " + data.HP);
+    }
+
+    public void takeDamage(int damage)
+    {
+        data.HP -= damage;
+        if (data.HP < 0)
+        {
+            data.HP = 0;
+        }
+        Debug.Log($"Player took {damage} damage. Current HP: " + data.HP);
+    }
 }

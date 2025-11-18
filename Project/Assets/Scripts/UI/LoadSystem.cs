@@ -39,7 +39,7 @@ public class LoadSystem : MonoBehaviour
                 FileTime[i].text = timeList.currentTime;
                 Debug.Log("Loaded Time for file " + i + ": " + timeList.currentTime);
             }
-            else if (LoadButtons != null)
+            else if (LoadButtons.Length >= 8)
             {
                 LoadButtons[i].interactable = false;
                 FileTime[i].text = "No Data";

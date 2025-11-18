@@ -11,9 +11,12 @@ public class ItemManager : MonoBehaviour
 
     private int itemCount;
 
-    [SerializeField]
-    private LoadPlayerData player;
+    private GameObject player;
 
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     public void SetItem(string name, int count, bool usable)
     {
         itemName.text = name;
@@ -27,10 +30,10 @@ public class ItemManager : MonoBehaviour
 
     public void UseItem() 
     {
-        UpdateItemCount(--itemCount);
+        updateItemCount(--itemCount);
     }
 
-    public void UpdateItemCount(int count)
+    public void updateItemCount(int count)
     {
         itemCount = count;
         itemCount_txt.text = "x" + itemCount.ToString();
@@ -38,16 +41,36 @@ public class ItemManager : MonoBehaviour
         if (itemCount <= 0)
         {
             // Remove item from inventory
-            for (int i = 0; i < player.data.Inventory.Count; i++)
+            for (int i = 0; i < player.GetComponent<LoadPlayerData>().data.Inventory.Count; i++)
             {
-                if (player.data.Inventory[i].itemName == itemName.text)
+                if (player.GetComponent<LoadPlayerData>().data.Inventory[i].itemName == itemName.text)
                 {
-                    player.data.Inventory.RemoveAt(i);
+                    getEffect(player.GetComponent<LoadPlayerData>().data.Inventory[i].effect);
+                    player.GetComponent<LoadPlayerData>().data.Inventory.RemoveAt(i);
                     break;
                 }
             }
             // Destroy item UI
             Destroy(gameObject);
+        }
+    }
+
+    void getEffect(string effect) 
+    {
+        switch (effect)
+        {
+            case "Heal10":
+                player.GetComponent<LoadPlayerData>().HealPlayer(10);
+                break;
+            case "Heal14":
+                player.GetComponent<LoadPlayerData>().HealPlayer(14);
+                break;
+            case "Heal35":
+                player.GetComponent<LoadPlayerData>().HealPlayer(35);
+                break;
+            default:
+                Debug.Log("No effect");
+                break;
         }
     }
 }
