@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 [System.Serializable]
 public class ItemData
@@ -39,6 +41,7 @@ public class ObjectManager : MonoBehaviour
 
     public PlayableDirector director;
     public DialogueController dialogueController;
+    public TimelineAsset pickUpTimeline;
 
     [SerializeField]
     private LoadPlayerData player;
@@ -90,10 +93,13 @@ public class ObjectManager : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.E)) 
             {
+                director.SetGenericBinding(pickUpTimeline.GetOutputTrack(0), GetComponent<SignalReceiver>());
                 switch (objectType) 
                 {
                     case ObjectType.Item:
-                        isPickUp = true;
+                        director.enabled = true;
+                        dialogueController.director = director;
+                        director.Play();
                         break;
                     case ObjectType.Description:
                         Debug.Log(description);
@@ -105,6 +111,12 @@ public class ObjectManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetPickUpTrue()
+    {
+        director.enabled = false;
+        isPickUp = true;
     }
 
     void PickUpObject(int id)

@@ -27,7 +27,7 @@ public class DialogueController : MonoBehaviour
 
     public void ShowDialogue(string message)
     {
-
+        Debug.Log("Showing dialogue: " + message);
         dialogueBox.enabled = true;
         dialogueText.text = "";
         NameText.text= "";

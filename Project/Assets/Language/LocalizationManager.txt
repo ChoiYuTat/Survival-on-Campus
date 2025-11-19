@@ -21,3 +21,11 @@ P1_04
 >Item
 Bandage
 Hamberger
+MedKit
+Tools
+P_Key
+Ban_txt
+Ham_txt
+Med_txt
+Tools_txt
+P_Key_txt
