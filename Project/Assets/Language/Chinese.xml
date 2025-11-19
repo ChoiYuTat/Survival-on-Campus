@@ -9,8 +9,15 @@ Language=語言:
 Back=返回
 Option_Title=選項
 Load_Title=加載界面
+Status=狀態
+Item=物品
+Use=使用
+Save=保存
 >Plot
 P1_01=我:/请输入文本
 P1_02=你:/输入你母亲
 P1_03=0
 P1_04=0
+>Item
+Bandage=
+Hamberger=

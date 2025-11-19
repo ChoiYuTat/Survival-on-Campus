@@ -9,8 +9,15 @@ Language=Language:
 Back=Back
 Option_Title=Option
 Load_Title=Load Menu
+Status=Status
+Item=Item
+Use=Use
+Save=Save
 >Plot
 P1_01=Me:/Please Enter Text
 P1_02=You:/I Enter your mother
 P1_03=0
 P1_04=0
+>Item
+Bandage=
+Hamberger=

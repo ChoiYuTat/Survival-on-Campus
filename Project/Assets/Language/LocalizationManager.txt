@@ -9,6 +9,10 @@ Language
 Back
 Option_Title
 Load_Title
+Status
+Item
+Use
+Save
 >Plot
 P1_01
 P1_02
