@@ -39,11 +39,20 @@ public class DialogueController : MonoBehaviour
         NameText.text = textIndex[0];
         StartCoroutine(TypeSentence(textIndex[1]));
 
-        //StopMovement();
-        Time.timeScale = 0f; // Pause the game
-        director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+        PauseGame(); // Pause the game
+        director.playableGraph.GetRootPlayable(0).SetSpeed(1); // Ensure timeline is playing
         waitingForInput = true;
         director.Pause(); 
+    }
+
+    public void PauseGame() 
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -65,7 +74,7 @@ public class DialogueController : MonoBehaviour
 
     void Update()
     {
-        if (waitingForInput && (Input.GetKeyDown(KeyCode.Z) || Input.GetMouseButtonDown(0)))
+        if (waitingForInput && (Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)))
         {
             if (typing)
             {
@@ -74,27 +83,8 @@ public class DialogueController : MonoBehaviour
             }
             waitingForInput = false;
             dialogueBox.enabled = false;
-            //continueMovement();
-            Time.timeScale = 1f; // Resume the game
+            //Time.timeScale = 1f; // Resume the game
             director.Resume(); 
-        }
-    }
-
-    void StopMovement() 
-    {
-        player.enabled = false;
-        foreach (var enemy in enemies)
-        {
-            enemy.enabled = false;
-        }
-    }
-
-    void continueMovement() 
-    {
-        player.enabled = true;
-        foreach (var enemy in enemies)
-        {
-            enemy.enabled = true;
         }
     }
 }
