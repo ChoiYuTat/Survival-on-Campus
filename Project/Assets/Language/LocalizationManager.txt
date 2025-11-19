@@ -20,10 +20,10 @@ P1_03
 P1_04
 >Item
 Bandage
-Hamberger
-MedKit
-Tools
-P_Key
+Hamburger
+Medical kit
+Lock picking tools
+Principal's Key
 Ban_txt
 Ham_txt
 Med_txt

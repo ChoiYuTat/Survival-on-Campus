@@ -20,12 +20,12 @@ P1_03=0
 P1_04=0
 >Item
 Bandage=Bandage
-Hamberger=Hamberger
-MedKit=Medical Kit
-Tools=Lock Pick Tools
-P_Key=Principal's Key
+Hamburger=Hamburger
+Medical kit=Medical kit
+Lock picking tools=Lock picking tools
+Principal's Key=Principal's Key
 Ban_txt=Tips:/You pick up the Bandage
-Ham_txt=Tips:/You pick up the Hamberger
+Ham_txt=Tips:/You pick up the Hamburger
 Med_txt=Tips:/You pick up the Midical Kit
 Tools_txt=Tips:/You pick up the Lock picking tools
 P_Key_txt=Tips:/You pick up the Principal's Key

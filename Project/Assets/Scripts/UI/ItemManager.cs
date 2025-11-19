@@ -1,3 +1,4 @@
+using LanguageLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,13 @@ public class ItemManager : MonoBehaviour
 
     private int itemCount;
 
+    private string itemNameIndex;
+
     private GameObject player;
+
+    public Localization_KEY key;
+    private Localization_SOURCE source;
+    private OptionSetter setter;
 
     void Start()
     {
@@ -19,7 +26,12 @@ public class ItemManager : MonoBehaviour
     }
     public void SetItem(string name, int count, bool usable)
     {
-        itemName.text = name;
+        source = GameObject.FindGameObjectWithTag("LocalizationSource").GetComponent<Localization_SOURCE>();
+        setter = GameObject.FindGameObjectWithTag("OptionSetter").GetComponent<OptionSetter>();
+        key.keyID = name;
+        source.RefreshTextElementsAndKeys();
+        source.LoadLanguage(setter.getLanguageIndex());
+        itemNameIndex = name;
         itemCount_txt.text = "x" + count.ToString();
         itemCount = count;
         if (!usable)
@@ -43,15 +55,29 @@ public class ItemManager : MonoBehaviour
             // Remove item from inventory
             for (int i = 0; i < player.GetComponent<LoadPlayerData>().data.Inventory.Count; i++)
             {
-                if (player.GetComponent<LoadPlayerData>().data.Inventory[i].itemName == itemName.text)
+                if (player.GetComponent<LoadPlayerData>().data.Inventory[i].itemName == itemNameIndex)
                 {
                     getEffect(player.GetComponent<LoadPlayerData>().data.Inventory[i].effect);
                     player.GetComponent<LoadPlayerData>().data.Inventory.RemoveAt(i);
+                    Debug.Log(player.GetComponent<LoadPlayerData>().data.Inventory);
                     break;
                 }
             }
             // Destroy item UI
             Destroy(gameObject);
+        }
+        else 
+        {
+            // Update inventory item count
+            for (int i = 0; i < player.GetComponent<LoadPlayerData>().data.Inventory.Count; i++)
+            {
+                if (player.GetComponent<LoadPlayerData>().data.Inventory[i].itemName == itemName.text)
+                {
+                    getEffect(player.GetComponent<LoadPlayerData>().data.Inventory[i].effect);
+                    player.GetComponent<LoadPlayerData>().data.Inventory[i].quantity = itemCount;
+                    break;
+                }
+            }
         }
     }
 

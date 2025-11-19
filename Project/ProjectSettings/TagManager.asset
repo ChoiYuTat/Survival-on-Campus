@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Door
   - SaveID
+  - LocalizationSource
+  - OptionSetter
   layers:
   - Default
   - TransparentFX

@@ -20,10 +20,10 @@ P1_03=0
 P1_04=0
 >Item
 Bandage=綳帶
-Hamberger=漢堡包
-MedKit=醫療包
-Tools=開鎖工具
-P_Key=校長室鑰匙
+Hamburger=漢堡包
+Medical kit=醫療包
+Lock picking tools=開鎖工具
+Principal's Key=校長室鑰匙
 Ban_txt=提示:/你撿起了綳帶
 Ham_txt=提示:/你撿起了漢堡包
 Med_txt=提示:/你撿起了醫療包

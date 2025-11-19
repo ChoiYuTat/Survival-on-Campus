@@ -10,7 +10,7 @@ public class DialogueController : MonoBehaviour
 {
     public Text dialogueText, textBuffer, NameText;
     public Canvas dialogueBox;
-    public PlayableDirector director;
+    public PlayableDirector director;   
     public Localization_KEY key;
     public Localization_SOURCE source;
     public OptionSetter setter;
