@@ -2647,6 +2647,8 @@ MonoBehaviour:
   objectItemID: 1
   objectID: 3
   description: 
+  director: {fileID: 0}
+  dialogueController: {fileID: 0}
   player: {fileID: 8729586507925044232}
 --- !u!135 &596300437
 SphereCollider:
@@ -6421,6 +6423,8 @@ MonoBehaviour:
   objectItemID: 0
   objectID: 1
   description: 
+  director: {fileID: 0}
+  dialogueController: {fileID: 0}
   player: {fileID: 8729586507925044232}
 --- !u!135 &1387446654
 SphereCollider:
@@ -8457,6 +8461,8 @@ MonoBehaviour:
   objectItemID: 0
   objectID: 0
   description: 
+  director: {fileID: 0}
+  dialogueController: {fileID: 0}
   player: {fileID: 8729586507925044232}
 --- !u!1 &1737355231
 GameObject:
@@ -10276,6 +10282,8 @@ MonoBehaviour:
   objectItemID: 1
   objectID: 2
   description: 
+  director: {fileID: 0}
+  dialogueController: {fileID: 0}
   player: {fileID: 8729586507925044232}
 --- !u!135 &2130494236
 SphereCollider:

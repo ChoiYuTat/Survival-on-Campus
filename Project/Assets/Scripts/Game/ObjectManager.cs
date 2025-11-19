@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 [System.Serializable]
 public class ItemData
@@ -35,6 +36,9 @@ public class ObjectManager : MonoBehaviour
 
     [SerializeField]
     private string description;
+
+    public PlayableDirector director;
+    public DialogueController dialogueController;
 
     [SerializeField]
     private LoadPlayerData player;
