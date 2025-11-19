@@ -8,12 +8,14 @@ using static Unity.VisualScripting.Member;
 
 public class DialogueController : MonoBehaviour
 {
-    public Text dialogueText, textBuffer;
+    public Text dialogueText, textBuffer, NameText;
     public Canvas dialogueBox;
     public PlayableDirector director;
     public Localization_KEY key;
     public Localization_SOURCE source;
     public OptionSetter setter;
+    public luna player;
+    public EnemyPathfindingSystem[] enemies;
 
     private bool waitingForInput = false;
 
@@ -27,11 +29,18 @@ public class DialogueController : MonoBehaviour
 
         dialogueBox.enabled = true;
         dialogueText.text = "";
+        NameText.text= "";
         key.keyID = message;
         source.RefreshTextElementsAndKeys();
         source.LoadLanguage(setter.getLanguageIndex());
-        Debug.Log(setter.getLanguageIndex());
-        StartCoroutine(TypeSentence(textBuffer.text));
+
+        string[] textIndex = textBuffer.text.Split('/'); //Plot Design(Name:/Dialogue)
+        NameText.text = textIndex[0];
+        StartCoroutine(TypeSentence(textIndex[1]));
+
+        //StopMovement();
+        Time.timeScale = 0f; // Pause the game
+        director.playableGraph.GetRootPlayable(0).SetSpeed(1);
         waitingForInput = true;
         director.Pause(); 
     }
@@ -41,7 +50,7 @@ public class DialogueController : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSecondsRealtime(0.05f);
         }
     }
 
@@ -52,7 +61,27 @@ public class DialogueController : MonoBehaviour
 
             waitingForInput = false;
             dialogueBox.enabled = false;
+            //continueMovement();
+            Time.timeScale = 1f; // Resume the game
             director.Resume(); 
+        }
+    }
+
+    void StopMovement() 
+    {
+        player.enabled = false;
+        foreach (var enemy in enemies)
+        {
+            enemy.enabled = false;
+        }
+    }
+
+    void continueMovement() 
+    {
+        player.enabled = true;
+        foreach (var enemy in enemies)
+        {
+            enemy.enabled = true;
         }
     }
 }

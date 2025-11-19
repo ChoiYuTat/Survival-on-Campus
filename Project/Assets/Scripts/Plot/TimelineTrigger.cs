@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 public class TimelineTrigger : MonoBehaviour
 {
     public PlayableDirector director; 
+    public DialogueController dialogueController;
 
     private bool triggered = false;
 
@@ -11,6 +12,7 @@ public class TimelineTrigger : MonoBehaviour
     {
         if (!triggered && other.CompareTag("Player"))
         {
+            dialogueController.director = director;
             Debug.Log("Player entered trigger zone, playing timeline.");
             triggered = true;
             director.Play(); 

@@ -10,7 +10,7 @@ Back=Back
 Option_Title=Option
 Load_Title=Load Menu
 >Plot
-P001=Please enter text.
-P002=
-P003=
-P004=
+P1_01=Me:/Please Enter Text
+P1_02=You:/I Enter your mother
+P1_03=0
+P1_04=0
