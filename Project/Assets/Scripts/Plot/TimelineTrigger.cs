@@ -12,6 +12,7 @@ public class TimelineTrigger : MonoBehaviour
     {
         if (!triggered && other.CompareTag("Player"))
         {
+            director.enabled = true;
             dialogueController.director = director;
             Debug.Log("Player entered trigger zone, playing timeline.");
             triggered = true;

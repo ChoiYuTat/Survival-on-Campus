@@ -17,6 +17,7 @@ public class DialogueController : MonoBehaviour
     public luna player;
     public EnemyPathfindingSystem[] enemies;
 
+    private bool typing = false;
     private bool waitingForInput = false;
 
     private void Start()
@@ -47,18 +48,30 @@ public class DialogueController : MonoBehaviour
 
     IEnumerator TypeSentence(string sentence)
     {
+        typing = true;
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSecondsRealtime(0.05f);
+
+            if (!typing)
+            {
+                dialogueText.text = sentence;
+                yield break;
+            }
         }
+        typing = false;
     }
 
     void Update()
     {
         if (waitingForInput && (Input.GetKeyDown(KeyCode.Z) || Input.GetMouseButtonDown(0)))
         {
-
+            if (typing)
+            {
+                typing = false;
+                return;
+            }
             waitingForInput = false;
             dialogueBox.enabled = false;
             //continueMovement();

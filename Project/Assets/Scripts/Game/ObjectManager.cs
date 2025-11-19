@@ -17,10 +17,17 @@ public class ItemDatabase
     public ItemData[] item;
 }
 
+public enum ObjectType
+{
+    Item,
+    Description,
+    LockedDoor
+}
+
 public class ObjectManager : MonoBehaviour
 {
     [SerializeField]
-    private int objectTypeID = 0; // 0: Item, 1: Description
+    private ObjectType objectType;
     [SerializeField]
     private int objectItemID = 0;
     [SerializeField]
@@ -35,6 +42,7 @@ public class ObjectManager : MonoBehaviour
     private ItemDatabase itemDatabase;
 
     private bool isPickUp = false;
+    private bool isOpened = false;
 
     void Start()
     {
@@ -56,30 +64,40 @@ public class ObjectManager : MonoBehaviour
         TextAsset jsonFile = Resources.Load<TextAsset>("item");
         itemDatabase = JsonUtility.FromJson<ItemDatabase>(jsonFile.text);
 
-        for (int i = 0; i < player.data.interactiveItemsID.Count; i++) 
+        if (objectType == ObjectType.Item) 
         {
-            if (player.data.interactiveItemsID[i] == objectID)
+            for (int i = 0; i < player.data.interactiveItemsID.Count; i++)
             {
-                Destroy(gameObject);
-                return;
+                if (player.data.interactiveItemsID[i] == objectID)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
             }
         }
+
+
+
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKey(KeyCode.Z)) 
+            if (Input.GetKey(KeyCode.E)) 
             {
-                if (objectTypeID == 0) 
+                switch (objectType) 
                 {
-                    isPickUp = true;
-                }
-                
-                if (objectTypeID == 1)
-                {
-                    Debug.Log($"ÃèÊö: {description}");
+                    case ObjectType.Item:
+                        isPickUp = true;
+                        break;
+                    case ObjectType.Description:
+                        Debug.Log(description);
+                        break;
+                    case ObjectType.LockedDoor:
+                        if (!isOpened)
+                        Debug.Log("This door is locked.");
+                        break;
                 }
             }
         }
