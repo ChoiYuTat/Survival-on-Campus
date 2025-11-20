@@ -8,6 +8,7 @@ TagManager:
   - SaveID
   - LocalizationSource
   - OptionSetter
+  - Description
   layers:
   - Default
   - TransparentFX

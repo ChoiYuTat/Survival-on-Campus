@@ -1,5 +1,7 @@
 using LanguageLocalization;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ItemManager : MonoBehaviour
@@ -17,13 +19,16 @@ public class ItemManager : MonoBehaviour
     private GameObject player;
 
     public Localization_KEY key;
+    private Localization_KEY des_key;
     private Localization_SOURCE source;
     private OptionSetter setter;
+
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
+
     public void SetItem(string name, int count, bool usable)
     {
         source = GameObject.FindGameObjectWithTag("LocalizationSource").GetComponent<Localization_SOURCE>();
@@ -38,6 +43,11 @@ public class ItemManager : MonoBehaviour
         {
             useButton.gameObject.SetActive(false);
         }
+    }
+
+    public string getItemName() 
+    {
+        return itemNameIndex;
     }
 
     public void UseItem() 
@@ -65,6 +75,9 @@ public class ItemManager : MonoBehaviour
             }
             // Destroy item UI
             Destroy(gameObject);
+            GameObject.FindGameObjectWithTag("Description").GetComponent<Text>().text = "";
+            des_key = GameObject.FindGameObjectWithTag("Description").GetComponent<Localization_KEY>();
+            des_key.keyID = "";
         }
         else 
         {

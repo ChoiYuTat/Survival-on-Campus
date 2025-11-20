@@ -35,3 +35,9 @@ C_Lock_2=Tips:/There may be lock-picking tools nearby.
 P_Lock=Tips:/It's locked, need the principal's office key.
 C_Unlock=Tips:/Classroom is Unlocked
 P_Unlock=Tips:/Principal's office is Unlocked
+>description
+I0=The simplest medical tools, suitable for treating minor wounds. +10HP
+I1=Who doesn't like hamburgers? +14HP
+I2=Powerful Healing, needs no further explanation. +35HP
+I3=Used to unlock the classroom lock.
+I4=Used to open the principal's office door.
