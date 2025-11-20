@@ -29,3 +29,9 @@ Ham_txt=Tips:/You pick up the Hamburger
 Med_txt=Tips:/You pick up the Midical Kit
 Tools_txt=Tips:/You pick up the Lock picking tools
 P_Key_txt=Tips:/You pick up the Principal's Key
+>Door
+C_Lock_1=Tips:/It's locked, can't open it.
+C_Lock_2=Tips:/There may be lock-picking tools nearby.
+P_Lock=Tips:/It's locked, need the principal's office key.
+C_Unlock=Tips:/Classroom is Unlocked
+P_Unlock=Tips:/Principal's office is Unlocked

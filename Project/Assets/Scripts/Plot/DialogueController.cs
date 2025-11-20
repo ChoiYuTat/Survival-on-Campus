@@ -52,6 +52,7 @@ public class DialogueController : MonoBehaviour
 
     public void ResumeGame()
     {
+        dialogueBox.enabled = false;
         Time.timeScale = 1f;
     }
 
@@ -82,7 +83,7 @@ public class DialogueController : MonoBehaviour
                 return;
             }
             waitingForInput = false;
-            dialogueBox.enabled = false;
+            //dialogueBox.enabled = false;
             //Time.timeScale = 1f; // Resume the game
             director.Resume(); 
         }

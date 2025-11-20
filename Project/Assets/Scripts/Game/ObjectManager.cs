@@ -28,10 +28,20 @@ public enum ObjectType
     LockedDoor
 }
 
+public enum LockType
+{
+    None,
+    OpenClassroom,
+    OpenPrincipalroom
+}
+
 public class ObjectManager : MonoBehaviour
 {
     [SerializeField]
     private ObjectType objectType;
+    [SerializeField] 
+    private LockType lockType;
+
     [SerializeField]
     private int objectItemID = 0;
     [SerializeField]
@@ -56,23 +66,34 @@ public class ObjectManager : MonoBehaviour
     {
         Invoke("loadItems", 0.1f);
         //loadItems();
+
+        if (lockType == LockType.None) 
+        {
+            isOpened = true;
+        }
     }
 
     private void Update()
     {
-        if (isPickUp) 
+        if (objectType == ObjectType.Item && isPickUp)
         {
             isPickUp = false;
             PickUpObject(objectItemID);
         }
+
+        if (objectType == ObjectType.LockedDoor && isOpened)
+        {
+            isOpened = false;
+            OpenDoor();
+        }
     }
 
-    void loadItems() 
+    void loadItems()
     {
         TextAsset jsonFile = Resources.Load<TextAsset>("item");
         itemDatabase = JsonUtility.FromJson<ItemDatabase>(jsonFile.text);
 
-        if (objectType == ObjectType.Item) 
+        if (objectType == ObjectType.Item)
         {
             for (int i = 0; i < player.data.interactiveItemsID.Count; i++)
             {
@@ -84,7 +105,16 @@ public class ObjectManager : MonoBehaviour
             }
         }
 
-
+        if (objectType == ObjectType.LockedDoor) 
+        {
+            for (int i = 0; i < player.data.interactiveItemsID.Count; i++)
+            {
+                if (player.data.interactiveItemsID[i] == objectID)
+                {
+                    isOpened = true;
+                }
+            }
+        }
 
     }
 
@@ -92,12 +122,12 @@ public class ObjectManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKey(KeyCode.E)) 
+            if (Input.GetKey(KeyCode.E))
             {
-                director.SetGenericBinding(pickUpTimeline.GetOutputTrack(0), GetComponent<SignalReceiver>());
-                switch (objectType) 
+                switch (objectType)
                 {
                     case ObjectType.Item:
+                        director.SetGenericBinding(pickUpTimeline.GetOutputTrack(0), GetComponent<SignalReceiver>());
                         director.enabled = true;
                         dialogueController.director = director;
                         director.Play();
@@ -106,10 +136,43 @@ public class ObjectManager : MonoBehaviour
                         Debug.Log(description);
                         break;
                     case ObjectType.LockedDoor:
-                        if (!isOpened)
-                        Debug.Log("This door is locked.");
+                        checkLocked();
                         break;
                 }
+            }
+        }
+    }
+
+    void checkLocked() 
+    {
+        if (lockType != LockType.None)
+        {
+            bool hasKey = false;
+            for (int i = 0; i < player.data.Inventory.Count; i++)
+            {
+                if ((lockType == LockType.OpenClassroom && player.data.Inventory[i].effect == "OpenClassroom") ||
+                    (lockType == LockType.OpenPrincipalroom && player.data.Inventory[i].effect == "OpenPrincipalroom"))
+                {
+                    hasKey = true;
+                    break;
+                }
+            }
+            if (hasKey)
+            {
+                isOpened = true;
+                director.SetGenericBinding(pickUpTimeline.GetOutputTrack(0),
+                    transform.GetChild(2).gameObject.GetComponent<SignalReceiver>());
+                director.enabled = true;
+                dialogueController.director = director;
+                director.Play();
+            }
+            else 
+            {
+                director.SetGenericBinding(pickUpTimeline.GetOutputTrack(0), 
+                    transform.GetChild(1).gameObject.GetComponent<SignalReceiver>());
+                director.enabled = true;
+                dialogueController.director = director;
+                director.Play();
             }
         }
     }
@@ -118,6 +181,20 @@ public class ObjectManager : MonoBehaviour
     {
         director.enabled = false;
         isPickUp = true;
+    }
+
+    public void SetDoorOpen() 
+    {
+        isOpened = true;
+    }
+
+    void OpenDoor() 
+    {
+        GameObject door = transform.GetChild(0).gameObject;
+        Debug.Log(door);
+        door.SetActive(true);
+
+        GetComponent<SphereCollider>().enabled = false;
     }
 
     void PickUpObject(int id)

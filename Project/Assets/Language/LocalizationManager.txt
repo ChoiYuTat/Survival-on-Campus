@@ -29,3 +29,9 @@ Ham_txt
 Med_txt
 Tools_txt
 P_Key_txt
+>Door
+C_Lock_1
+C_Lock_2
+P_Lock
+C_Unlock
+P_Unlock
