@@ -50,6 +50,7 @@ public class PlayerData
         CurrentExp = 0;
         RequiredExp = 20;
         PlayerPosition = new Vector3(-3.62f,1,3.34f);
+        Skills.Add(new PlayerSkillData { name = "God's Slap", type = "group", damageMultiplier = 1.0f });
     }
 }
 
@@ -57,6 +58,7 @@ public class PlayerData
 public class PlayerSkillData
 {
     public string name;
+    public string type;
     public float damageMultiplier;
 }
 
@@ -77,7 +79,7 @@ public class LoadPlayerData : MonoBehaviour
 
     private void Start()
     {
-        Invoke("UpdatePosition", 0.1f);
+        Invoke("UpdatePosition", 0.01f);
     }
 
     void UpdatePosition() 

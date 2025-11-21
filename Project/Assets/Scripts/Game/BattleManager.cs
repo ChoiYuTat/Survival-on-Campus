@@ -5,7 +5,11 @@ public enum BattleState
 {
     Start,
     PlayerTurn,
+    PlayerAction,
     EnemyTurn,
+    Victory,
+    Defeat,
+    CheckWinLose,
     BattleOver
 }
 
@@ -18,6 +22,7 @@ public class BattleManager : MonoBehaviour
     public GameObject playerPosition;
     public GameObject[] enemyPosition;
     public LoadPlayerData playerData;
+    public Canvas battleCanvas, MenuCanvas;
 
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -60,6 +65,8 @@ public class BattleManager : MonoBehaviour
         player.transform.position = playerPosition.transform.position;
         player.GetComponent<luna>().enabled = false;
         player.GetComponent<OpenDoor>().enabled = false;
+        battleCanvas.enabled = true;
+        MenuCanvas.enabled = false;
         for (int i = 0; i < currentEnemies.Count; i++) 
         {
             enemies.Add(Instantiate(enemyPrefab, enemyPosition[i].transform.position, 
@@ -78,12 +85,24 @@ public class BattleManager : MonoBehaviour
         // 玩家操作完成后调用 EndPlayerTurn()
     }
 
-    public void EndPlayerTurn()
+    public void PlayerAction(string actionType)
     {
-        Debug.Log("玩家回合结束！");
-        state = BattleState.EnemyTurn;
-        currentEnemyIndex = 0; // 从第一个敌人开始
-        EnemyTurn();
+        state = BattleState.PlayerAction;
+        Debug.Log($"玩家执行动作: {actionType}");
+        // 计算伤害或技能效果
+        EndPlayerAction();
+    }
+
+    void EndPlayerAction()
+    {
+        state = BattleState.CheckWinLose;
+        CheckBattleEnd();
+        if (state != BattleState.BattleOver)
+        {
+            state = BattleState.EnemyTurn;
+            currentEnemyIndex = 0;
+            EnemyTurn();
+        }
     }
 
     void EnemyTurn()
@@ -125,5 +144,27 @@ public class BattleManager : MonoBehaviour
         Debug.Log("所有敌人行动完毕，切换到玩家回合！");
         state = BattleState.PlayerTurn;
         PlayerTurn();
+    }
+
+    void CheckBattleEnd()
+    {
+        bool allEnemiesDead = true;
+        foreach (var enemy in currentEnemies)
+        {
+            if (enemy.hp > 0) { allEnemiesDead = false; break; }
+        }
+
+        if (allEnemiesDead)
+        {
+            state = BattleState.Victory;
+            Debug.Log("战斗胜利！");
+            state = BattleState.BattleOver;
+        }
+        else if (playerData.data.HP <= 0)
+        {
+            state = BattleState.Defeat;
+            Debug.Log("玩家被击败！");
+            state = BattleState.BattleOver;
+        }
     }
 }

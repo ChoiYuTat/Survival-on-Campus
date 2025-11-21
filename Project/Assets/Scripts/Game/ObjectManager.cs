@@ -64,7 +64,7 @@ public class ObjectManager : MonoBehaviour
 
     void Start()
     {
-        Invoke("loadItems", 0.1f);
+        Invoke("loadItems", 0.01f);
         //loadItems();
 
         if (lockType == LockType.None) 
