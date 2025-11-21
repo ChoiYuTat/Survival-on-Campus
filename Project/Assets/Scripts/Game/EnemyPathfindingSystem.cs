@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +11,8 @@ public class EnemyPathfindingSystem : MonoBehaviour
     public float sightRange = 20f;
     public float viewAngle = 70f;
     public float loseSightTime = 2f;
+    public EnemyManager enemyManager;
+    public BattleManager battleManager;
 
     private int currentIndex = 0;
     private NavMeshAgent agent;
@@ -89,6 +92,7 @@ public class EnemyPathfindingSystem : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player") 
         {
+            battleManager.StartBattle(enemyManager.getEnemyData());
             Destroy(gameObject);    
         }
     }

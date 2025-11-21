@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
@@ -31,39 +32,53 @@ public class EnemyDatabase
 public class EnemyManager : MonoBehaviour
 {
     private EnemyDatabase enemyDatabase;
+    private Dictionary<int, EnemyData> enemyDict;
+    [SerializeField]
+    private EnemyGroupSO enemyGroup;
 
     void Start()
     {
         LoadEnemyData();
-        PrintEnemyInfo(1); 
     }
 
     void LoadEnemyData()
     {
         TextAsset jsonFile = Resources.Load<TextAsset>("enemies");
         enemyDatabase = JsonUtility.FromJson<EnemyDatabase>(jsonFile.text);
+
+        enemyDict = new Dictionary<int, EnemyData>();
+        foreach (var enemy in enemyDatabase.enemies)
+        {
+            enemyDict[enemy.id] = enemy;
+        }
+
+        for (int i = 0; i < enemyGroup.enemies.Length; i++)
+        {
+            if (enemyDict.ContainsKey(enemyGroup.enemies[i].id)) 
+            {
+                enemyGroup.enemies[i] = enemyDict[enemyGroup.enemies[i].id];
+            }
+        }
+    }
+
+    public List<EnemyData> getEnemyData()
+    {
+        bool allNull = true;
+        foreach (var enemy in enemyGroup.enemies)
+        {
+            if (enemy != null)
+            {
+                allNull = false;
+            }
+        }
+
+        if (!allNull)
+            return new List<EnemyData>(enemyGroup.enemies);
+        else return null;
     }
 
     public EnemyData GetEnemyById(int id)
     {
-        foreach (var enemy in enemyDatabase.enemies)
-        {
-            if (enemy.id == id)
-                return enemy;
-        }
-        return null;
-    }
-
-    void PrintEnemyInfo(int id)
-    {
-        EnemyData enemy = GetEnemyById(id);
-        if (enemy != null)
-        {
-            Debug.Log($"敌人: {enemy.name}, HP: {enemy.hp}, 攻击: {enemy.attack}, 经验: {enemy.exp}");
-            foreach (var skill in enemy.skills)
-            {
-                Debug.Log($"技能: {skill.name}, 持续时间: {skill.duration}");
-            }
-        }
+        return enemyDict.ContainsKey(id) ? enemyDict[id] : null;
     }
 }
