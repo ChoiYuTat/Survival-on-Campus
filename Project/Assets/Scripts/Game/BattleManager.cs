@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public enum BattleState
 {
     Start,
     PlayerTurn,
     PlayerAction,
+    SelectTarget,
     EnemyTurn,
     Victory,
     Defeat,
@@ -16,34 +18,45 @@ public enum BattleState
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager Instance;
+
     public GameObject battleScene;
     public GameObject enemyPrefab;
+    public GameObject enemyTargetManager;
+    public GameObject targetPanel;
+    public GameObject battleButton;
     public GameObject player;
     public GameObject playerPosition;
     public GameObject[] enemyPosition;
+
+
+    public Transform content;
     public LoadPlayerData playerData;
     public Canvas battleCanvas, MenuCanvas;
 
+    public Slider energySlider;
+    public Text energyText, playerHP;
+
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
+    private List<GameObject> targets = new List<GameObject>();
     private Dictionary<EnemyData, int> enemySkillIndex = new Dictionary<EnemyData, int>();
-    private BattleState state;
+    public BattleState state;
 
 
     private int currentEnemyIndex = 0;
 
-    //void Awake()
-    //{
-    //    if (Instance == null)
-    //    {
-    //        Instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        energyText.text = energySlider.value.ToString();
+    }
 
     public void StartBattle(List<EnemyData> enemies)
     {
@@ -56,7 +69,6 @@ public class BattleManager : MonoBehaviour
             enemySkillIndex[enemy] = 0;
         }
 
-        Debug.Log("战斗开始！");
         BeginBattle();
     }
 
@@ -81,26 +93,50 @@ public class BattleManager : MonoBehaviour
 
     void PlayerTurn()
     {
-        Debug.Log("玩家回合开始！");
-        // 玩家操作完成后调用 EndPlayerTurn()
+        battleButton.SetActive(true);
     }
 
-    public void PlayerAction(string actionType)
+    public void PlayerAction(int actionType)
+    {
+        state = BattleState.SelectTarget;
+        for (int i = 0; i < targets.Count; i++)
+        {
+            Destroy(targets[i]);
+        }
+        targets.Clear();
+
+        if (actionType == 0) 
+        {
+            for (int i = 0; i < enemies.Count; i++) 
+            {
+                targets.Add(Instantiate(enemyTargetManager, content));
+                targets[i].GetComponent<EnemyTargetManager>().SetTarget(enemies[i], i);
+            }
+        }
+
+        energyText.text = energySlider.value.ToString();
+    }
+
+    public void OnTargetSelected(int target)
     {
         state = BattleState.PlayerAction;
-        Debug.Log($"玩家执行动作: {actionType}");
-        // 计算伤害或技能效果
-        EndPlayerAction();
+        targetPanel.SetActive(false);
+        battleButton.SetActive(false);
+        ExecutePlayerAttack(enemies[target].GetComponent<Enemy>());
     }
 
-    void EndPlayerAction()
+    void ExecutePlayerAttack(Enemy target)
     {
+        int damage = Mathf.Max(playerData.data.Attack - target.enemyData.defense, 1);
+        target.TakeDamage(damage);
+
+
         state = BattleState.CheckWinLose;
         CheckBattleEnd();
+
         if (state != BattleState.BattleOver)
         {
             state = BattleState.EnemyTurn;
-            currentEnemyIndex = 0;
             EnemyTurn();
         }
     }
@@ -116,32 +152,26 @@ public class BattleManager : MonoBehaviour
                 SkillData skill = enemy.skills[index];
 
                 int damage = Mathf.Max((int)(enemy.attack * skill.damageMultiplier) - playerData.data.Defense, 1);
+                playerData.data.HP -= damage;
+                playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
 
                 Debug.Log($"{enemy.name} 使用技能 {skill.name}，造成 {damage} 点伤害！玩家剩余 HP: {playerData.data.HP}");
-
+                CheckBattleEnd();
                 enemySkillIndex[enemy] = (index + 1) % enemy.skills.Length;
-
-                if (playerData.data.HP <= 0)
-                {
-                    Debug.Log("玩家被击败！游戏结束！");
-                    state = BattleState.BattleOver;
-                    return;
-                }
             }
 
-            // 下一个敌人
             currentEnemyIndex++;
-            Invoke("EnemyTurn", 1f); // 延迟调用，模拟逐个行动
+            Invoke("EnemyTurn", 1f); 
         }
         else
         {
+            currentEnemyIndex = 0;
             EndEnemyTurn();
         }
     }
 
     void EndEnemyTurn()
     {
-        Debug.Log("所有敌人行动完毕，切换到玩家回合！");
         state = BattleState.PlayerTurn;
         PlayerTurn();
     }
@@ -149,9 +179,9 @@ public class BattleManager : MonoBehaviour
     void CheckBattleEnd()
     {
         bool allEnemiesDead = true;
-        foreach (var enemy in currentEnemies)
+        foreach (var enemy in enemies)
         {
-            if (enemy.hp > 0) { allEnemiesDead = false; break; }
+            if (enemy.GetComponent<Enemy>().enemyData.hp > 0) { allEnemiesDead = false; break; }
         }
 
         if (allEnemiesDead)

@@ -44,8 +44,8 @@ public class PlayerData
     {
         HP = 20;
         MaxHP = 20;
-        Attack = 3;
-        Defense = 2;
+        Attack = 5;
+        Defense = 3;
         Level = 1;
         CurrentExp = 0;
         RequiredExp = 20;
