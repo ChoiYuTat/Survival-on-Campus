@@ -100,7 +100,6 @@ public class BattleManager : MonoBehaviour
 
                 Debug.Log($"{enemy.name} 使用技能 {skill.name}，造成 {damage} 点伤害！玩家剩余 HP: {playerData.data.HP}");
 
-                // 技能索引递增，循环使用
                 enemySkillIndex[enemy] = (index + 1) % enemy.skills.Length;
 
                 if (playerData.data.HP <= 0)
