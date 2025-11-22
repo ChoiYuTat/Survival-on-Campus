@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 
 [System.Serializable]
-public struct SkillData
+public class SkillData
 {
     public string name;
     public float damageMultiplier;
