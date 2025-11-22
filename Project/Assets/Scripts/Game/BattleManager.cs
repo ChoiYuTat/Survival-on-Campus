@@ -28,7 +28,9 @@ public class BattleManager : MonoBehaviour
     public GameObject player;
     public GameObject playerPosition;
     public GameObject LevelUP;
+    public GameObject QTEmanager;
     public GameObject[] enemyPosition;
+
 
     public MenuManager menuManager;
 
