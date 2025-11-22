@@ -33,7 +33,7 @@ public class BattleManager : MonoBehaviour
 
     public Transform content;
     public LoadPlayerData playerData;
-    public Canvas battleCanvas, MenuCanvas, itemCanvas, resultCanvas;
+    public Canvas battleCanvas, MenuCanvas, itemCanvas, resultCanvas, gameOverCanvas;
 
     public Slider energySlider;
     public Text energyText, playerHP, earnedEXP_txt;
@@ -279,6 +279,7 @@ public class BattleManager : MonoBehaviour
             state = BattleState.Defeat;
             Debug.Log("Íæ¼Ò±»»÷°Ü£¡");
             state = BattleState.BattleOver;
+            GameOver();
         }
     }
 
@@ -312,5 +313,10 @@ public class BattleManager : MonoBehaviour
         menuManager.ResetEnemy();
         LevelUP.SetActive(false);
         battleScene.SetActive(false);
+    }
+
+    void GameOver() 
+    {
+        gameOverCanvas.enabled = true;
     }
 }
