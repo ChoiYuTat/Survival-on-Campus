@@ -23,7 +23,8 @@ public class PlayerData
     public void AddExperience(int exp)
     {
         CurrentExp += exp;
-        while (CurrentExp >= RequiredExp)
+        RequiredExp -= exp;
+        if (RequiredExp <= 0)
         {
             LevelUp();
         }
@@ -31,7 +32,6 @@ public class PlayerData
     private void LevelUp()
     {
         Level++;
-        CurrentExp -= RequiredExp;
         RequiredExp = Mathf.RoundToInt(20 * Mathf.Pow(Level, 1.5f));
         MaxHP += (int)(3 * 1.1f);
         HP = MaxHP;

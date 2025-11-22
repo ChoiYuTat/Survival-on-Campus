@@ -64,18 +64,29 @@ public class MenuManager : MonoBehaviour
     public void Freeze() 
     {
         player.GetComponent<luna>().enabled = false;
-        foreach (var enemy in enemies)
+        if (enemies != null)
         {
-            enemy.SetActive(false);
+            foreach (var enemy in enemies)
+            {
+                enemy.SetActive(false);
+            }
         }
     }
 
     public void Unfreeze()
     {
         player.GetComponent<luna>().enabled = true;
-        foreach (var enemy in enemies)
+        if (enemies != null) 
         {
-            enemy.SetActive(true);
+            foreach (var enemy in enemies)
+            {
+                enemy.SetActive(true);
+            }
         }
+    }
+
+    public void ResetEnemy() 
+    {
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 }

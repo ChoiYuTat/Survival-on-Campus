@@ -28,6 +28,7 @@ public class BattleManager : MonoBehaviour
     public GameObject playerPosition;
     public GameObject[] enemyPosition;
 
+    public MenuManager menuManager;
 
     public Transform content;
     public LoadPlayerData playerData;
@@ -40,6 +41,9 @@ public class BattleManager : MonoBehaviour
     private List<GameObject> enemies = new List<GameObject>();
     private List<GameObject> targets = new List<GameObject>();
     private Dictionary<EnemyData, int> enemySkillIndex = new Dictionary<EnemyData, int>();
+    private int earnedExp = 0;
+    private Vector3 playerOriginalPosition;
+
     public BattleState state;
 
 
@@ -60,6 +64,7 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle(List<EnemyData> enemies)
     {
+        playerOriginalPosition = player.transform.position;
         battleScene.SetActive(true);
         currentEnemies = enemies;
         state = BattleState.Start;
@@ -206,6 +211,7 @@ public class BattleManager : MonoBehaviour
             if (!enemies[i].GetComponent<Enemy>().IsAlive())
             {
                 Debug.Log(enemies[i].GetComponent<Enemy>().GetEnemyData().name + " 被击败！");
+                earnedExp += enemies[i].GetComponent<Enemy>().GetEnemyData().exp;
                 Destroy(enemies[i]);
                 enemies.RemoveAt(i);
                 currentEnemies.RemoveAt(i);
@@ -264,6 +270,7 @@ public class BattleManager : MonoBehaviour
             state = BattleState.Victory;
             Debug.Log("战斗胜利！");
             state = BattleState.BattleOver;
+            EndBattle();
         }
         else if (playerData.data.HP <= 0)
         {
@@ -271,5 +278,26 @@ public class BattleManager : MonoBehaviour
             Debug.Log("玩家被击败！");
             state = BattleState.BattleOver;
         }
+    }
+
+    public void EndBattle()
+    {
+        player.transform.position = playerOriginalPosition;
+        player.GetComponent<luna>().enabled = true;
+        player.GetComponent<OpenDoor>().enabled = true;
+        battleCanvas.enabled = false;
+        MenuCanvas.enabled = true;
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            Destroy(enemies[i]);
+        }
+        enemies.Clear();
+        currentEnemies.Clear();
+        enemySkillIndex.Clear();
+        playerData.data.AddExperience(earnedExp);
+        Debug.Log("获得经验值: " + earnedExp);
+        menuManager.ResetEnemy();
+        earnedExp = 0;
+        battleScene.SetActive(false);
     }
 }
