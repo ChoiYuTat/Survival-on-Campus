@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public EnemyData enemyData;
+    [SerializeField]
+    private EnemyData enemyData;
 
-    public void SetEnemyData(EnemyData data)
+    public void SetEnemyData(EnemyData data,int number)
     {
         enemyData = data;
+        enemyData.instanceID = GetInstanceID() + number;
+        enemyData.name += " #" + number;
         Debug.Log("Enemy " + enemyData.name + " initialized with HP: " + enemyData.hp);
     }
 
@@ -17,4 +20,6 @@ public class Enemy : MonoBehaviour
     }
 
     public bool IsAlive() => enemyData.hp > 0;
+
+    public EnemyData GetEnemyData() => enemyData;
 }

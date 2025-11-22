@@ -1,10 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private GameObject target;
     private int targetIndex;
+
+    [SerializeField]
+    private Slider HPSlider;
     public void HighlightTarget(GameObject enemy)
     {
         // Implement highlight logic here
@@ -27,6 +31,8 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void SetTarget(GameObject enemy, int index)
     {
         target = enemy;
+        HPSlider.maxValue = enemy.GetComponent<Enemy>().GetEnemyData().maxHp;
+        HPSlider.value = enemy.GetComponent<Enemy>().GetEnemyData().hp;
         targetIndex = index;
     }
 

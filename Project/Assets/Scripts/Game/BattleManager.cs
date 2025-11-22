@@ -79,11 +79,14 @@ public class BattleManager : MonoBehaviour
         player.GetComponent<OpenDoor>().enabled = false;
         battleCanvas.enabled = true;
         MenuCanvas.enabled = false;
+
         for (int i = 0; i < currentEnemies.Count; i++) 
         {
-            enemies.Add(Instantiate(enemyPrefab, enemyPosition[i].transform.position, 
-                enemyPosition[i].transform.rotation, enemyPosition[i].transform));
-            enemies[i].GetComponent<Enemy>().SetEnemyData(currentEnemies[i]);
+            Debug.Log(currentEnemies[i]);
+            GameObject gameObject = Instantiate(enemyPrefab, enemyPosition[i].transform.position,
+                enemyPosition[i].transform.rotation, enemyPosition[i].transform);
+            enemies.Add(gameObject);
+            enemies[i].GetComponent<Enemy>().SetEnemyData(currentEnemies[i], i);
             enemies[i].transform.Translate(new Vector3(0, 1f));
         }
 
@@ -105,16 +108,60 @@ public class BattleManager : MonoBehaviour
         }
         targets.Clear();
 
-        if (actionType == 0) 
+        if (actionType == 0)
         {
-            for (int i = 0; i < enemies.Count; i++) 
+            for (int i = 0; i < enemies.Count; i++)
             {
                 targets.Add(Instantiate(enemyTargetManager, content));
                 targets[i].GetComponent<EnemyTargetManager>().SetTarget(enemies[i], i);
             }
         }
+        else if (actionType == 1) 
+        {
+            UseSkill();
 
-        energyText.text = energySlider.value.ToString();
+            state = BattleState.CheckWinLose;
+            CheckBattleEnd();
+
+            if (state != BattleState.BattleOver)
+            {
+                state = BattleState.EnemyTurn;
+                EnemyTurn();
+            }
+        }
+    }
+
+    public void UseSkill() 
+    {
+        int MaxEnegryUse = 3;
+        if (energySlider.value >= 3)
+        {
+            state = BattleState.PlayerAction;
+            battleButton.SetActive(false);
+            foreach (var enemy in enemies)
+            {
+                int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier * MaxEnegryUse)
+                    - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
+            }
+
+            energySlider.value -= MaxEnegryUse;
+            energyText.text = energySlider.value.ToString();
+        }
+        else if (energySlider.value >= 1)
+        {
+            state = BattleState.PlayerAction;
+            battleButton.SetActive(false);
+            foreach (var enemy in enemies)
+            {
+                int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier * energySlider.value)
+                    - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
+            }
+
+            energySlider.value = 0;
+            energyText.text = energySlider.value.ToString();
+        }
     }
 
     public void OnTargetSelected(int target)
@@ -127,9 +174,11 @@ public class BattleManager : MonoBehaviour
 
     void ExecutePlayerAttack(Enemy target)
     {
-        int damage = Mathf.Max(playerData.data.Attack - target.enemyData.defense, 1);
+        Debug.Log("Íæ¼Ò¹¥»÷ " + target.GetEnemyData().name);
+        int damage = Mathf.Max(playerData.data.Attack - target.GetEnemyData().defense, 1);
         target.TakeDamage(damage);
-
+        energySlider.value += 1;
+        energyText.text = energySlider.value.ToString();
 
         state = BattleState.CheckWinLose;
         CheckBattleEnd();
@@ -181,7 +230,10 @@ public class BattleManager : MonoBehaviour
         bool allEnemiesDead = true;
         foreach (var enemy in enemies)
         {
-            if (enemy.GetComponent<Enemy>().enemyData.hp > 0) { allEnemiesDead = false; break; }
+            if (enemy.GetComponent<Enemy>().IsAlive()) 
+            {
+                allEnemiesDead = false; 
+            }
         }
 
         if (allEnemiesDead)

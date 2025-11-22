@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 
 [System.Serializable]
-public class SkillData
+public struct SkillData
 {
     public string name;
     public float damageMultiplier;
@@ -12,14 +12,16 @@ public class SkillData
 }
 
 [System.Serializable]
-public class EnemyData
+public struct EnemyData
 {
     public int id;
     public string name;
     public int hp;
+    public int maxHp;
     public int attack;
     public int defense;
     public int exp;
+    public int instanceID;
     public SkillData[] skills;
 }
 
@@ -33,8 +35,8 @@ public class EnemyManager : MonoBehaviour
 {
     private EnemyDatabase enemyDatabase;
     private Dictionary<int, EnemyData> enemyDict;
-    [SerializeField]
-    private EnemyGroupSO enemyGroup;
+
+    public EnemyGroupSO enemyGroup;
 
     void Start()
     {
@@ -52,7 +54,7 @@ public class EnemyManager : MonoBehaviour
             enemyDict[enemy.id] = enemy;
         }
 
-        for (int i = 0; i < enemyGroup.enemies.Length; i++)
+        for (int i = 0; i < enemyGroup.enemies.Count; i++)
         {
             if (enemyDict.ContainsKey(enemyGroup.enemies[i].id)) 
             {
@@ -66,7 +68,7 @@ public class EnemyManager : MonoBehaviour
         bool allNull = true;
         foreach (var enemy in enemyGroup.enemies)
         {
-            if (enemy != null)
+            if (IsValid(enemy))
             {
                 allNull = false;
             }
@@ -76,9 +78,17 @@ public class EnemyManager : MonoBehaviour
             return new List<EnemyData>(enemyGroup.enemies);
         else return null;
     }
-
-    public EnemyData GetEnemyById(int id)
+    public EnemyData? GetEnemyById(int id)
     {
-        return enemyDict.ContainsKey(id) ? enemyDict[id] : null;
+        if (enemyDict.TryGetValue(id, out EnemyData enemy))
+        {
+            return enemy; 
+        }
+        return null; 
+    }
+
+    public bool IsValid(EnemyData enemy)
+    {
+        return enemy.id > 0 && !string.IsNullOrEmpty(name);
     }
 }

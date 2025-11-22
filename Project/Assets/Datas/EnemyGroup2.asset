@@ -16,16 +16,32 @@ MonoBehaviour:
   groupID: 1
   enemies:
   - id: 1
-    name: 
-    hp: 0
-    attack: 0
-    defense: 0
-    exp: 0
-    skills: []
+    name: Normal Infector
+    hp: 30
+    maxHp: 30
+    attack: 5
+    defense: 3
+    exp: 10
+    instanceID: 0
+    skills:
+    - name: Bite
+      damageMultiplier: 1
+      duration: 1
+    - name: Trip
+      damageMultiplier: 1
+      duration: 3
   - id: 1
-    name: 
-    hp: 0
-    attack: 0
-    defense: 0
-    exp: 0
-    skills: []
+    name: Normal Infector
+    hp: 30
+    maxHp: 30
+    attack: 5
+    defense: 3
+    exp: 10
+    instanceID: 0
+    skills:
+    - name: Bite
+      damageMultiplier: 1
+      duration: 1
+    - name: Trip
+      damageMultiplier: 1
+      duration: 3

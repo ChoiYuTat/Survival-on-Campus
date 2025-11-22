@@ -4,9 +4,11 @@
       "id": 1,
       "name": "Normal Infector",
       "hp": 30,
+      "maxHp": 30,
       "attack": 5,
       "defense": 3,
       "exp": 10,
+      "instanceId": null,
       "skills": [
         {
           "name": "Bite",

@@ -907,8 +907,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 234901734}
   m_HandleRect: {fileID: 234901733}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.12394176
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1284,7 +1284,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1648361047}
   m_HandleRect: {fileID: 1648361046}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1437,7 +1437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: -0.000038146973}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &237715337
@@ -3576,7 +3576,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1293198941}
   m_Direction: 0
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7965,6 +7965,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1222517113}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &917796113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8772,11 +8784,11 @@ MonoBehaviour:
       - m_Target: {fileID: 2033676840}
         m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
         m_MethodName: PlayerAction
-        m_Mode: 5
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 1
           m_BoolArgument: 0
@@ -9892,7 +9904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 26489.586}
+  m_AnchoredPosition: {x: 0, y: -0.000045776367}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1170119572
@@ -10120,6 +10132,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1222517113}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1178925839
 MonoBehaviour:
@@ -16797,7 +16821,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleScene: {fileID: 2033676834}
   enemyPrefab: {fileID: 5433540144654025127, guid: 81bd93f7426d40848b77356f7577dbea, type: 3}
-  enemyTargetManager: {fileID: 416406525852299682, guid: 37c45c24ca26440468929c641f816f6e, type: 3}
+  enemyTargetManager: {fileID: 2163847233617846595, guid: 37c45c24ca26440468929c641f816f6e, type: 3}
   targetPanel: {fileID: 656060265}
   battleButton: {fileID: 1222517113}
   player: {fileID: 2768522022989334918}
@@ -17279,7 +17303,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 6
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
