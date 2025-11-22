@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public enum BattleState
 {
@@ -103,6 +104,7 @@ public class BattleManager : MonoBehaviour
 
     void PlayerTurn()
     {
+        if (state == BattleState.PlayerTurn)
         battleButton.SetActive(true);
     }
 
@@ -223,7 +225,7 @@ public class BattleManager : MonoBehaviour
 
     void EnemyTurn()
     {
-        if (currentEnemyIndex < currentEnemies.Count)
+        if ((currentEnemyIndex < currentEnemies.Count) && (state == BattleState.EnemyTurn))
         {
             EnemyData enemy = currentEnemies[currentEnemyIndex];
             if (enemy.hp > 0 && enemy.skills.Length > 0)
