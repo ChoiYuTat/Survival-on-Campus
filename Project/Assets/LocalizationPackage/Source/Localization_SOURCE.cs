@@ -223,8 +223,8 @@ namespace LanguageLocalization
                 }
                 if (sel.assignationType == LocalizationSelector.AssignationType.GameObjectChild || sel.assignationType == LocalizationSelector.AssignationType.LocalizationComponent)
                 {
-                    if (sel.AT_FoundObjects.Count == 0)
-                        Debug.Log("Localization: The key '" + sel.Key + "' couldn't find any child objects");
+                    if (sel.AT_FoundObjects.Count == 0) { }
+                        //Debug.Log("Localization: The key '" + sel.Key + "' couldn't find any child objects");
                 }
             }
         }

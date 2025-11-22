@@ -82,6 +82,7 @@ public class BattleManager : MonoBehaviour
         player.transform.position = playerPosition.transform.position;
         player.GetComponent<luna>().enabled = false;
         player.GetComponent<OpenDoor>().enabled = false;
+        playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
         battleCanvas.enabled = true;
         MenuCanvas.enabled = false;
 
