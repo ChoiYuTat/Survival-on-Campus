@@ -9,6 +9,7 @@ TagManager:
   - LocalizationSource
   - OptionSetter
   - Description
+  - Enemy
   layers:
   - Default
   - TransparentFX

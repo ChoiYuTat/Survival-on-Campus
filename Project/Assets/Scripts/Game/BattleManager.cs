@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject enemyTargetManager;
     public GameObject targetPanel;
+    public GameObject itemPenel;
     public GameObject battleButton;
     public GameObject player;
     public GameObject playerPosition;
@@ -162,6 +163,14 @@ public class BattleManager : MonoBehaviour
             energySlider.value = 0;
             energyText.text = energySlider.value.ToString();
         }
+    }
+
+    public void UseItem() 
+    {
+        playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
+        itemPenel.SetActive(false);
+        state = BattleState.EnemyTurn;
+        EnemyTurn();
     }
 
     public void OnTargetSelected(int target)
