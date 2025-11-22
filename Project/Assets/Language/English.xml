@@ -13,6 +13,7 @@ Status=Status
 Item=Item
 Use=Use
 Save=Save
+Result=Result
 >Plot
 P1_01=Me:/Please Enter Text
 P1_02=You:/I Enter your mother

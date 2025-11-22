@@ -13,6 +13,7 @@ Status=狀態
 Item=物品
 Use=使用
 Save=保存
+Result=结果
 >Plot
 P1_01=我:/请输入文本
 P1_02=你:/输入你母亲

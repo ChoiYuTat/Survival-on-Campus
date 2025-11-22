@@ -26,16 +26,17 @@ public class BattleManager : MonoBehaviour
     public GameObject battleButton;
     public GameObject player;
     public GameObject playerPosition;
+    public GameObject LevelUP;
     public GameObject[] enemyPosition;
 
     public MenuManager menuManager;
 
     public Transform content;
     public LoadPlayerData playerData;
-    public Canvas battleCanvas, MenuCanvas, itemCanvas;
+    public Canvas battleCanvas, MenuCanvas, itemCanvas, resultCanvas;
 
     public Slider energySlider;
-    public Text energyText, playerHP;
+    public Text energyText, playerHP, earnedEXP_txt;
 
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -283,6 +284,19 @@ public class BattleManager : MonoBehaviour
 
     public void EndBattle()
     {
+        resultCanvas.enabled = true;
+        playerData.data.AddExperience(earnedExp);
+        earnedEXP_txt.text = "+" + earnedExp.ToString();
+        Debug.Log("获得经验值: " + earnedExp);
+        if (playerData.data.RequiredExp <= 0)
+        {
+            LevelUP.SetActive(true);
+        }
+        earnedExp = 0;
+    }
+    public void CloseResult()
+    {
+        resultCanvas.enabled = false;
         player.transform.position = playerOriginalPosition;
         player.GetComponent<luna>().enabled = true;
         player.GetComponent<OpenDoor>().enabled = true;
@@ -295,10 +309,8 @@ public class BattleManager : MonoBehaviour
         enemies.Clear();
         currentEnemies.Clear();
         enemySkillIndex.Clear();
-        playerData.data.AddExperience(earnedExp);
-        Debug.Log("获得经验值: " + earnedExp);
         menuManager.ResetEnemy();
-        earnedExp = 0;
+        LevelUP.SetActive(false);
         battleScene.SetActive(false);
     }
 }
