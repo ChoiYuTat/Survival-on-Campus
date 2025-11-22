@@ -23,7 +23,6 @@ public class BattleManager : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject enemyTargetManager;
     public GameObject targetPanel;
-    public GameObject itemPenel;
     public GameObject battleButton;
     public GameObject player;
     public GameObject playerPosition;
@@ -32,7 +31,7 @@ public class BattleManager : MonoBehaviour
 
     public Transform content;
     public LoadPlayerData playerData;
-    public Canvas battleCanvas, MenuCanvas;
+    public Canvas battleCanvas, MenuCanvas, itemCanvas;
 
     public Slider energySlider;
     public Text energyText, playerHP;
@@ -120,6 +119,7 @@ public class BattleManager : MonoBehaviour
         else if (actionType == 1) 
         {
             UseSkill();
+            CheckEnemyDead();
 
             state = BattleState.CheckWinLose;
             CheckBattleEnd();
@@ -159,7 +159,6 @@ public class BattleManager : MonoBehaviour
                     - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
                 enemy.GetComponent<Enemy>().TakeDamage(damage);
             }
-
             energySlider.value = 0;
             energyText.text = energySlider.value.ToString();
         }
@@ -168,7 +167,7 @@ public class BattleManager : MonoBehaviour
     public void UseItem() 
     {
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
-        itemPenel.SetActive(false);
+        itemCanvas.enabled = false;
         state = BattleState.EnemyTurn;
         EnemyTurn();
     }
@@ -189,6 +188,7 @@ public class BattleManager : MonoBehaviour
         energySlider.value += 1;
         energyText.text = energySlider.value.ToString();
 
+        CheckEnemyDead();
         state = BattleState.CheckWinLose;
         CheckBattleEnd();
 
@@ -196,6 +196,20 @@ public class BattleManager : MonoBehaviour
         {
             state = BattleState.EnemyTurn;
             EnemyTurn();
+        }
+    }
+
+    void CheckEnemyDead() 
+    {
+        for (int i = enemies.Count - 1; i >= 0; i--)
+        {
+            if (!enemies[i].GetComponent<Enemy>().IsAlive())
+            {
+                Debug.Log(enemies[i].GetComponent<Enemy>().GetEnemyData().name + " ±»»÷°Ü£¡");
+                Destroy(enemies[i]);
+                enemies.RemoveAt(i);
+                currentEnemies.RemoveAt(i);
+            }
         }
     }
 

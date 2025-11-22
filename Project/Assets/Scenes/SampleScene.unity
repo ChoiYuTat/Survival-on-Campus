@@ -9916,7 +9916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 345992.62}
+  m_AnchoredPosition: {x: 0, y: 379405.66}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1170119572
@@ -16859,7 +16859,6 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5433540144654025127, guid: 81bd93f7426d40848b77356f7577dbea, type: 3}
   enemyTargetManager: {fileID: 2163847233617846595, guid: 37c45c24ca26440468929c641f816f6e, type: 3}
   targetPanel: {fileID: 656060265}
-  itemPenel: {fileID: 0}
   battleButton: {fileID: 1222517113}
   player: {fileID: 2768522022989334918}
   playerPosition: {fileID: 822109146}
@@ -16871,6 +16870,7 @@ MonoBehaviour:
   playerData: {fileID: 8729586507925044232}
   battleCanvas: {fileID: 1743590818}
   MenuCanvas: {fileID: 1884803261}
+  itemCanvas: {fileID: 206507753}
   energySlider: {fileID: 2073984234}
   energyText: {fileID: 1131308099}
   playerHP: {fileID: 2010778641}

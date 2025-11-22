@@ -4,12 +4,13 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private EnemyData enemyData;
-
+    private int number;
     public void SetEnemyData(EnemyData data,int number)
     {
         enemyData = data;
         enemyData.instanceID = GetInstanceID() + number;
         enemyData.name += " #" + number;
+        this.number = number;
         Debug.Log("Enemy " + enemyData.name + " initialized with HP: " + enemyData.hp);
     }
 
@@ -22,4 +23,6 @@ public class Enemy : MonoBehaviour
     public bool IsAlive() => enemyData.hp > 0;
 
     public EnemyData GetEnemyData() => enemyData;
+
+    public int GetNumber() => number;
 }
