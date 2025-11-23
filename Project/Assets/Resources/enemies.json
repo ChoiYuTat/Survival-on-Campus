@@ -14,11 +14,6 @@
           "name": "Bite",
           "damageMultiplier": 1.0,
           "duration": 1.0
-        },
-        {
-          "name": "Trip",
-          "damageMultiplier": 1.0,
-          "duration": 3.0
         }
       ]
     }

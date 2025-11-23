@@ -6493,7 +6493,7 @@ Transform:
   m_GameObject: {fileID: 692404828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.1247, y: 0, z: 0.1982}
+  m_LocalPosition: {x: -0.1247, y: 1, z: 0.1982}
   m_LocalScale: {x: 0.05, y: 1, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10888,7 +10888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 187706.83}
+  m_AnchoredPosition: {x: 0, y: 384619}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1170119572
@@ -13813,7 +13813,7 @@ GameObject:
   - component: {fileID: 1543302231}
   - component: {fileID: 1543302230}
   m_Layer: 0
-  m_Name: EnemyPosition1
+  m_Name: EnemyPosition2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13902,7 +13902,7 @@ Transform:
   m_GameObject: {fileID: 1543302229}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.23550014, y: 0, z: 0.093434}
+  m_LocalPosition: {x: -0.23550014, y: 1, z: 0.093434}
   m_LocalScale: {x: 0.05, y: 1, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15478,7 +15478,7 @@ GameObject:
   - component: {fileID: 1713392001}
   - component: {fileID: 1713392000}
   m_Layer: 0
-  m_Name: EnemyPosition2
+  m_Name: EnemyPosition1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15493,7 +15493,7 @@ Transform:
   m_GameObject: {fileID: 1713391998}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.144, y: 0, z: -0.019}
+  m_LocalPosition: {x: -0.144, y: 1, z: -0.019}
   m_LocalScale: {x: 0.05, y: 1, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19074,8 +19074,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 822109150}
-  - {fileID: 1543302233}
   - {fileID: 1713391999}
+  - {fileID: 1543302233}
   - {fileID: 692404829}
   - {fileID: 509834113}
   m_Father: {fileID: 0}
@@ -26518,6 +26518,7 @@ MonoBehaviour:
   jumpForce: 6
   groundCheckDistance: 0.2
   slopeLimit: 45
+  fastFallSpeed: 20
 --- !u!224 &8739519604713826925
 RectTransform:
   m_ObjectHideFlags: 0

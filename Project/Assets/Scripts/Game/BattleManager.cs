@@ -99,8 +99,8 @@ public class BattleManager : MonoBehaviour
             GameObject gameObject = Instantiate(enemyPrefab, enemyPosition[i].transform.position,
                 enemyPosition[i].transform.rotation, enemyPosition[i].transform);
             enemies.Add(gameObject);
-            enemies[i].GetComponent<Enemy>().SetEnemyData(currentEnemies[i], i);
-            enemies[i].transform.Translate(new Vector3(0, 1f));
+            enemies[i].GetComponent<Enemy>().SetEnemyData(currentEnemies[i], i, enemyPosition[i].transform);
+            //enemies[i].transform.Translate(new Vector3(0, 1f));
         }
 
         state = BattleState.PlayerTurn;
@@ -272,23 +272,32 @@ public class BattleManager : MonoBehaviour
                 int index = enemySkillIndex[enemy];
                 SkillData skill = enemy.skills[index];
 
-                int damage = Mathf.Max((int)(enemy.attack * skill.damageMultiplier) - playerData.data.Defense, 1);
-                playerData.data.HP -= damage;
-                playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
-
-                Debug.Log($"{enemy.name} 使用技能 {skill.name}，造成 {damage} 点伤害！玩家剩余 HP: {playerData.data.HP}");
-                CheckBattleEnd();
+                enemies[currentEnemyIndex].GetComponent<Enemy>().ExecuteSkill(player.transform, index);
                 enemySkillIndex[enemy] = (index + 1) % enemy.skills.Length;
             }
 
             currentEnemyIndex++;
-            Invoke("EnemyTurn", 1f); 
+        }
+    }
+
+    public void EnemyActionComplete() 
+    {
+        if ((currentEnemyIndex < currentEnemies.Count)) 
+        {
+            EnemyTurn();
         }
         else
         {
             currentEnemyIndex = 0;
             EndEnemyTurn();
         }
+    }
+
+    public void PlayerTakeDamage(int damage)
+    {
+        playerData.data.HP -= damage;
+        CheckBattleEnd();
+        playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
     }
 
     void EndEnemyTurn()
