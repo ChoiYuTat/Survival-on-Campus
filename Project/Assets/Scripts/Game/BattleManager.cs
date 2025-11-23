@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using System.Collections;
 
 public enum BattleState
 {
@@ -28,11 +29,11 @@ public class BattleManager : MonoBehaviour
     public GameObject player;
     public GameObject playerPosition;
     public GameObject LevelUP;
-    public GameObject QTEmanager;
     public GameObject[] enemyPosition;
 
 
     public MenuManager menuManager;
+    public QTEManager QTEmanager;
 
     public Transform content;
     public LoadPlayerData playerData;
@@ -52,6 +53,7 @@ public class BattleManager : MonoBehaviour
 
 
     private int currentEnemyIndex = 0;
+    private int targetIndex = 0;
 
     void Awake()
     {
@@ -129,21 +131,13 @@ public class BattleManager : MonoBehaviour
         }
         else if (actionType == 1) 
         {
-            UseSkill();
-            CheckEnemyDead();
-
-            state = BattleState.CheckWinLose;
-            CheckBattleEnd();
-
-            if (state != BattleState.BattleOver)
-            {
-                state = BattleState.EnemyTurn;
-                EnemyTurn();
-            }
+            //UseSkill();
+            battleButton.SetActive(false);
+            StartCoroutine(WaitAndTriggerSkillQTE(0.5f));
         }
     }
 
-    public void UseSkill() 
+    void UseSkill(float Multiplier) 
     {
         int MaxEnegryUse = 3;
         if (energySlider.value >= 3)
@@ -152,7 +146,8 @@ public class BattleManager : MonoBehaviour
             battleButton.SetActive(false);
             foreach (var enemy in enemies)
             {
-                int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier * MaxEnegryUse)
+                int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier 
+                    * MaxEnegryUse * Multiplier)
                     - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
                 enemy.GetComponent<Enemy>().TakeDamage(damage);
             }
@@ -166,12 +161,24 @@ public class BattleManager : MonoBehaviour
             battleButton.SetActive(false);
             foreach (var enemy in enemies)
             {
-                int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier * energySlider.value)
+                int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier 
+                    * energySlider.value * Multiplier)
                     - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
                 enemy.GetComponent<Enemy>().TakeDamage(damage);
             }
             energySlider.value = 0;
             energyText.text = energySlider.value.ToString();
+        }
+
+        CheckEnemyDead();
+
+        state = BattleState.CheckWinLose;
+        CheckBattleEnd();
+
+        if (state != BattleState.BattleOver)
+        {
+            state = BattleState.EnemyTurn;
+            EnemyTurn();
         }
     }
 
@@ -185,16 +192,41 @@ public class BattleManager : MonoBehaviour
 
     public void OnTargetSelected(int target)
     {
-        state = BattleState.PlayerAction;
+
         targetPanel.SetActive(false);
         battleButton.SetActive(false);
-        ExecutePlayerAttack(enemies[target].GetComponent<Enemy>());
+        StartCoroutine(WaitAndTriggerFightQTE(0.5f));
+        targetIndex = target;
     }
 
-    void ExecutePlayerAttack(Enemy target)
+    IEnumerator WaitAndTriggerFightQTE(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        state = BattleState.PlayerAction;
+        QTEmanager.TriggerQTE("Fight");
+    }
+
+    IEnumerator WaitAndTriggerSkillQTE(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        state = BattleState.PlayerAction;
+        QTEmanager.TriggerQTE("Skill");
+    }
+
+    public void FightQTEBonues(float Multiplier) 
+    {
+        ExecutePlayerAttack(enemies[targetIndex].GetComponent<Enemy>(), Multiplier);
+    }
+
+    public void SkillQTEBonues(float Multiplier)
+    {
+        UseSkill(Multiplier);
+    }
+
+    void ExecutePlayerAttack(Enemy target, float n)
     {
         Debug.Log("Íæ¼Ò¹¥»÷ " + target.GetEnemyData().name);
-        int damage = Mathf.Max(playerData.data.Attack - target.GetEnemyData().defense, 1);
+        int damage = (int)Mathf.Max((playerData.data.Attack * n) - target.GetEnemyData().defense, 1);
         target.TakeDamage(damage);
         energySlider.value += 1;
         energyText.text = energySlider.value.ToString();

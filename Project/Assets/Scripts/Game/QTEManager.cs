@@ -34,6 +34,7 @@ public class QTEManager : MonoBehaviour
     public TMPro.TextMeshProUGUI keyDisplayText;
     public UnityEngine.UI.Slider timeSlider;
     public TMPro.TextMeshProUGUI rapidPressCounter;
+    public GameObject criticalArea;
 
     private QTEEvent currentQTE;
     private Coroutine currentQTECoroutine;
@@ -88,6 +89,7 @@ public class QTEManager : MonoBehaviour
     {
         float timer = qte.timeLimit;
         bool success = false;
+        criticalArea.SetActive(true);
 
         while (timer > 0f && !success)
         {
@@ -97,10 +99,19 @@ public class QTEManager : MonoBehaviour
             // ºÏ≤‚∞¥º¸ ‰»Î
             if (Input.GetKeyDown(qte.targetKey))
             {
-                success = true;
-                qte.onSuccess?.Invoke();
+                if (timer <= (qte.timeLimit / 4))
+                {
+                    success = true;
+                    qte.onSuccess?.Invoke();
+                }
+                else 
+                {
+                    success = false;
+                    qte.onFailure?.Invoke();
+                    EndQTE();
+                    yield return null;
+                }
             }
-
             yield return null;
         }
 
@@ -199,6 +210,7 @@ public class QTEManager : MonoBehaviour
     private void EndQTE()
     {
         isQTEActive = false;
+        criticalArea.SetActive(false);
         HideQTEUI();
 
         if (currentQTECoroutine != null)
