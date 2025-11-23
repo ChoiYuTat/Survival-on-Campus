@@ -2,10 +2,10 @@
   "enemies": [
     {
       "id": 1,
-      "name": "Normal Infector",
+      "name": "Infector",
       "hp": 30,
       "maxHp": 30,
-      "attack": 5,
+      "attack": 7,
       "defense": 3,
       "exp": 10,
       "instanceId": null,
@@ -17,6 +17,28 @@
         }
       ]
     }
-
+    ,
+    {
+      "id": 2,
+      "name": "Violent Infector",
+      "hp": 25,
+      "maxHp": 25,
+      "attack": 12,
+      "defense": 2,
+      "exp": 15,
+      "instanceId": null,
+      "skills": [
+        {
+          "name": "Bite",
+          "damageMultiplier": 1.0,
+          "duration": 1.0
+        },
+        {
+          "name": "Quick Bite",
+          "damageMultiplier": 1.0,
+          "duration": 1.0
+        }
+      ]
+    }
   ]
 }

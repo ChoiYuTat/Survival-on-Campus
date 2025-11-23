@@ -72,17 +72,24 @@ public class EnemyManager : MonoBehaviour
             enemyDict[enemy.id] = enemy;
         }
 
-        for (int i = 0; i < enemyGroup.enemies.Count; i++)
-        {
-            if (enemyDict.ContainsKey(enemyGroup.enemies[i].id)) 
-            {
-                enemyGroup.enemies[i] = enemyDict[enemyGroup.enemies[i].id];
-            }
-        }
+        //for (int i = 0; i < enemyGroup.enemies.Count; i++)
+        //{
+        //    if (enemyDict.ContainsKey(enemyGroup.enemies[i].id)) 
+        //    {
+        //        enemyGroup.enemies[i] = enemyDict[enemyGroup.enemies[i].id];
+        //    }
+        //}
     }
 
     public List<EnemyData> getEnemyData()
     {
+        for (int i = 0; i < enemyGroup.enemies.Count; i++)
+        {
+            if (enemyDict.ContainsKey(enemyGroup.enemies[i].id))
+            {
+                enemyGroup.enemies[i] = enemyDict[enemyGroup.enemies[i].id];
+            }
+        }
         bool allNull = true;
         foreach (var enemy in enemyGroup.enemies)
         {

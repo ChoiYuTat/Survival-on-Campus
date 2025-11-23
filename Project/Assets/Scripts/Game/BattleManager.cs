@@ -73,6 +73,8 @@ public class BattleManager : MonoBehaviour
         playerOriginalPosition = player.transform.position;
         battleScene.SetActive(true);
         currentEnemies = enemies;
+        energySlider.value = 2;
+        energyText.text = energySlider.value.ToString();
         state = BattleState.Start;
 
         foreach (var enemy in currentEnemies)

@@ -240,7 +240,8 @@ MonoBehaviour:
     instanceID: 0
     skills: []
   actionConfigs:
-  - {fileID: 11400000, guid: 6a6d65a02c4b7594382b5016ed807ee9, type: 2}
+  - {fileID: 11400000, guid: 15866651b98aedb4bb85471aec2124a8, type: 2}
+  - {fileID: 11400000, guid: 0df40dd33dc1cbf4496d331cd5ebda97, type: 2}
   enemyRenderer: {fileID: 8603303956161281357}
   attackCollider: {fileID: 7563521363740564964}
   jumpAttackCollider: {fileID: 3605790408844971073}
