@@ -64,10 +64,11 @@ public class Enemy : MonoBehaviour
             Debug.LogError("技能索引超出范围");
             return;
         }
-
+        
         SkillData skill = enemyData.skills[skillIndex];
         EnemyActionConfig config = FindConfigBySkillName(skill.name);
 
+        
         if (config == null)
         {
             Debug.LogError("未找到技能配置：" + skill.name);
@@ -135,9 +136,9 @@ public class Enemy : MonoBehaviour
     private IEnumerator JumpAttack(SkillData skill, EnemyActionConfig config)
     {
         //animator.SetTrigger("JumpAttack");
-
+        ChangeColorImmediate(Color.white);
         Vector3 startPos = transform.position;
-        Vector3 endPos = attackTarget.position + new Vector3(0, 0, -1f); // 落在角色后方
+        Vector3 endPos = attackTarget.position + new Vector3(2f, 1f, 0); // 落在角色后方
         float elapsed = 0f;
 
         while (elapsed < config.jumpDuration)
