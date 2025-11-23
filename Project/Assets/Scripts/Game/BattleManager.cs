@@ -47,6 +47,7 @@ public class BattleManager : MonoBehaviour
     private List<GameObject> targets = new List<GameObject>();
     private Dictionary<EnemyData, int> enemySkillIndex = new Dictionary<EnemyData, int>();
     private int earnedExp = 0;
+    private int energyUseIndex;
     private Vector3 playerOriginalPosition;
 
     public BattleState state;
@@ -145,36 +146,16 @@ public class BattleManager : MonoBehaviour
 
     void UseSkill(float Multiplier) 
     {
-        int MaxEnegryUse = 3;
-        if (energySlider.value >= 3)
+        state = BattleState.PlayerAction;
+        battleButton.SetActive(false);
+        foreach (var enemy in enemies)
         {
-            state = BattleState.PlayerAction;
-            battleButton.SetActive(false);
-            foreach (var enemy in enemies)
-            {
                 int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier 
-                    * MaxEnegryUse * Multiplier)
+                    * energyUseIndex * Multiplier)
                     - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
                 enemy.GetComponent<Enemy>().TakeDamage(damage);
-            }
-
-            energySlider.value -= MaxEnegryUse;
-            energyText.text = energySlider.value.ToString();
         }
-        else if (energySlider.value >= 1)
-        {
-            state = BattleState.PlayerAction;
-            battleButton.SetActive(false);
-            foreach (var enemy in enemies)
-            {
-                int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier 
-                    * energySlider.value * Multiplier)
-                    - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
-                enemy.GetComponent<Enemy>().TakeDamage(damage);
-            }
-            energySlider.value = 0;
-            energyText.text = energySlider.value.ToString();
-        }
+        energyUseIndex = 0;
 
         CheckEnemyDead();
 
@@ -214,6 +195,23 @@ public class BattleManager : MonoBehaviour
 
     IEnumerator WaitAndTriggerSkillQTE(float waitTime)
     {
+        int MaxEnegryUse = 3;
+        if (energySlider.value >= 3)
+        {
+            energyUseIndex = MaxEnegryUse;
+            state = BattleState.PlayerAction;
+            battleButton.SetActive(false);
+            energySlider.value -= MaxEnegryUse;
+            energyText.text = energySlider.value.ToString();
+        }
+        else if (energySlider.value >= 1)
+        {
+            energyUseIndex = (int)energySlider.value;
+            state = BattleState.PlayerAction;
+            battleButton.SetActive(false);
+            energySlider.value = 0;
+            energyText.text = energySlider.value.ToString();
+        }
         yield return new WaitForSeconds(waitTime);
         state = BattleState.PlayerAction;
         QTEmanager.TriggerQTE("Skill");
