@@ -322,13 +322,13 @@ public class BattleManager : MonoBehaviour
     public void EndBattle()
     {
         resultCanvas.enabled = true;
-        playerData.data.AddExperience(earnedExp);
         earnedEXP_txt.text = "+" + earnedExp.ToString();
         Debug.Log("获得经验值: " + earnedExp);
-        if (playerData.data.RequiredExp <= 0)
+        if (earnedExp >= playerData.data.RequiredExp)
         {
             LevelUP.SetActive(true);
         }
+        playerData.data.AddExperience(earnedExp);
         earnedExp = 0;
     }
     public void CloseResult()
