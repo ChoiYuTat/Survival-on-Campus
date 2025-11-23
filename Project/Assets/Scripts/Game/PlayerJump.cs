@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerJump : MonoBehaviour
 {
-    [Header("跳躍參數")]
     public float jumpForce = 5f;
     public float groundCheckDistance = 0.2f; // 射線檢測距離
     public float slopeLimit = 45f;           // 允許的斜坡角度
