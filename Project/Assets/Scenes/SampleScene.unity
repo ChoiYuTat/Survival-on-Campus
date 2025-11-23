@@ -1155,8 +1155,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 234901734}
   m_HandleRect: {fileID: 234901733}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.12394176
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4031,7 +4031,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1293198941}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10888,7 +10888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 187706.83}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1170119572
@@ -19469,7 +19469,7 @@ GameObject:
   - component: {fileID: 2062863701}
   - component: {fileID: 2062863700}
   - component: {fileID: 2062863704}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22130,6 +22130,7 @@ GameObject:
   - component: {fileID: 1925225881440224729}
   - component: {fileID: 8729586507925044232}
   - component: {fileID: 8729586507925044233}
+  - component: {fileID: 8729586507925044234}
   m_Layer: 0
   m_Name: testCharacter
   m_TagString: Player
@@ -26441,7 +26442,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2768522022989334918}
   serializedVersion: 5
-  m_Mass: 100
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -26502,6 +26503,21 @@ MonoBehaviour:
   isOpen: 0
   door: {fileID: 0}
   doorSystem: {fileID: 0}
+--- !u!114 &8729586507925044234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2768522022989334918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cfb8324ec2820f41889c401be9db6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 6
+  groundCheckDistance: 0.2
+  slopeLimit: 45
 --- !u!224 &8739519604713826925
 RectTransform:
   m_ObjectHideFlags: 0
