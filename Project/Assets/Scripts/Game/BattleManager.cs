@@ -278,11 +278,12 @@ public class BattleManager : MonoBehaviour
             }
         }
 
-        currentEnemyIndex++;
+
     }
 
     public void EnemyActionComplete() 
     {
+        currentEnemyIndex++;
         if ((currentEnemyIndex < currentEnemies.Count)) 
         {
 
