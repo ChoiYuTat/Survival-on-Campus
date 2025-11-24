@@ -7,14 +7,13 @@ public class Enemy : MonoBehaviour
     private EnemyData enemyData;
     private int number;
     private int skillIndex;
-    public EnemyActionConfig[] actionConfigs;    // ���м����ݳ�����
+    public EnemyActionConfig[] actionConfigs;    
                                                  //public Animator animator;
 
-    [Header("�������")]
     //public Animator animator;
     public Renderer enemyRenderer;
-    public Collider attackCollider;              // ��ͨ�����ж�
-    public Collider jumpAttackCollider;          // ��Ծ�����ж�
+    public Collider attackCollider;              
+    public Collider jumpAttackCollider;          
 
 
     private Transform defaultPosition;
@@ -53,10 +52,6 @@ public class Enemy : MonoBehaviour
         if (enemyRenderer != null)
             enemyRenderer.material = new Material(enemyRenderer.material); // ���⹲������һ���ɫ
     }
-
-    /// <summary>
-    /// ִ�е��˼���
-    /// </summary>
     public void ExecuteSkill(Transform target, int skillIndex)
     {
         this.skillIndex = skillIndex;
@@ -64,7 +59,7 @@ public class Enemy : MonoBehaviour
 
         if (skillIndex < 0 || skillIndex >= enemyData.skills.Length)
         {
-            Debug.LogError("��������������Χ");
+            Debug.LogError("Skill Out bound");
             return;
         }
         
@@ -74,7 +69,7 @@ public class Enemy : MonoBehaviour
         
         if (config == null)
         {
-            Debug.LogError("δ�ҵ��������ã�" + skill.name);
+            Debug.LogError("Can't not find" + skill.name);
             return;
         }
 
@@ -83,102 +78,119 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator ActionRoutine(SkillData skill, EnemyActionConfig config)
     {
-        // Step 1: �ƶ�����ȫ����
-        //yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.approachDistance)));
-
-        // Step 2: ����ǰ��ɫ
-
-
-        // Step 3: �жϹ�������
         if (config.useJumpAttack)
         {
             if (config.changeColorBeforeAttack)
-                yield return StartCoroutine(ChangeColor(Color.white, Color.yellow, 0.2f));
-            yield return StartCoroutine(JumpAttack(skill, config));
+                yield return StartCoroutine(ChangeColor(Color.white, Color.yellow, 0.5f));
+            yield return StartCoroutine(JumpAttack(skill));
         }
-        else
+        else if (config.attackCount >= 2)
         {
-            for (int i = 0; i < config.attackCount; i++)
-            {
-                if (config.changeColorBeforeAttack)
-                    yield return StartCoroutine(ChangeColor(Color.white, Color.red, 0.2f));
-
-                yield return StartCoroutine(Attack(skill));
-                //yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.attackDistance)));
-                yield return StartCoroutine(DoneAttack(skill));
-
-                //if (i < config.attackCount - 1)
-                    //yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.approachDistance)));
-            }
+            if (config.changeColorBeforeAttack)
+                yield return StartCoroutine(ChangeColor(Color.white, Color.red, 0.5f));
+            yield return StartCoroutine(KeepAttack(skill));
+        }
+        else 
+        {
+            if (config.changeColorBeforeAttack)
+                yield return StartCoroutine(ChangeColor(Color.white, Color.red, 0.5f));
+            yield return StartCoroutine(Attack(skill));
         }
 
-        // Step 4: ����ԭλ
-        if (config.returnToOrigin)
-            yield return StartCoroutine(MoveTo(defaultPosition.position));
-
-        //BattleManager.Instance.EnemyActionComplete();
-        Debug.Log(enemyData.name + " �ж�����");
+            BattleManager.Instance.EnemyActionComplete();
     }
-
-    // ��ͨ����
     private IEnumerator Attack(SkillData skill)
     {
         //animator.SetTrigger("Attack");
         ChangeColorImmediate(Color.white);
+        bool qteFinished = false;
+        bool qteSuccess = false;
+
+        // 注册临时回调
+        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; qteSuccess = true; };
+        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true; qteSuccess = false; };
+
+        // 找到对应的QTE事件并绑定回调
+        var qte = qteManager.qteEvents.Find(e => e.eventName == "EnemyAttack");
+        if (qte != null)
+        {
+            qte.onSuccess.AddListener(successAction);
+            qte.onFailure.AddListener(failureAction);
+        }
+
         qteManager.TriggerQTE("EnemyAttack");
-        EnableAttackCollider();
-        yield return null;
+
+        // 等待QTE完成
+        yield return new WaitUntil(() => qteFinished);
+
+        // 移除回调，避免重复绑定
+        if (qte != null)
+        {
+            qte.onSuccess.RemoveListener(successAction);
+            qte.onFailure.RemoveListener(failureAction);
+        }
     }
 
-    private IEnumerator DoneAttack(SkillData skill)
-    {
-        DisableAttackCollider();
-        yield return null;
-    }
-
-    // ��Ծ����
-    private IEnumerator JumpAttack(SkillData skill, EnemyActionConfig config)
+    private IEnumerator JumpAttack(SkillData skill)
     {
         //animator.SetTrigger("JumpAttack");
+        bool qteFinished = false;
+        bool qteSuccess = false;
+
+        // 注册临时回调
+        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; qteSuccess = true; };
+        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true; qteSuccess = false; };
+
+        // 找到对应的QTE事件并绑定回调
+        var qte = qteManager.qteEvents.Find(e => e.eventName == "EnemyJumpAttack");
+        if (qte != null)
+        {
+            qte.onSuccess.AddListener(successAction);
+            qte.onFailure.AddListener(failureAction);
+        }
         ChangeColorImmediate(Color.white);
-        Vector3 startPos = transform.position;
-        Vector3 endPos = attackTarget.position + new Vector3(2f, 1f, 0); // ���ڽ�ɫ��
-        float elapsed = 0f;
+        qteManager.TriggerQTE("EnemyJumpAttack");
+        // 等待QTE完成
+        yield return new WaitUntil(() => qteFinished);
 
-        while (elapsed < config.jumpDuration)
+        // 移除回调，避免重复绑定
+        if (qte != null)
         {
-            elapsed += Time.deltaTime;
-            float t = elapsed / config.jumpDuration;
-
-            float height = Mathf.Sin(t * Mathf.PI) * config.jumpHeight;
-            transform.position = Vector3.Lerp(startPos, endPos, t) + Vector3.up * height;
-
-            if (t > 0.3f && t < 0.7f)
-                EnableJumpAttackCollider();
-            else
-                DisableJumpAttackCollider();
-
-            yield return null;
+            qte.onSuccess.RemoveListener(successAction);
+            qte.onFailure.RemoveListener(failureAction);
         }
-
-        DisableJumpAttackCollider();
     }
 
-    // �ƶ�
-    private IEnumerator MoveTo(Vector3 destination)
+    private IEnumerator KeepAttack(SkillData skill)
     {
-        //animator.SetBool("IsMoving", true);
+        //animator.SetTrigger("JumpAttack");
+        bool qteFinished = false;
+        bool qteSuccess = false;
 
-        while (Vector3.Distance(transform.position, destination) > 0.05f)
+        // 注册临时回调
+        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; qteSuccess = true; };
+        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true; qteSuccess = false; };
+
+        // 找到对应的QTE事件并绑定回调
+        var qte = qteManager.qteEvents.Find(e => e.eventName == "EnemyKeepAttack");
+        if (qte != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, destination, 7f * Time.deltaTime);
-            yield return null;
+            qte.onSuccess.AddListener(successAction);
+            qte.onFailure.AddListener(failureAction);
         }
+        ChangeColorImmediate(Color.white);
+        qteManager.TriggerQTE("EnemyKeepAttack");
+        // 等待QTE完成
+        yield return new WaitUntil(() => qteFinished);
 
-        //animator.SetBool("IsMoving", false);
+        // 移除回调，避免重复绑定
+        if (qte != null)
+        {
+            qte.onSuccess.RemoveListener(successAction);
+            qte.onFailure.RemoveListener(failureAction);
+        }
     }
 
-    // ��ɫ����
     private IEnumerator ChangeColor(Color fromColor, Color toColor, float duration)
     {
         float elapsed = 0f;
@@ -197,35 +209,6 @@ public class Enemy : MonoBehaviour
     }
 
 
-    // ��ײ�ж�
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (attackCollider != null && attackCollider.enabled && other.gameObject.CompareTag("Player"))
-    //    {
-    //        if (attackTarget != null) 
-    //        {
-    //            Debug.Log("Enemy " + enemyData.name + " hits Player with skill " + enemyData.skills[skillIndex].name);
-    //            BattleManager.Instance.PlayerTakeDamage((int)(enemyData.attack * enemyData.skills[skillIndex].damageMultiplier
-    //                - attackTarget.gameObject.GetComponent<LoadPlayerData>().data.Defense));
-    //        }
-    //    }
-
-    //    if (jumpAttackCollider != null && jumpAttackCollider.enabled && other.gameObject.CompareTag("Player"))
-    //    {
-    //        if (attackTarget != null) 
-    //        {
-    //            BattleManager.Instance.PlayerTakeDamage((int)(enemyData.attack * enemyData.skills[skillIndex].damageMultiplier
-    //                - attackTarget.gameObject.GetComponent<LoadPlayerData>().data.Defense));
-    //        }
-    //    }
-    //}
-
-    // ��������
-    private void EnableAttackCollider() { if (attackCollider != null) attackCollider.enabled = true; }
-    private void DisableAttackCollider() { if (attackCollider != null) attackCollider.enabled = false; }
-    private void EnableJumpAttackCollider() { if (jumpAttackCollider != null) jumpAttackCollider.enabled = true; }
-    private void DisableJumpAttackCollider() { if (jumpAttackCollider != null) jumpAttackCollider.enabled = false; }
-
     private EnemyActionConfig FindConfigBySkillName(string skillName)
     {
         foreach (var config in actionConfigs)
@@ -236,12 +219,4 @@ public class Enemy : MonoBehaviour
         return null;
     }
 
-    private Vector3 GetOffsetPosition(Transform target, float distance)
-    {
-        // ֻȡˮƽ�淽�� (X,Z)������ Y
-        Vector3 targetPos = new Vector3(target.position.x, transform.position.y, target.position.z);
-        Vector3 dir = (targetPos - transform.position).normalized;
-
-        return targetPos - dir * distance;
-    }
 }

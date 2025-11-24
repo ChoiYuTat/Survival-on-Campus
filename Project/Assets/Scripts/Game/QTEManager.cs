@@ -7,7 +7,8 @@ public enum QTEType
 {
     SinglePress,    // 单次按键
     RapidPress,     // 连按
-    Sequence        // 按键序列（可扩展）
+    Sequence,        // 按键序列（可扩展）
+    NoPress
 }
 
 [System.Serializable]
@@ -20,6 +21,9 @@ public class QTEEvent
     public float timeLimit = 3f;    // 时间限制
     public UnityEvent onSuccess;
     public UnityEvent onFailure;
+
+    // 新增：按键序列
+    public List<KeyCode> keySequence = new List<KeyCode>();
 }
 
 public class QTEManager : MonoBehaviour
@@ -76,7 +80,88 @@ public class QTEManager : MonoBehaviour
             case QTEType.RapidPress:
                 currentQTECoroutine = StartCoroutine(RapidPressQTE(qte));
                 break;
+            case QTEType.NoPress:
+                currentQTECoroutine = StartCoroutine(NoPressQTE(qte));
+                break;
+            case QTEType.Sequence:
+                currentQTECoroutine = StartCoroutine(SequenceQTE(qte));
+                break;
         }
+    }
+
+    // 按键序列QTE
+    private IEnumerator SequenceQTE(QTEEvent qte)
+    {
+        float timer = qte.timeLimit;
+        int currentIndex = 0;
+
+        while (timer > 0f && currentIndex < qte.keySequence.Count)
+        {
+            timer -= Time.deltaTime;
+            UpdateTimerDisplay(timer / qte.timeLimit);
+
+            // 检测输入
+            if (Input.GetKeyDown(qte.keySequence[currentIndex]))
+            {
+                currentIndex++;
+                // 更新UI提示
+                if (keyDisplayText != null)
+                    keyDisplayText.text = $"{(currentIndex < qte.keySequence.Count ? qte.keySequence[currentIndex].ToString() : "Done!")}";
+            }
+            else if (Input.anyKeyDown) // 按错键
+            {
+                qte.onFailure?.Invoke();
+                EndQTE();
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        // 判定结果
+        if (currentIndex >= qte.keySequence.Count)
+        {
+            qte.onSuccess?.Invoke();
+        }
+        else
+        {
+            qte.onFailure?.Invoke();
+        }
+
+        EndQTE();
+    }
+
+
+    // 禁止按键QTE
+    private IEnumerator NoPressQTE(QTEEvent qte)
+    {
+        float timer = qte.timeLimit;
+        bool failed = false;
+
+        while (timer > 0f && !failed)
+        {
+            timer -= Time.deltaTime;
+            UpdateTimerDisplay(timer / qte.timeLimit);
+
+            // 检测是否按下了指定按键
+            if (Input.GetKeyDown(qte.targetKey))
+            {
+                failed = true;
+                qte.onFailure?.Invoke();
+                EndQTE();
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        // 如果时间耗尽且没有按键 → 成功
+        if (!failed)
+        {
+            qte.onSuccess?.Invoke();
+        }
+
+        EndQTE();
     }
 
     // 单次按键QTE
@@ -173,8 +258,13 @@ public class QTEManager : MonoBehaviour
 
     private void SetupQTEUI(QTEEvent qte)
     {
-        if (keyDisplayText != null)
+        if ((keyDisplayText != null) && (qte.type != QTEType.Sequence))
             keyDisplayText.text = qte.targetKey.ToString();
+
+        if (qte.type == QTEType.NoPress)
+        {
+            keyDisplayText.text = $"No {qte.targetKey}";
+        }
 
         if (rapidPressCounter != null)
         {

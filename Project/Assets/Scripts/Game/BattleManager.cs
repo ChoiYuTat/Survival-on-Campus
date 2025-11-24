@@ -27,6 +27,7 @@ public class BattleManager : MonoBehaviour
     public GameObject targetPanel;
     public GameObject battleButton;
     public GameObject player;
+    public GameObject playerSprite;
     public GameObject playerPosition;
     public GameObject LevelUP;
     public GameObject[] enemyPosition;
@@ -93,6 +94,7 @@ public class BattleManager : MonoBehaviour
         player.GetComponent<luna>().enabled = false;
         player.GetComponent<OpenDoor>().enabled = false;
         player.GetComponent<PlayerJump>().enabled = false;
+        playerSprite.GetComponent<SpriteRenderer>().enabled = false;
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
         battleCanvas.enabled = true;
         MenuCanvas.enabled = false;
@@ -109,15 +111,6 @@ public class BattleManager : MonoBehaviour
 
         state = BattleState.PlayerTurn;
         PlayerTurn();
-    }
-
-    void PlayerTurn()
-    {
-        if (state == BattleState.PlayerTurn) 
-        {
-            player.GetComponent<PlayerJump>().enabled = false;
-            battleButton.SetActive(true);
-        }
     }
 
     public void PlayerAction(int actionType)
@@ -296,6 +289,21 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    void EndEnemyTurn()
+    {
+        state = BattleState.PlayerTurn;
+        PlayerTurn();
+    }
+
+    void PlayerTurn()
+    {
+        if (state == BattleState.PlayerTurn)
+        {
+            player.GetComponent<PlayerJump>().enabled = false;
+            battleButton.SetActive(true);
+        }
+    }
+
     public void PlayerTakeDamage()
     {
         int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
@@ -305,11 +313,7 @@ public class BattleManager : MonoBehaviour
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
     }
 
-    void EndEnemyTurn()
-    {
-        state = BattleState.PlayerTurn;
-        PlayerTurn();
-    }
+
 
     void CheckBattleEnd()
     {
@@ -354,6 +358,7 @@ public class BattleManager : MonoBehaviour
     {
         resultCanvas.enabled = false;
         player.transform.position = playerOriginalPosition;
+        playerSprite.GetComponent<SpriteRenderer>().enabled = true;
         player.GetComponent<luna>().enabled = true;
         player.GetComponent<OpenDoor>().enabled = true;
         battleCanvas.enabled = false;
