@@ -7,24 +7,27 @@ public class Enemy : MonoBehaviour
     private EnemyData enemyData;
     private int number;
     private int skillIndex;
-    public EnemyActionConfig[] actionConfigs;    // ËùÓÐ¼¼ÄÜÑÝ³öÅäÖÃ
+    public EnemyActionConfig[] actionConfigs;    // ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½
                                                  //public Animator animator;
 
-    [Header("×é¼þÒýÓÃ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     //public Animator animator;
     public Renderer enemyRenderer;
-    public Collider attackCollider;              // ÆÕÍ¨¹¥»÷ÅÐ¶¨
-    public Collider jumpAttackCollider;          // ÌøÔ¾¹¥»÷ÅÐ¶¨
+    public Collider attackCollider;              // ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+    public Collider jumpAttackCollider;          // ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 
 
     private Transform defaultPosition;
     private Transform attackTarget;
 
-    public void SetEnemyData(EnemyData data,int number,Transform position)
+    private QTEManager qteManager;
+
+    public void SetEnemyData(EnemyData data,int number,Transform position, QTEManager manager)
     {
         defaultPosition = position;
         enemyData = data;
         enemyData.instanceID = GetInstanceID() + number;
+        qteManager = manager;
         enemyData.name += " #" + number;
         this.number = number;
         Debug.Log("Enemy " + enemyData.name + " initialized with HP: " + enemyData.hp);
@@ -48,11 +51,11 @@ public class Enemy : MonoBehaviour
         if (jumpAttackCollider != null) jumpAttackCollider.enabled = false;
 
         if (enemyRenderer != null)
-            enemyRenderer.material = new Material(enemyRenderer.material); // ±ÜÃâ¹²Ïí²ÄÖÊÒ»Æð±äÉ«
+            enemyRenderer.material = new Material(enemyRenderer.material); // ï¿½ï¿½ï¿½â¹²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½É«
     }
 
     /// <summary>
-    /// Ö´ÐÐµÐÈË¼¼ÄÜ
+    /// Ö´ï¿½Ðµï¿½ï¿½Ë¼ï¿½ï¿½ï¿½
     /// </summary>
     public void ExecuteSkill(Transform target, int skillIndex)
     {
@@ -61,7 +64,7 @@ public class Enemy : MonoBehaviour
 
         if (skillIndex < 0 || skillIndex >= enemyData.skills.Length)
         {
-            Debug.LogError("¼¼ÄÜË÷Òý³¬³ö·¶Î§");
+            Debug.LogError("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§");
             return;
         }
         
@@ -71,7 +74,7 @@ public class Enemy : MonoBehaviour
         
         if (config == null)
         {
-            Debug.LogError("Î´ÕÒµ½¼¼ÄÜÅäÖÃ£º" + skill.name);
+            Debug.LogError("Î´ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½" + skill.name);
             return;
         }
 
@@ -80,17 +83,17 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator ActionRoutine(SkillData skill, EnemyActionConfig config)
     {
-        // Step 1: ÒÆ¶¯µ½°²È«¾àÀë
-        yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.approachDistance)));
+        // Step 1: ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+        //yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.approachDistance)));
 
-        // Step 2: ¹¥»÷Ç°±äÉ«
+        // Step 2: ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½É«
 
 
-        // Step 3: ÅÐ¶Ï¹¥»÷ÀàÐÍ
+        // Step 3: ï¿½Ð¶Ï¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (config.useJumpAttack)
         {
             if (config.changeColorBeforeAttack)
-                yield return StartCoroutine(ChangeColor(Color.white, Color.yellow, 1.5f));
+                yield return StartCoroutine(ChangeColor(Color.white, Color.yellow, 0.2f));
             yield return StartCoroutine(JumpAttack(skill, config));
         }
         else
@@ -98,30 +101,31 @@ public class Enemy : MonoBehaviour
             for (int i = 0; i < config.attackCount; i++)
             {
                 if (config.changeColorBeforeAttack)
-                    yield return StartCoroutine(ChangeColor(Color.white, Color.red, 1.5f));
+                    yield return StartCoroutine(ChangeColor(Color.white, Color.red, 0.2f));
 
                 yield return StartCoroutine(Attack(skill));
-                yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.attackDistance)));
+                //yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.attackDistance)));
                 yield return StartCoroutine(DoneAttack(skill));
 
-                if (i < config.attackCount - 1)
-                    yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.approachDistance)));
+                //if (i < config.attackCount - 1)
+                    //yield return StartCoroutine(MoveTo(GetOffsetPosition(attackTarget, config.approachDistance)));
             }
         }
 
-        // Step 4: ·µ»ØÔ­Î»
+        // Step 4: ï¿½ï¿½ï¿½ï¿½Ô­Î»
         if (config.returnToOrigin)
             yield return StartCoroutine(MoveTo(defaultPosition.position));
 
-        BattleManager.Instance.EnemyActionComplete();
-        Debug.Log(enemyData.name + " ÐÐ¶¯½áÊø");
+        //BattleManager.Instance.EnemyActionComplete();
+        Debug.Log(enemyData.name + " ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½");
     }
 
-    // ÆÕÍ¨¹¥»÷
+    // ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½
     private IEnumerator Attack(SkillData skill)
     {
         //animator.SetTrigger("Attack");
         ChangeColorImmediate(Color.white);
+        qteManager.TriggerQTE("EnemyAttack");
         EnableAttackCollider();
         yield return null;
     }
@@ -132,13 +136,13 @@ public class Enemy : MonoBehaviour
         yield return null;
     }
 
-    // ÌøÔ¾¹¥»÷
+    // ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
     private IEnumerator JumpAttack(SkillData skill, EnemyActionConfig config)
     {
         //animator.SetTrigger("JumpAttack");
         ChangeColorImmediate(Color.white);
         Vector3 startPos = transform.position;
-        Vector3 endPos = attackTarget.position + new Vector3(2f, 1f, 0); // ÂäÔÚ½ÇÉ«ºó·½
+        Vector3 endPos = attackTarget.position + new Vector3(2f, 1f, 0); // ï¿½ï¿½ï¿½Ú½ï¿½É«ï¿½ï¿½
         float elapsed = 0f;
 
         while (elapsed < config.jumpDuration)
@@ -160,7 +164,7 @@ public class Enemy : MonoBehaviour
         DisableJumpAttackCollider();
     }
 
-    // ÒÆ¶¯
+    // ï¿½Æ¶ï¿½
     private IEnumerator MoveTo(Vector3 destination)
     {
         //animator.SetBool("IsMoving", true);
@@ -174,7 +178,7 @@ public class Enemy : MonoBehaviour
         //animator.SetBool("IsMoving", false);
     }
 
-    // ÑÕÉ«½¥±ä
+    // ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
     private IEnumerator ChangeColor(Color fromColor, Color toColor, float duration)
     {
         float elapsed = 0f;
@@ -193,30 +197,30 @@ public class Enemy : MonoBehaviour
     }
 
 
-    // Åö×²ÅÐ¶¨
-    private void OnTriggerEnter(Collider other)
-    {
-        if (attackCollider != null && attackCollider.enabled && other.gameObject.CompareTag("Player"))
-        {
-            if (attackTarget != null) 
-            {
-                Debug.Log("Enemy " + enemyData.name + " hits Player with skill " + enemyData.skills[skillIndex].name);
-                BattleManager.Instance.PlayerTakeDamage((int)(enemyData.attack * enemyData.skills[skillIndex].damageMultiplier
-                    - attackTarget.gameObject.GetComponent<LoadPlayerData>().data.Defense));
-            }
-        }
+    // ï¿½ï¿½×²ï¿½Ð¶ï¿½
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (attackCollider != null && attackCollider.enabled && other.gameObject.CompareTag("Player"))
+    //    {
+    //        if (attackTarget != null) 
+    //        {
+    //            Debug.Log("Enemy " + enemyData.name + " hits Player with skill " + enemyData.skills[skillIndex].name);
+    //            BattleManager.Instance.PlayerTakeDamage((int)(enemyData.attack * enemyData.skills[skillIndex].damageMultiplier
+    //                - attackTarget.gameObject.GetComponent<LoadPlayerData>().data.Defense));
+    //        }
+    //    }
 
-        if (jumpAttackCollider != null && jumpAttackCollider.enabled && other.gameObject.CompareTag("Player"))
-        {
-            if (attackTarget != null) 
-            {
-                BattleManager.Instance.PlayerTakeDamage((int)(enemyData.attack * enemyData.skills[skillIndex].damageMultiplier
-                    - attackTarget.gameObject.GetComponent<LoadPlayerData>().data.Defense));
-            }
-        }
-    }
+    //    if (jumpAttackCollider != null && jumpAttackCollider.enabled && other.gameObject.CompareTag("Player"))
+    //    {
+    //        if (attackTarget != null) 
+    //        {
+    //            BattleManager.Instance.PlayerTakeDamage((int)(enemyData.attack * enemyData.skills[skillIndex].damageMultiplier
+    //                - attackTarget.gameObject.GetComponent<LoadPlayerData>().data.Defense));
+    //        }
+    //    }
+    //}
 
-    // ¸¨Öú·½·¨
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private void EnableAttackCollider() { if (attackCollider != null) attackCollider.enabled = true; }
     private void DisableAttackCollider() { if (attackCollider != null) attackCollider.enabled = false; }
     private void EnableJumpAttackCollider() { if (jumpAttackCollider != null) jumpAttackCollider.enabled = true; }
@@ -234,7 +238,7 @@ public class Enemy : MonoBehaviour
 
     private Vector3 GetOffsetPosition(Transform target, float distance)
     {
-        // Ö»È¡Ë®Æ½Ãæ·½Ïò (X,Z)£¬ºöÂÔ Y
+        // Ö»È¡Ë®Æ½ï¿½æ·½ï¿½ï¿½ (X,Z)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Y
         Vector3 targetPos = new Vector3(target.position.x, transform.position.y, target.position.z);
         Vector3 dir = (targetPos - transform.position).normalized;
 

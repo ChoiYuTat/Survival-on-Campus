@@ -55,6 +55,7 @@ public class BattleManager : MonoBehaviour
 
     private int currentEnemyIndex = 0;
     private int targetIndex = 0;
+    private int skillIndex = 0;
 
     void Awake()
     {
@@ -102,7 +103,7 @@ public class BattleManager : MonoBehaviour
             GameObject gameObject = Instantiate(enemyPrefab, enemyPosition[i].transform.position,
                 enemyPosition[i].transform.rotation, enemyPosition[i].transform);
             enemies.Add(gameObject);
-            enemies[i].GetComponent<Enemy>().SetEnemyData(currentEnemies[i], i, enemyPosition[i].transform);
+            enemies[i].GetComponent<Enemy>().SetEnemyData(currentEnemies[i], i, enemyPosition[i].transform, QTEmanager);
             //enemies[i].transform.Translate(new Vector3(0, 1f));
         }
 
@@ -263,27 +264,28 @@ public class BattleManager : MonoBehaviour
 
     void EnemyTurn()
     {
-        player.GetComponent<PlayerJump>().enabled = true;
         if ((currentEnemyIndex < currentEnemies.Count) && (state == BattleState.EnemyTurn))
         {
             EnemyData enemy = currentEnemies[currentEnemyIndex];
             if (enemy.hp > 0 && enemy.skills.Length > 0)
             {
-                int index = enemySkillIndex[enemy];
-                SkillData skill = enemy.skills[index];
+                skillIndex = enemySkillIndex[enemy];
+                Debug.Log(skillIndex);
+                SkillData skill = enemy.skills[skillIndex];
 
-                enemies[currentEnemyIndex].GetComponent<Enemy>().ExecuteSkill(player.transform, index);
-                enemySkillIndex[enemy] = (index + 1) % enemy.skills.Length;
+                enemies[currentEnemyIndex].GetComponent<Enemy>().ExecuteSkill(player.transform, skillIndex);
+                enemySkillIndex[enemy] = (skillIndex + 1) % enemy.skills.Length;
             }
-
-            currentEnemyIndex++;
         }
+
+        currentEnemyIndex++;
     }
 
     public void EnemyActionComplete() 
     {
         if ((currentEnemyIndex < currentEnemies.Count)) 
         {
+
             EnemyTurn();
         }
         else
@@ -293,8 +295,10 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void PlayerTakeDamage(int damage)
+    public void PlayerTakeDamage()
     {
+        int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
+                    - player.gameObject.GetComponent<LoadPlayerData>().data.Defense);
         playerData.data.HP -= damage;
         CheckBattleEnd();
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
