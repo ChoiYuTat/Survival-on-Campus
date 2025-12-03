@@ -42,3 +42,7 @@ I1=Who doesn't like hamburgers? +14HP
 I2=Powerful Healing, needs no further explanation. +35HP
 I3=Used to unlock the classroom lock.
 I4=Used to open the principal's office door.
+>Enemy
+E1=Infector
+E2=Violent Infector
+E3=Parkour Infector

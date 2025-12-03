@@ -1,3 +1,4 @@
+using LanguageLocalization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,13 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     [SerializeField]
     private Slider HPSlider;
+    [SerializeField]
+    private Text enemyName, nameBuffer;
+
+    private Localization_SOURCE source;
+    private OptionSetter setter;
+
+    public Localization_KEY key;
     public void HighlightTarget(GameObject enemy)
     {
         // Implement highlight logic here
@@ -30,10 +38,19 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
     public void SetTarget(GameObject enemy, int index)
     {
+        source = GameObject.FindGameObjectWithTag("LocalizationSource").GetComponent<Localization_SOURCE>();
+        setter = GameObject.FindGameObjectWithTag("OptionSetter").GetComponent<OptionSetter>();
+
         target = enemy;
         HPSlider.maxValue = enemy.GetComponent<Enemy>().GetEnemyData().maxHp;
         HPSlider.value = enemy.GetComponent<Enemy>().GetEnemyData().hp;
         targetIndex = index;
+
+        key.keyID = "E" + enemy.GetComponent<Enemy>().GetEnemyData().id;
+        source.RefreshTextElementsAndKeys();
+        source.LoadLanguage(setter.getLanguageIndex());
+
+        enemyName.text = nameBuffer.text + " #" + targetIndex.ToString();
     }
 
     public void SelectTarget()
