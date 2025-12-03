@@ -32,7 +32,7 @@ public class SaveSystem : MonoBehaviour
         if (File.Exists(filePath))
         {
             File.Delete(filePath);
-            Invoke("WriteFile", 1f);
+            Invoke("WriteFile", 0.01f);
         }
         else
         {

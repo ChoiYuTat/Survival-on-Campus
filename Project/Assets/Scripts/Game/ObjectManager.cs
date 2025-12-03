@@ -61,6 +61,7 @@ public class ObjectManager : MonoBehaviour
 
     private bool isPickUp = false;
     private bool isOpened = false;
+    private bool hasKey = false;
 
     void Start()
     {
@@ -111,7 +112,7 @@ public class ObjectManager : MonoBehaviour
             {
                 if (player.data.interactiveItemsID[i] == objectID)
                 {
-                    isOpened = true;
+                    OpenDoor();
                 }
             }
         }
@@ -147,7 +148,6 @@ public class ObjectManager : MonoBehaviour
     {
         if (lockType != LockType.None)
         {
-            bool hasKey = false;
             for (int i = 0; i < player.data.Inventory.Count; i++)
             {
                 if ((lockType == LockType.OpenClassroom && player.data.Inventory[i].effect == "OpenClassroom") ||
@@ -157,7 +157,7 @@ public class ObjectManager : MonoBehaviour
                     break;
                 }
             }
-            if (hasKey)
+            if (hasKey && !isOpened)
             {
                 isOpened = true;
                 director.SetGenericBinding(pickUpTimeline.GetOutputTrack(0),
@@ -165,8 +165,9 @@ public class ObjectManager : MonoBehaviour
                 director.enabled = true;
                 dialogueController.director = director;
                 director.Play();
+                player.data.interactiveItemsID.Add(objectID);
             }
-            else 
+            else if (!isOpened)
             {
                 director.SetGenericBinding(pickUpTimeline.GetOutputTrack(0), 
                     transform.GetChild(1).gameObject.GetComponent<SignalReceiver>());
@@ -193,6 +194,7 @@ public class ObjectManager : MonoBehaviour
         GameObject door = transform.GetChild(0).gameObject;
         Debug.Log(door);
         door.SetActive(true);
+
 
         GetComponent<SphereCollider>().enabled = false;
     }
