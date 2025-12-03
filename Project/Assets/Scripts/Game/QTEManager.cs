@@ -105,8 +105,19 @@ public class QTEManager : MonoBehaviour
             {
                 currentIndex++;
                 // 更新UI提示
-                if (keyDisplayText != null)
-                    keyDisplayText.text = $"{(currentIndex < qte.keySequence.Count ? qte.keySequence[currentIndex].ToString() : "Done!")}";
+                if (keyDisplayText != null) 
+                {
+                    Debug.Log(qte.keySequence.Count + "and" + currentIndex);
+                    if ((currentIndex + 1) < qte.keySequence.Count)
+                    {
+                        keyDisplayText.text = $"<color=Yellow>{qte.keySequence[currentIndex].ToString()}</color> " + $"{qte.keySequence[currentIndex + 1].ToString()}";
+                    }
+                    else if ((currentIndex + 1) == qte.keySequence.Count)
+                    {
+                        keyDisplayText.text = $"<color=Yellow>{qte.keySequence[currentIndex].ToString()}</color>";
+                    }
+                }
+
             }
             else if (Input.anyKeyDown) // 按错键
             {
@@ -258,12 +269,18 @@ public class QTEManager : MonoBehaviour
 
     private void SetupQTEUI(QTEEvent qte)
     {
-        if ((keyDisplayText != null) && (qte.type != QTEType.Sequence))
+        if ((keyDisplayText != null) && (qte.type == QTEType.Sequence))
+        {
+            keyDisplayText.text = $"<color=Yellow>{qte.keySequence[0].ToString()}</color> " + $"{qte.keySequence[1].ToString()}";
+        }
+        else 
+        {
             keyDisplayText.text = qte.targetKey.ToString();
+        }
 
         if (qte.type == QTEType.NoPress)
         {
-            keyDisplayText.text = $"No {qte.targetKey}";
+            keyDisplayText.text = $"<color=Red>No</color> {qte.targetKey}";
         }
 
         if (rapidPressCounter != null)
