@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public enum QTEType
 {
-    SinglePress,    // µ¥´Î°´¼ü
-    RapidPress,     // Á¬°´
-    Sequence,        // °´¼üÐòÁÐ£¨¿ÉÀ©Õ¹£©
+    SinglePress,    // ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½
+    RapidPress,     // ï¿½ï¿½ï¿½ï¿½
+    Sequence,        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½
     NoPress
 }
 
@@ -17,12 +17,12 @@ public class QTEEvent
     public string eventName;
     public QTEType type;
     public KeyCode targetKey;
-    public int rapidPressCount = 5; // Á¬°´´ÎÊýÒªÇó
-    public float timeLimit = 3f;    // Ê±¼äÏÞÖÆ
+    public int rapidPressCount = 5; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½
+    public float timeLimit = 3f;    // Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public UnityEvent onSuccess;
     public UnityEvent onFailure;
 
-    // ÐÂÔö£º°´¼üÐòÁÐ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public List<KeyCode> keySequence = new List<KeyCode>();
 }
 
@@ -55,7 +55,7 @@ public class QTEManager : MonoBehaviour
         HideQTEUI();
     }
 
-    // ´¥·¢QTEÊÂ¼þ
+    // ï¿½ï¿½ï¿½ï¿½QTEï¿½Â¼ï¿½
     public void TriggerQTE(string eventName)
     {
         QTEEvent qte = qteEvents.Find(e => e.eventName == eventName);
@@ -89,7 +89,7 @@ public class QTEManager : MonoBehaviour
         }
     }
 
-    // °´¼üÐòÁÐQTE
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½QTE
     private IEnumerator SequenceQTE(QTEEvent qte)
     {
         float timer = qte.timeLimit;
@@ -100,11 +100,11 @@ public class QTEManager : MonoBehaviour
             timer -= Time.deltaTime;
             UpdateTimerDisplay(timer / qte.timeLimit);
 
-            // ¼ì²âÊäÈë
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (Input.GetKeyDown(qte.keySequence[currentIndex]))
             {
                 currentIndex++;
-                // ¸üÐÂUIÌáÊ¾
+                // ï¿½ï¿½ï¿½ï¿½UIï¿½ï¿½Ê¾
                 if (keyDisplayText != null) 
                 {
                     Debug.Log(qte.keySequence.Count + "and" + currentIndex);
@@ -119,7 +119,7 @@ public class QTEManager : MonoBehaviour
                 }
 
             }
-            else if (Input.anyKeyDown) // °´´í¼ü
+            else if (Input.anyKeyDown) // ï¿½ï¿½ï¿½ï¿½ï¿½
             {
                 qte.onFailure?.Invoke();
                 EndQTE();
@@ -129,7 +129,7 @@ public class QTEManager : MonoBehaviour
             yield return null;
         }
 
-        // ÅÐ¶¨½á¹û
+        // ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½
         if (currentIndex >= qte.keySequence.Count)
         {
             qte.onSuccess?.Invoke();
@@ -143,7 +143,7 @@ public class QTEManager : MonoBehaviour
     }
 
 
-    // ½ûÖ¹°´¼üQTE
+    // ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½QTE
     private IEnumerator NoPressQTE(QTEEvent qte)
     {
         float timer = qte.timeLimit;
@@ -154,7 +154,7 @@ public class QTEManager : MonoBehaviour
             timer -= Time.deltaTime;
             UpdateTimerDisplay(timer / qte.timeLimit);
 
-            // ¼ì²âÊÇ·ñ°´ÏÂÁËÖ¸¶¨°´¼ü
+            // ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (Input.GetKeyDown(qte.targetKey))
             {
                 failed = true;
@@ -166,7 +166,7 @@ public class QTEManager : MonoBehaviour
             yield return null;
         }
 
-        // Èç¹ûÊ±¼äºÄ¾¡ÇÒÃ»ÓÐ°´¼ü ¡ú ³É¹¦
+        // ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½Ã»ï¿½Ð°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½É¹ï¿½
         if (!failed)
         {
             qte.onSuccess?.Invoke();
@@ -175,7 +175,7 @@ public class QTEManager : MonoBehaviour
         EndQTE();
     }
 
-    // µ¥´Î°´¼üQTE
+    // ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½QTE
     private IEnumerator SinglePressQTE(QTEEvent qte)
     {
         float timer = qte.timeLimit;
@@ -187,7 +187,7 @@ public class QTEManager : MonoBehaviour
             timer -= Time.deltaTime;
             UpdateTimerDisplay(timer / qte.timeLimit);
 
-            // ¼ì²â°´¼üÊäÈë
+            // ï¿½ï¿½â°´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (Input.GetKeyDown(qte.targetKey))
             {
                 if (timer <= (qte.timeLimit / 4))
@@ -214,7 +214,7 @@ public class QTEManager : MonoBehaviour
         EndQTE();
     }
 
-    // Á¬°´QTE
+    // ï¿½ï¿½ï¿½ï¿½QTE
     private IEnumerator RapidPressQTE(QTEEvent qte)
     {
         float timer = qte.timeLimit;
@@ -226,7 +226,7 @@ public class QTEManager : MonoBehaviour
             UpdateTimerDisplay(timer / qte.timeLimit);
             UpdateRapidPressCounter();
 
-            // ¼ì²âÁ¬°´ÊäÈë
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (Input.GetKeyDown(qte.targetKey))
             {
                 currentRapidPressCount++;
@@ -241,7 +241,7 @@ public class QTEManager : MonoBehaviour
             yield return null;
         }
 
-        // Ê±¼äµ½£¬¼ì²éÊÇ·ñ´ïµ½ÒªÇó
+        // Ê±ï¿½äµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ïµ½Òªï¿½ï¿½
         if (currentRapidPressCount >= qte.rapidPressCount)
         {
             qte.onSuccess?.Invoke();
@@ -254,7 +254,7 @@ public class QTEManager : MonoBehaviour
         EndQTE();
     }
 
-    // UIÏà¹Ø·½·¨
+    // UIï¿½ï¿½Ø·ï¿½ï¿½ï¿½
     private void ShowQTEUI()
     {
         if (qteDisplayPanel != null)
@@ -322,7 +322,7 @@ public class QTEManager : MonoBehaviour
         }
     }
 
-    // Ç¿ÖÆ½áÊøµ±Ç°QTE
+    // Ç¿ï¿½Æ½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°QTE
     public void ForceEndQTE(bool success = false)
     {
         if (isQTEActive && currentQTE != null)

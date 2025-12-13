@@ -3,18 +3,18 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Enemy/ActionConfig", fileName = "NewEnemyActionConfig")]
 public class EnemyActionConfig : ScriptableObject
 {
-    [Header("¼¼ÄÜÐÅÏ¢")]
-    public string skillName;                // Óë SkillData.name ¶ÔÓ¦
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢")]
+    public string skillName;                // ï¿½ï¿½ SkillData.name ï¿½ï¿½Ó¦
 
-    [Header("ÆÕÍ¨¹¥»÷ÑÝ³ö²ÎÊý")]
-    public int attackCount = 1;             // ÆÕÍ¨¹¥»÷´ÎÊý
-    public float approachDistance = 2f;     // °²È«¾àÀë
-    public float attackDistance = 0.5f;     // ¹¥»÷¾àÀë
-    public bool changeColorBeforeAttack = true; // ÊÇ·ñ¹¥»÷Ç°±äÉ«
-    public bool returnToOrigin = true;      // ¹¥»÷ºóÊÇ·ñ·µ»ØÔ­Î»
+    [Header("ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public int attackCount = 1;             // ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float approachDistance = 2f;     // ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+    public float attackDistance = 0.5f;     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public bool changeColorBeforeAttack = true; // ï¿½Ç·ñ¹¥»ï¿½Ç°ï¿½ï¿½É«
+    public bool returnToOrigin = true;      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ñ·µ»ï¿½Ô­Î»
 
-    [Header("ÌøÔ¾¹¥»÷ÑÝ³ö²ÎÊý")]
-    public bool useJumpAttack = false;      // ÊÇ·ñÆôÓÃÌøÔ¾¹¥»÷
-    public float jumpHeight = 2f;           // ÌøÔ¾¸ß¶È
-    public float jumpDuration = 1f;         // ÌøÔ¾×ÜÊ±³¤
+    [Header("ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public bool useJumpAttack = false;      // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¾ï¿½ï¿½ï¿½ï¿½
+    public float jumpHeight = 2f;           // ï¿½ï¿½Ô¾ï¿½ß¶ï¿½
+    public float jumpDuration = 1f;         // ï¿½ï¿½Ô¾ï¿½ï¿½Ê±ï¿½ï¿½
 }

@@ -223,7 +223,7 @@ public class BattleManager : MonoBehaviour
 
     void ExecutePlayerAttack(Enemy target, float n)
     {
-        Debug.Log("Íæ¼Ò¹¥»÷ " + target.GetEnemyData().name);
+        Debug.Log("ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½ " + target.GetEnemyData().name);
         int damage = (int)Mathf.Max((playerData.data.Attack * n) - target.GetEnemyData().defense, 1);
         target.TakeDamage(damage);
         energySlider.value += 1;
@@ -246,7 +246,7 @@ public class BattleManager : MonoBehaviour
         {
             if (!enemies[i].GetComponent<Enemy>().IsAlive())
             {
-                Debug.Log(enemies[i].GetComponent<Enemy>().GetEnemyData().name + " ±»»÷°Ü£¡");
+                Debug.Log(enemies[i].GetComponent<Enemy>().GetEnemyData().name + " ï¿½ï¿½ï¿½ï¿½ï¿½Ü£ï¿½");
                 earnedExp += enemies[i].GetComponent<Enemy>().GetEnemyData().exp;
                 Destroy(enemies[i]);
                 enemies.RemoveAt(i);
@@ -329,14 +329,14 @@ public class BattleManager : MonoBehaviour
         if (allEnemiesDead)
         {
             state = BattleState.Victory;
-            Debug.Log("Õ½¶·Ê¤Àû£¡");
+            Debug.Log("Õ½ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½");
             state = BattleState.BattleOver;
             EndBattle();
         }
         else if (playerData.data.HP <= 0)
         {
             state = BattleState.Defeat;
-            Debug.Log("Íæ¼Ò±»»÷°Ü£¡");
+            Debug.Log("ï¿½ï¿½Ò±ï¿½ï¿½ï¿½ï¿½Ü£ï¿½");
             state = BattleState.BattleOver;
             GameOver();
         }
@@ -346,7 +346,7 @@ public class BattleManager : MonoBehaviour
     {
         resultCanvas.enabled = true;
         earnedEXP_txt.text = "+" + earnedExp.ToString();
-        Debug.Log("»ñµÃ¾­ÑéÖµ: " + earnedExp);
+        Debug.Log("ï¿½ï¿½Ã¾ï¿½ï¿½ï¿½Öµ: " + earnedExp);
         if (earnedExp >= playerData.data.RequiredExp)
         {
             LevelUP.SetActive(true);

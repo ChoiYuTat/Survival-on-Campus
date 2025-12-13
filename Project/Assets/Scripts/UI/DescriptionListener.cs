@@ -10,7 +10,7 @@ public class DescriptionListener : MonoBehaviour, IPointerEnterHandler, IPointer
     private ItemManager itemManager;
     private GameObject player;
 
-    private Localization_KEY des_key;
+    private Localization_KEY des_key, des_keyInCombat;
     private Localization_SOURCE source;
     private OptionSetter setter;
 
@@ -22,6 +22,7 @@ public class DescriptionListener : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerEnter(PointerEventData eventData)
     {
         des_key = GameObject.FindGameObjectWithTag("Description").GetComponent<Localization_KEY>();
+        des_keyInCombat = GameObject.FindGameObjectWithTag("CombatDescription").GetComponent<Localization_KEY>();
         source = GameObject.FindGameObjectWithTag("LocalizationSource").GetComponent<Localization_SOURCE>();
         setter = GameObject.FindGameObjectWithTag("OptionSetter").GetComponent<OptionSetter>();
 
@@ -31,6 +32,7 @@ public class DescriptionListener : MonoBehaviour, IPointerEnterHandler, IPointer
             {
                 Debug.Log("Enter");
                 des_key.keyID = "I" + player.GetComponent<LoadPlayerData>().data.Inventory[i].itemID;
+                des_keyInCombat.keyID = "I" + player.GetComponent<LoadPlayerData>().data.Inventory[i].itemID;
                 source.RefreshTextElementsAndKeys();
                 source.LoadLanguage(setter.getLanguageIndex());
                 break;
@@ -41,7 +43,10 @@ public class DescriptionListener : MonoBehaviour, IPointerEnterHandler, IPointer
     public void OnPointerExit(PointerEventData eventData)
     {
         GameObject.FindGameObjectWithTag("Description").GetComponent<Text>().text = "";
+        GameObject.FindGameObjectWithTag("CombatDescription").GetComponent<Text>().text = "";
         des_key = GameObject.FindGameObjectWithTag("Description").GetComponent<Localization_KEY>();
+        des_keyInCombat = GameObject.FindGameObjectWithTag("CombatDescription").GetComponent<Localization_KEY>();
         des_key.keyID = "";
+        des_keyInCombat.keyID = "";
     }
 }

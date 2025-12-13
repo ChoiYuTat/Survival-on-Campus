@@ -10,6 +10,7 @@ TagManager:
   - OptionSetter
   - Description
   - Enemy
+  - CombatDescription
   layers:
   - Default
   - TransparentFX
