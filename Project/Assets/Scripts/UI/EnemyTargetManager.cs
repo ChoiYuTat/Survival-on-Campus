@@ -20,21 +20,15 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void HighlightTarget(GameObject enemy)
     {
         // Implement highlight logic here
-        var renderer = enemy.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            renderer.material.color = Color.red; // Example highlight color
-        }
+        var renderer = enemy.GetComponent<Outline>();
+        renderer.GetComponent<Outline>().enabled = true;
     }
 
     public void RemoveHighlight(GameObject enemy)
     {
         // Implement remove highlight logic here
         var renderer = enemy.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            renderer.material.color = Color.white; // Example default color
-        }
+        renderer.GetComponent<Outline>().enabled = false;
     }
     public void SetTarget(GameObject enemy, int index)
     {
@@ -56,10 +50,7 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void SelectTarget()
     {
         var renderer = target.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            renderer.material.color = Color.white;
-        }
+        renderer.GetComponent<Outline>().enabled = false;
         Debug.Log("Selected target index: " + targetIndex);
         BattleManager.Instance.OnTargetSelected(targetIndex);
     }
