@@ -31,7 +31,9 @@ public class BattleManager : MonoBehaviour
     public GameObject playerPosition;
     public GameObject LevelUP;
     public GameObject[] enemyPosition;
-    public GameObject effectPrefab;
+
+    [SerializeField]
+    private GameObject hitEffectPrefab, criticalEffectPrefab;
 
 
     public MenuManager menuManager;
@@ -139,7 +141,7 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    void UseSkill(float Multiplier) 
+    void UseSkill(float Multiplier, bool qteSuccess) 
     {
         state = BattleState.PlayerAction;
         battleButton.SetActive(false);
@@ -148,11 +150,15 @@ public class BattleManager : MonoBehaviour
                 int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier 
                     * energyUseIndex * Multiplier)
                     - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
-                enemy.GetComponent<Enemy>().TakeDamage(effectPrefab,damage);
+            if (qteSuccess)
+            {
+                enemy.GetComponent<Enemy>().HeavyDamageEffect(criticalEffectPrefab);
+            }
+            enemy.GetComponent<Enemy>().TakeDamage(hitEffectPrefab, damage);
         }
         energyUseIndex = 0;
 
-        CheckEnemyDead();
+        Invoke("CheckEnemyDead", 1f);
 
         state = BattleState.CheckWinLose;
         CheckBattleEnd();
@@ -214,23 +220,34 @@ public class BattleManager : MonoBehaviour
 
     public void FightQTEBonues(float Multiplier) 
     {
-        ExecutePlayerAttack(enemies[targetIndex].GetComponent<Enemy>(), Multiplier);
+        bool success = false;
+        if (Multiplier > 1.0f)
+            success = true;
+        ExecutePlayerAttack(enemies[targetIndex].GetComponent<Enemy>(), Multiplier, success);
     }
 
     public void SkillQTEBonues(float Multiplier)
     {
-        UseSkill(Multiplier);
+        bool success = false;
+        if (Multiplier > 1.0f)
+            success = true;
+        UseSkill(Multiplier, success);
     }
 
-    void ExecutePlayerAttack(Enemy target, float n)
+    void ExecutePlayerAttack(Enemy target, float n, bool qteSuccess)
     {
         Debug.Log("��ҹ��� " + target.GetEnemyData().name);
         int damage = (int)Mathf.Max((playerData.data.Attack * n) - target.GetEnemyData().defense, 1);
-        target.TakeDamage(effectPrefab,damage);
+        if (qteSuccess)
+        {
+            target.HeavyDamageEffect(criticalEffectPrefab);
+        }
+        target.TakeDamage(hitEffectPrefab, damage);
+
         energySlider.value += 1;
         energyText.text = energySlider.value.ToString();
 
-        CheckEnemyDead();
+        Invoke("CheckEnemyDead", 1f);
         state = BattleState.CheckWinLose;
         CheckBattleEnd();
 

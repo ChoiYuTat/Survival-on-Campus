@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private EnemyData enemyData;
     [SerializeField]
     private TMP_Text damageText;
+
     private int number;
     private Color originalColor;
     public EnemyActionConfig[] actionConfigs;    
@@ -33,13 +34,21 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(GameObject effect, int damage) 
     {
-        GameObject e = Instantiate(effect, transform.position, transform.rotation);
-        e.transform.localScale *= 5f;
-        e.transform.LookAt(Camera.main.transform);
+        GameObject eff = Instantiate(effect, transform.position, transform.rotation);
+        eff.transform.localScale *= 3f;
+        eff.transform.LookAt(Camera.main.transform);
         enemyData.hp -= damage;
-        damageText.text = damage.ToString();
+        damageText.text += damage.ToString();
         Invoke("ResetDamageText", 1f);
         Debug.Log("Enemy " + enemyData.name + " took damage. Remaining HP: " + enemyData.hp);
+    }
+
+    public void HeavyDamageEffect(GameObject effect) 
+    {
+        damageText.text += "<color=yellow>CRITICAL!</color> \n";
+        GameObject crEff = Instantiate(effect, transform.position, transform.rotation);
+        crEff.transform.localScale *= 4f;
+        crEff.transform.LookAt(Camera.main.transform);
     }
 
     private void ResetDamageText()
