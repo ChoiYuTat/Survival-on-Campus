@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     private EnemyData enemyData;
     private int number;
     private int skillIndex;
+    private Color originalColor;
     public EnemyActionConfig[] actionConfigs;    
                                                  //public Animator animator;
 
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour
         qteManager = manager;
         enemyData.name += " #" + number;
         this.number = number;
+        originalColor = enemyRenderer.material.color;
         Debug.Log("Enemy " + enemyData.name + " initialized with HP: " + enemyData.hp);
     }
 
@@ -80,20 +82,31 @@ public class Enemy : MonoBehaviour
     {
         if (config.useJumpAttack)
         {
-            if (config.changeColorBeforeAttack)
-                yield return StartCoroutine(ChangeColor(Color.white, Color.yellow, 0.5f));
+            if (config.changeColorBeforeAttack) 
+            {
+                yield return StartCoroutine(ChangeColor(originalColor, Color.yellow, 0.3f));
+                yield return StartCoroutine(ResetColor(Color.yellow, 0.3f));
+            }
             yield return StartCoroutine(JumpAttack(skill));
         }
         else if (config.attackCount >= 2)
         {
-            if (config.changeColorBeforeAttack)
-                yield return StartCoroutine(ChangeColor(Color.white, Color.red, 0.5f));
+            if (config.changeColorBeforeAttack) 
+            {
+                yield return StartCoroutine(ChangeColor(originalColor, Color.red, 0.3f));
+                yield return StartCoroutine(ResetColor(Color.red, 0.3f));
+            }
+
             yield return StartCoroutine(KeepAttack(skill));
         }
         else 
         {
-            if (config.changeColorBeforeAttack)
-                yield return StartCoroutine(ChangeColor(Color.white, Color.red, 0.5f));
+            if (config.changeColorBeforeAttack) 
+            {
+                yield return StartCoroutine(ChangeColor(originalColor, Color.red, 0.3f));
+                yield return StartCoroutine(ResetColor(Color.red, 0.3f));
+            }
+
             yield return StartCoroutine(Attack(skill));
         }
 
@@ -102,7 +115,6 @@ public class Enemy : MonoBehaviour
     private IEnumerator Attack(SkillData skill)
     {
         //animator.SetTrigger("Attack");
-        ChangeColorImmediate(Color.white);
         bool qteFinished = false;
         bool qteSuccess = false;
 
@@ -199,6 +211,18 @@ public class Enemy : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
             enemyRenderer.material.color = Color.Lerp(fromColor, toColor, t);
+            yield return null;
+        }
+    }
+
+    private IEnumerator ResetColor(Color fromColor, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+            enemyRenderer.material.color = Color.Lerp(fromColor, originalColor, t);
             yield return null;
         }
     }
