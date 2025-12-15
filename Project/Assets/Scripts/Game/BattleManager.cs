@@ -31,6 +31,7 @@ public class BattleManager : MonoBehaviour
     public GameObject playerPosition;
     public GameObject LevelUP;
     public GameObject[] enemyPosition;
+    public GameObject effectPrefab;
 
 
     public MenuManager menuManager;
@@ -147,7 +148,7 @@ public class BattleManager : MonoBehaviour
                 int damage = (int)Mathf.Max((playerData.data.Attack * playerData.data.Skills[0].damageMultiplier 
                     * energyUseIndex * Multiplier)
                     - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
-                enemy.GetComponent<Enemy>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(effectPrefab,damage);
         }
         energyUseIndex = 0;
 
@@ -159,7 +160,7 @@ public class BattleManager : MonoBehaviour
         if (state != BattleState.BattleOver)
         {
             state = BattleState.EnemyTurn;
-            EnemyTurn();
+            Invoke("EnemyTurn", 1f);
         }
     }
 
@@ -225,7 +226,7 @@ public class BattleManager : MonoBehaviour
     {
         Debug.Log("��ҹ��� " + target.GetEnemyData().name);
         int damage = (int)Mathf.Max((playerData.data.Attack * n) - target.GetEnemyData().defense, 1);
-        target.TakeDamage(damage);
+        target.TakeDamage(effectPrefab,damage);
         energySlider.value += 1;
         energyText.text = energySlider.value.ToString();
 
@@ -236,7 +237,7 @@ public class BattleManager : MonoBehaviour
         if (state != BattleState.BattleOver)
         {
             state = BattleState.EnemyTurn;
-            EnemyTurn();
+            Invoke("EnemyTurn", 1f);
         }
     }
 

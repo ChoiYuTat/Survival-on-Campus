@@ -1,12 +1,14 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private EnemyData enemyData;
+    [SerializeField]
+    private TMP_Text damageText;
     private int number;
-    private int skillIndex;
     private Color originalColor;
     public EnemyActionConfig[] actionConfigs;    
                                                  //public Animator animator;
@@ -16,15 +18,10 @@ public class Enemy : MonoBehaviour
     public Collider attackCollider;              
     public Collider jumpAttackCollider;          
 
-
-    private Transform defaultPosition;
-    private Transform attackTarget;
-
     private QTEManager qteManager;
 
     public void SetEnemyData(EnemyData data,int number,Transform position, QTEManager manager)
     {
-        defaultPosition = position;
         enemyData = data;
         enemyData.instanceID = GetInstanceID() + number;
         qteManager = manager;
@@ -34,10 +31,20 @@ public class Enemy : MonoBehaviour
         Debug.Log("Enemy " + enemyData.name + " initialized with HP: " + enemyData.hp);
     }
 
-    public void TakeDamage(int damage) 
+    public void TakeDamage(GameObject effect, int damage) 
     {
+        GameObject e = Instantiate(effect, transform.position, transform.rotation);
+        e.transform.localScale *= 5f;
+        e.transform.LookAt(Camera.main.transform);
         enemyData.hp -= damage;
+        damageText.text = damage.ToString();
+        Invoke("ResetDamageText", 1f);
         Debug.Log("Enemy " + enemyData.name + " took damage. Remaining HP: " + enemyData.hp);
+    }
+
+    private void ResetDamageText()
+    {
+        damageText.text = "";
     }
 
     public bool IsAlive() => enemyData.hp > 0;
@@ -56,8 +63,6 @@ public class Enemy : MonoBehaviour
     }
     public void ExecuteSkill(Transform target, int skillIndex)
     {
-        this.skillIndex = skillIndex;
-        attackTarget = target;
 
         if (skillIndex < 0 || skillIndex >= enemyData.skills.Length)
         {
@@ -110,7 +115,8 @@ public class Enemy : MonoBehaviour
             yield return StartCoroutine(Attack(skill));
         }
 
-            BattleManager.Instance.EnemyActionComplete();
+        yield return 1f;
+        BattleManager.Instance.EnemyActionComplete();
     }
     private IEnumerator Attack(SkillData skill)
     {
@@ -160,7 +166,6 @@ public class Enemy : MonoBehaviour
             qte.onSuccess.AddListener(successAction);
             qte.onFailure.AddListener(failureAction);
         }
-        ChangeColorImmediate(Color.white);
         qteManager.TriggerQTE("EnemyJumpAttack");
         // 等待QTE完成
         yield return new WaitUntil(() => qteFinished);
@@ -190,7 +195,6 @@ public class Enemy : MonoBehaviour
             qte.onSuccess.AddListener(successAction);
             qte.onFailure.AddListener(failureAction);
         }
-        ChangeColorImmediate(Color.white);
         qteManager.TriggerQTE("EnemyKeepAttack");
         // 等待QTE完成
         yield return new WaitUntil(() => qteFinished);
@@ -225,11 +229,6 @@ public class Enemy : MonoBehaviour
             enemyRenderer.material.color = Color.Lerp(fromColor, originalColor, t);
             yield return null;
         }
-    }
-
-    private void ChangeColorImmediate(Color toColor) 
-    {
-        enemyRenderer.material.color = toColor;
     }
 
 
