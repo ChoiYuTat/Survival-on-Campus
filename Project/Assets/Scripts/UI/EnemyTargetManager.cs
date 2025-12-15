@@ -32,8 +32,7 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
     public void SetTarget(GameObject enemy, int index)
     {
-        source = GameObject.FindGameObjectWithTag("LocalizationSource").GetComponent<Localization_SOURCE>();
-        setter = GameObject.FindGameObjectWithTag("OptionSetter").GetComponent<OptionSetter>();
+
 
         target = enemy;
         HPSlider.maxValue = enemy.GetComponent<Enemy>().GetEnemyData().maxHp;
@@ -41,6 +40,16 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
         targetIndex = index;
 
         key.keyID = "E" + enemy.GetComponent<Enemy>().GetEnemyData().id;
+
+        Invoke("RefreshText", 0.01f);
+
+    }
+
+    void RefreshText() 
+    {
+        source = GameObject.FindGameObjectWithTag("LocalizationSource").GetComponent<Localization_SOURCE>();
+        setter = GameObject.FindGameObjectWithTag("OptionSetter").GetComponent<OptionSetter>();
+
         source.RefreshTextElementsAndKeys();
         source.LoadLanguage(setter.getLanguageIndex());
 
