@@ -156,8 +156,13 @@ public class BattleManager : MonoBehaviour
             if (qteSuccess)
             {
                 enemy.GetComponent<Enemy>().HeavyDamageEffect(criticalEffectPrefab);
-                cameraReceiver.InduceStress(0.1f);
+                cameraReceiver.InduceStress(0.10f);
             }
+            else 
+            {
+                cameraReceiver.InduceStress(0.04f);
+            }
+
             enemy.GetComponent<Enemy>().TakeDamage(hitEffectPrefab, damage);
         }
         energyUseIndex = 0;
@@ -244,8 +249,12 @@ public class BattleManager : MonoBehaviour
         int damage = (int)Mathf.Max((playerData.data.Attack * n) - target.GetEnemyData().defense, 1);
         if (qteSuccess)
         {
-            cameraReceiver.InduceStress(0.1f);
+            cameraReceiver.InduceStress(0.10f);
             target.HeavyDamageEffect(criticalEffectPrefab);
+        }
+        else
+        {
+            cameraReceiver.InduceStress(0.04f);
         }
         target.TakeDamage(hitEffectPrefab, damage);
 
@@ -302,13 +311,14 @@ public class BattleManager : MonoBehaviour
         currentEnemyIndex++;
         if ((currentEnemyIndex < currentEnemies.Count)) 
         {
-
-            EnemyTurn();
+            Invoke("EnemyTurn", 0.5f);
+            //EnemyTurn();
         }
         else
         {
             currentEnemyIndex = 0;
-            EndEnemyTurn();
+            Invoke("EndEnemyTurn", 0.5f);
+            //EndEnemyTurn();
         }
     }
 
