@@ -97,10 +97,9 @@ public class BattleManager : MonoBehaviour
     void BeginBattle()
     {
         player.transform.position = playerPosition.transform.position;
-        player.GetComponent<luna>().enabled = false;
+        player.GetComponent<PlayerControl>().enabled = false;
         player.GetComponent<OpenDoor>().enabled = false;
-        player.GetComponent<PlayerJump>().enabled = false;
-        playerSprite.GetComponent<SpriteRenderer>().enabled = false;
+        playerSprite.SetActive(false);
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
         battleCanvas.enabled = true;
         MenuCanvas.enabled = false;
@@ -332,7 +331,6 @@ public class BattleManager : MonoBehaviour
     {
         if (state == BattleState.PlayerTurn)
         {
-            player.GetComponent<PlayerJump>().enabled = false;
             battleButton.SetActive(true);
         }
     }
@@ -389,8 +387,8 @@ public class BattleManager : MonoBehaviour
     {
         resultCanvas.enabled = false;
         player.transform.position = playerOriginalPosition;
-        playerSprite.GetComponent<SpriteRenderer>().enabled = true;
-        player.GetComponent<luna>().enabled = true;
+        playerSprite.SetActive(true);
+        player.GetComponent<PlayerControl>().enabled = true;
         player.GetComponent<OpenDoor>().enabled = true;
         battleCanvas.enabled = false;
         MenuCanvas.enabled = true;
