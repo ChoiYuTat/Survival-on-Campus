@@ -5132,6 +5132,7 @@ GameObject:
   - component: {fileID: 509834116}
   - component: {fileID: 509834115}
   - component: {fileID: 509834114}
+  - component: {fileID: 509834117}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -5257,6 +5258,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &509834117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509834112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ee1c62c905bb24ea7c9cf3d9d40b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TraumaExponent: 1
+  MaximumAngularShake: {x: 5, y: 5, z: 5}
+  MaximumTranslationShake: {x: 0.75, y: 0.75, z: 0.75}
 --- !u!1 &520454697
 GameObject:
   m_ObjectHideFlags: 0
@@ -11095,7 +11111,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 799716.06}
+  m_AnchoredPosition: {x: 0, y: 807281.8}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1170119572
@@ -19497,6 +19513,7 @@ MonoBehaviour:
   - {fileID: 692404828}
   hitEffectPrefab: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   criticalEffectPrefab: {fileID: 2054803858064431036, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
+  cameraReceiver: {fileID: 509834117}
   menuManager: {fileID: 7668078736523347297}
   QTEmanager: {fileID: 194876405}
   content: {fileID: 237715336}

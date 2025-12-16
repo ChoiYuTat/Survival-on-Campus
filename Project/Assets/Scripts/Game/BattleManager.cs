@@ -35,6 +35,9 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private GameObject hitEffectPrefab, criticalEffectPrefab;
 
+    [SerializeField]
+    private StressReceiver cameraReceiver;
+
 
     public MenuManager menuManager;
     public QTEManager QTEmanager;
@@ -153,20 +156,21 @@ public class BattleManager : MonoBehaviour
             if (qteSuccess)
             {
                 enemy.GetComponent<Enemy>().HeavyDamageEffect(criticalEffectPrefab);
+                cameraReceiver.InduceStress(0.1f);
             }
             enemy.GetComponent<Enemy>().TakeDamage(hitEffectPrefab, damage);
         }
         energyUseIndex = 0;
 
-        Invoke("CheckEnemyDead", 1f);
+        Invoke("CheckEnemyDead", 0.5f);
 
         state = BattleState.CheckWinLose;
-        CheckBattleEnd();
+        Invoke("CheckBattleEnd", 1.3f);
 
         if (state != BattleState.BattleOver)
         {
             state = BattleState.EnemyTurn;
-            Invoke("EnemyTurn", 1f);
+            Invoke("EnemyTurn", 1.5f);
         }
     }
 
@@ -240,6 +244,7 @@ public class BattleManager : MonoBehaviour
         int damage = (int)Mathf.Max((playerData.data.Attack * n) - target.GetEnemyData().defense, 1);
         if (qteSuccess)
         {
+            cameraReceiver.InduceStress(0.1f);
             target.HeavyDamageEffect(criticalEffectPrefab);
         }
         target.TakeDamage(hitEffectPrefab, damage);
@@ -249,7 +254,7 @@ public class BattleManager : MonoBehaviour
 
         Invoke("CheckEnemyDead", 1f);
         state = BattleState.CheckWinLose;
-        CheckBattleEnd();
+        Invoke("CheckBattleEnd", 1f);
 
         if (state != BattleState.BattleOver)
         {
@@ -324,6 +329,7 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTakeDamage()
     {
+        cameraReceiver.InduceStress(0.1f);
         int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
                     - player.gameObject.GetComponent<LoadPlayerData>().data.Defense);
         playerData.data.HP -= damage;
@@ -347,14 +353,12 @@ public class BattleManager : MonoBehaviour
         if (allEnemiesDead)
         {
             state = BattleState.Victory;
-            Debug.Log("ս��ʤ����");
             state = BattleState.BattleOver;
             EndBattle();
         }
         else if (playerData.data.HP <= 0)
         {
             state = BattleState.Defeat;
-            Debug.Log("��ұ����ܣ�");
             state = BattleState.BattleOver;
             GameOver();
         }
@@ -364,7 +368,6 @@ public class BattleManager : MonoBehaviour
     {
         resultCanvas.enabled = true;
         earnedEXP_txt.text = "+" + earnedExp.ToString();
-        Debug.Log("��þ���ֵ: " + earnedExp);
         if (earnedExp >= playerData.data.RequiredExp)
         {
             LevelUP.SetActive(true);
