@@ -329,7 +329,7 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTakeDamage()
     {
-        cameraReceiver.InduceStress(0.1f);
+        cameraReceiver.InduceStress(0.2f);
         int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
                     - player.gameObject.GetComponent<LoadPlayerData>().data.Defense);
         playerData.data.HP -= damage;
