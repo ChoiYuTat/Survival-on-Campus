@@ -1921,38 +1921,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!1 &238827864
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 238827865}
-  m_Layer: 0
-  m_Name: ModelRotation
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &238827865
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238827864}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 543450653505617593}
-  m_Father: {fileID: 4230841573182549657}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &258529836
 GameObject:
   m_ObjectHideFlags: 0
@@ -8184,7 +8152,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149248402435}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 98fc28f5029a3a345bc6496b9246f25b, type: 3}
   m_Controller: {fileID: 9100000, guid: 0182be97cce44904eb98acbb2fee9f08, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -11006,7 +10974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 418035.72}
+  m_AnchoredPosition: {x: 0, y: 597529.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1170119572
@@ -20857,7 +20825,7 @@ Transform:
   m_Children:
   - {fileID: 5465940246580010541}
   - {fileID: 3593489680027154783}
-  m_Father: {fileID: 238827865}
+  m_Father: {fileID: 4230841573182549657}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &543866683272763345
 RectTransform:
@@ -24403,7 +24371,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 330585546}
-  - {fileID: 238827865}
+  - {fileID: 543450653505617593}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4237274458449533947
@@ -28603,7 +28571,7 @@ MonoBehaviour:
   turnSpeed: 20
   turnSmoothTime: 0.1
   animator: {fileID: 846784952}
-  modelRotation: {fileID: 238827864}
+  modelRotation: {fileID: 919132149248402435}
 --- !u!224 &8739519604713826925
 RectTransform:
   m_ObjectHideFlags: 0
