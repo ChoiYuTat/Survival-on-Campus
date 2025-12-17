@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour
@@ -10,9 +11,15 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject modelRotation;
 
+    private AudioSource audioSource;
     private Vector3 moveDirection;
     private float currentTurnVelocity;
     private float targetAngle;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -34,10 +41,12 @@ public class PlayerControl : MonoBehaviour
         {
             transform.position += moveDirection * (moveSpeed * Time.deltaTime);
             animator.SetFloat("Walk", 1f);
+            audioSource.mute = false;
         }
         else 
         {
             animator.SetFloat("Walk", 0f);
+            audioSource.mute = true;
         }
     }
 

@@ -50,6 +50,9 @@ public class ObjectManager : MonoBehaviour
     [SerializeField]
     private string description;
 
+    [SerializeField]
+    private AudioClip pickUpSound, openDoorSound, lockSound;
+
     public PlayableDirector director;
     public DialogueController dialogueController;
     public TimelineAsset pickUpTimeline;
@@ -59,12 +62,15 @@ public class ObjectManager : MonoBehaviour
 
     private ItemDatabase itemDatabase;
 
+    private AudioSource audioSource;
+
     private bool isPickUp = false;
     private bool isOpened = false;
     private bool hasKey = false;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         Invoke("loadItems", 0.01f);
         //loadItems();
 
@@ -132,6 +138,7 @@ public class ObjectManager : MonoBehaviour
                         director.enabled = true;
                         dialogueController.director = director;
                         director.Play();
+                        audioSource.PlayOneShot(pickUpSound);
                         break;
                     case ObjectType.Description:
                         Debug.Log(description);
@@ -166,6 +173,7 @@ public class ObjectManager : MonoBehaviour
                 dialogueController.director = director;
                 director.Play();
                 player.data.interactiveItemsID.Add(objectID);
+                audioSource.PlayOneShot(openDoorSound);
             }
             else if (!isOpened)
             {
@@ -174,6 +182,7 @@ public class ObjectManager : MonoBehaviour
                 director.enabled = true;
                 dialogueController.director = director;
                 director.Play();
+                audioSource.PlayOneShot(lockSound);
             }
         }
     }

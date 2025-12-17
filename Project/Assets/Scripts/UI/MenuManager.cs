@@ -63,7 +63,7 @@ public class MenuManager : MonoBehaviour
 
     public void Freeze() 
     {
-        player.GetComponent<luna>().enabled = false;
+        player.GetComponent<PlayerControl>().enabled = false;
         if (enemies != null)
         {
             foreach (var enemy in enemies)
@@ -75,7 +75,7 @@ public class MenuManager : MonoBehaviour
 
     public void Unfreeze()
     {
-        player.GetComponent<luna>().enabled = true;
+        player.GetComponent<PlayerControl>().enabled = true;
         if (enemies != null) 
         {
             foreach (var enemy in enemies)
