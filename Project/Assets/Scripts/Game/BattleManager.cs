@@ -104,7 +104,7 @@ public class BattleManager : MonoBehaviour
         battleCanvas.enabled = true;
         MenuCanvas.enabled = false;
 
-        for (int i = 0; i < currentEnemies.Count; i++) 
+        for (int i = 0; i < currentEnemies.Count; i++)
         {
             Debug.Log(currentEnemies[i]);
             GameObject gameObject = Instantiate(enemyPrefab, enemyPosition[i].transform.position,
@@ -135,12 +135,28 @@ public class BattleManager : MonoBehaviour
                 targets[i].GetComponent<EnemyTargetManager>().SetTarget(enemies[i], i);
             }
         }
-        else if (actionType == 1) 
+        else if (actionType == 1)
         {
             //UseSkill();
             battleButton.SetActive(false);
             StartCoroutine(WaitAndTriggerSkillQTE(0.5f));
         }
+    }
+
+    public void SkipBattle() 
+    {
+        clearEnemy();
+    }
+
+    void clearEnemy() 
+    {
+        battleButton.SetActive(false);
+        foreach (var enemy in enemies)
+        {
+            int damage = 114514;
+            enemy.GetComponent<Enemy>().TakeDamage(hitEffectPrefab, damage);
+        }
+        EndTrun();
     }
 
     void UseSkill(float Multiplier, bool qteSuccess) 
