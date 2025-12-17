@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
         this.number = number;
         model = Instantiate(enemyModelPrefab[enemyData.id - 1], position.position, position.rotation, transform);
         model.transform.rotation = Quaternion.Euler(0, 180, 0);
+        model.transform.localScale = new Vector3(1.5f, 2f, 1.5f);
+        model.transform.position += new Vector3(0, -0.5f, 0);
         animator = model.GetComponent<Animator>();
 
         Debug.Log("Enemy " + enemyData.name + " initialized with HP: " + enemyData.hp);
