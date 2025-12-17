@@ -166,10 +166,15 @@ public class BattleManager : MonoBehaviour
         }
         energyUseIndex = 0;
 
-        Invoke("CheckEnemyDead", 0.5f);
+        EndTrun();
+    }
+
+    public void EndTrun() 
+    {
+        Invoke("CheckEnemyDead", 0.4f);
 
         state = BattleState.CheckWinLose;
-        Invoke("CheckBattleEnd", 1.3f);
+        Invoke("CheckBattleEnd", 1.5f);
 
         if (state != BattleState.BattleOver)
         {
@@ -260,15 +265,7 @@ public class BattleManager : MonoBehaviour
         energySlider.value += 1;
         energyText.text = energySlider.value.ToString();
 
-        Invoke("CheckEnemyDead", 1f);
-        state = BattleState.CheckWinLose;
-        Invoke("CheckBattleEnd", 1f);
-
-        if (state != BattleState.BattleOver)
-        {
-            state = BattleState.EnemyTurn;
-            Invoke("EnemyTurn", 1f);
-        }
+        EndTrun();
     }
 
     void CheckEnemyDead() 
@@ -277,9 +274,9 @@ public class BattleManager : MonoBehaviour
         {
             if (!enemies[i].GetComponent<Enemy>().IsAlive())
             {
-                Debug.Log(enemies[i].GetComponent<Enemy>().GetEnemyData().name + " �����ܣ�");
                 earnedExp += enemies[i].GetComponent<Enemy>().GetEnemyData().exp;
-                Destroy(enemies[i]);
+                enemies[i].GetComponent<Enemy>().DeadAnimation();
+                Destroy(enemies[i], 3f);
                 enemies.RemoveAt(i);
                 currentEnemies.RemoveAt(i);
             }
@@ -311,13 +308,11 @@ public class BattleManager : MonoBehaviour
         if ((currentEnemyIndex < currentEnemies.Count)) 
         {
             Invoke("EnemyTurn", 0.5f);
-            //EnemyTurn();
         }
         else
         {
             currentEnemyIndex = 0;
             Invoke("EndEnemyTurn", 0.5f);
-            //EndEnemyTurn();
         }
     }
 

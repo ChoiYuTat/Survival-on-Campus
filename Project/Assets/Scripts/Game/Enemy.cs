@@ -12,16 +12,12 @@ public class Enemy : MonoBehaviour
     private GameObject[] enemyModelPrefab;
 
     private GameObject model;
+    private Animator animator;
 
     private int number;
-    private Color originalColor;
     public EnemyActionConfig[] actionConfigs;    
-                                                 //public Animator animator;
 
-    //public Animator animator;
-    public Renderer enemyRenderer;
-    public Collider attackCollider;              
-    public Collider jumpAttackCollider;          
+    public Renderer enemyRenderer;        
 
     private QTEManager qteManager;
 
@@ -32,9 +28,10 @@ public class Enemy : MonoBehaviour
         qteManager = manager;
         enemyData.name += " #" + number;
         this.number = number;
-        model = Instantiate(enemyModelPrefab[enemyData.id], position.position, position.rotation, transform);
-        //enemyRenderer = model.GetComponent<Renderer>();
-        originalColor = enemyRenderer.material.color;
+        model = Instantiate(enemyModelPrefab[enemyData.id - 1], position.position, position.rotation, transform);
+        model.transform.rotation = Quaternion.Euler(0, 180, 0);
+        animator = model.GetComponent<Animator>();
+
         Debug.Log("Enemy " + enemyData.name + " initialized with HP: " + enemyData.hp);
     }
 
@@ -44,6 +41,7 @@ public class Enemy : MonoBehaviour
         eff.transform.localScale *= 3f;
         eff.transform.LookAt(Camera.main.transform);
         Destroy(eff, 3f);
+        animator.SetTrigger("DamageWeak");
         enemyData.hp -= damage;
         damageText.text += damage.ToString();
         Invoke("ResetDamageText", 1f);
@@ -64,20 +62,17 @@ public class Enemy : MonoBehaviour
         damageText.text = "";
     }
 
+    public void DeadAnimation() 
+    {
+        animator.SetBool("isDead", true);
+    }
+
     public bool IsAlive() => enemyData.hp > 0;
 
     public EnemyData GetEnemyData() => enemyData;
 
     public int GetNumber() => number;
 
-    private void Start()
-    {
-        if (attackCollider != null) attackCollider.enabled = false;
-        if (jumpAttackCollider != null) jumpAttackCollider.enabled = false;
-
-        if (enemyRenderer != null)
-            enemyRenderer.material = new Material(enemyRenderer.material); // ���⹲������һ���ɫ
-    }
     public void ExecuteSkill(Transform target, int skillIndex)
     {
 
@@ -106,8 +101,7 @@ public class Enemy : MonoBehaviour
         {
             if (config.changeColorBeforeAttack) 
             {
-                yield return StartCoroutine(ChangeColor(originalColor, Color.yellow, 0.3f));
-                yield return StartCoroutine(ResetColor(Color.yellow, 0.3f));
+
             }
             yield return StartCoroutine(JumpAttack(skill));
         }
@@ -115,8 +109,7 @@ public class Enemy : MonoBehaviour
         {
             if (config.changeColorBeforeAttack) 
             {
-                yield return StartCoroutine(ChangeColor(originalColor, Color.red, 0.3f));
-                yield return StartCoroutine(ResetColor(Color.red, 0.3f));
+
             }
 
             yield return StartCoroutine(KeepAttack(skill));
@@ -125,8 +118,7 @@ public class Enemy : MonoBehaviour
         {
             if (config.changeColorBeforeAttack) 
             {
-                yield return StartCoroutine(ChangeColor(originalColor, Color.red, 0.3f));
-                yield return StartCoroutine(ResetColor(Color.red, 0.3f));
+
             }
 
             yield return StartCoroutine(Attack(skill));
@@ -157,6 +149,7 @@ public class Enemy : MonoBehaviour
 
         // 等待QTE完成
         yield return new WaitUntil(() => qteFinished);
+        animator.SetTrigger("Attack");
 
         // 移除回调，避免重复绑定
         if (qte != null)
@@ -186,6 +179,7 @@ public class Enemy : MonoBehaviour
         qteManager.TriggerQTE("EnemyJumpAttack");
         // 等待QTE完成
         yield return new WaitUntil(() => qteFinished);
+        animator.SetTrigger("Attack");
 
         // 移除回调，避免重复绑定
         if (qte != null)
@@ -215,6 +209,7 @@ public class Enemy : MonoBehaviour
         qteManager.TriggerQTE("EnemyKeepAttack");
         // 等待QTE完成
         yield return new WaitUntil(() => qteFinished);
+        animator.SetTrigger("Attack");
 
         // 移除回调，避免重复绑定
         if (qte != null)
@@ -223,31 +218,6 @@ public class Enemy : MonoBehaviour
             qte.onFailure.RemoveListener(failureAction);
         }
     }
-
-    private IEnumerator ChangeColor(Color fromColor, Color toColor, float duration)
-    {
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            enemyRenderer.material.color = Color.Lerp(fromColor, toColor, t);
-            yield return null;
-        }
-    }
-
-    private IEnumerator ResetColor(Color fromColor, float duration)
-    {
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / duration);
-            enemyRenderer.material.color = Color.Lerp(fromColor, originalColor, t);
-            yield return null;
-        }
-    }
-
 
     private EnemyActionConfig FindConfigBySkillName(string skillName)
     {

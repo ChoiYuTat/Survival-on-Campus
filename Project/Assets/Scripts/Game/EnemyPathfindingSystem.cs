@@ -13,6 +13,7 @@ public class EnemyPathfindingSystem : MonoBehaviour
     public float loseSightTime = 2f;
     public EnemyManager enemyManager;
     public BattleManager battleManager;
+    public Animator animator;
 
     private int currentIndex = 0;
     private NavMeshAgent agent;
@@ -31,6 +32,7 @@ public class EnemyPathfindingSystem : MonoBehaviour
 
     void Update()
     {
+
         playerVector = player.position;
         playerVector.y = transform.position.y;
 
@@ -50,6 +52,8 @@ public class EnemyPathfindingSystem : MonoBehaviour
 
     void Patrol()
     {
+        animator.SetFloat("Walk", 1f);
+        animator.SetFloat("Run", 0f);
         if (agent.pathStatus == NavMeshPathStatus.PathPartial || agent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
             agent.SetDestination(waypoints[currentIndex].position);
@@ -64,6 +68,7 @@ public class EnemyPathfindingSystem : MonoBehaviour
 
     void DetectPlayer()
     {
+
         Vector3 dirToPlayer = (playerVector - transform.position).normalized;
         //Debug.Log($"Direction to player: {dirToPlayer}");
 
@@ -98,10 +103,10 @@ public class EnemyPathfindingSystem : MonoBehaviour
     }
 
     void Chase()
-        {
-            agent.destination = player.position;
-
-        }
+    {
+        animator.SetFloat("Run", 1f);
+        agent.destination = player.position;
+    }
 
         void LosePlayerCheck()
         {
