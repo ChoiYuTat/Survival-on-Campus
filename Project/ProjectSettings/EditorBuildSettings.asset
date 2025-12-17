@@ -11,6 +11,24 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Classroom.unity
+    guid: f5b5d7e2301222944bf3a3bf6c483f3d
+  - enabled: 1
+    path: Assets/Scenes/Corridor.unity
+    guid: 67745dfc0cd04314cbfd8f1c8ba6d46b
+  - enabled: 1
+    path: Assets/Scenes/maleRestroom.unity
+    guid: bc9b2bbde0dc83a4b868776860fd9e7c
+  - enabled: 1
+    path: Assets/Scenes/femalRestroom.unity
+    guid: 59cdbc9c60a24154bbfa573bb2d80352
+  - enabled: 1
+    path: Assets/Scenes/Office.unity
+    guid: f91c6f130ac6bc64b88d1971dd39b76b
+  - enabled: 1
+    path: Assets/Scenes/CorridorG.unity
+    guid: de2b3d46bfe2d5e4fb57c107887a6399
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
