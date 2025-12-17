@@ -290,7 +290,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5433540144654025127}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -372,6 +372,10 @@ MonoBehaviour:
     instanceID: 0
     skills: []
   damageText: {fileID: 3344258717068961214}
+  enemyModelPrefab:
+  - {fileID: 9146724964725125982, guid: c5bb5411a294f7b428d94415c3803bf4, type: 3}
+  - {fileID: 9146724964725125982, guid: 708687c71e054a64992c1a61950888eb, type: 3}
+  - {fileID: 9146724964725125982, guid: a9377fa85d6e8b54f95a8a9416c9a156, type: 3}
   actionConfigs:
   - {fileID: 11400000, guid: 87b0673759bf6fd4290fda967ed75db6, type: 2}
   - {fileID: 11400000, guid: f52b7aca7ab36f843b640a15fb80d2ba, type: 2}

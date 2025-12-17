@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour
     private EnemyData enemyData;
     [SerializeField]
     private TMP_Text damageText;
+    [SerializeField]
+    private GameObject[] enemyModelPrefab;
+
+    private GameObject model;
 
     private int number;
     private Color originalColor;
@@ -28,6 +32,8 @@ public class Enemy : MonoBehaviour
         qteManager = manager;
         enemyData.name += " #" + number;
         this.number = number;
+        model = Instantiate(enemyModelPrefab[enemyData.id], position.position, position.rotation, transform);
+        //enemyRenderer = model.GetComponent<Renderer>();
         originalColor = enemyRenderer.material.color;
         Debug.Log("Enemy " + enemyData.name + " initialized with HP: " + enemyData.hp);
     }
@@ -37,6 +43,7 @@ public class Enemy : MonoBehaviour
         GameObject eff = Instantiate(effect, transform.position, transform.rotation);
         eff.transform.localScale *= 3f;
         eff.transform.LookAt(Camera.main.transform);
+        Destroy(eff, 3f);
         enemyData.hp -= damage;
         damageText.text += damage.ToString();
         Invoke("ResetDamageText", 1f);
@@ -49,6 +56,7 @@ public class Enemy : MonoBehaviour
         GameObject crEff = Instantiate(effect, transform.position, transform.rotation);
         crEff.transform.localScale *= 4f;
         crEff.transform.LookAt(Camera.main.transform);
+        Destroy(crEff, 3f);
     }
 
     private void ResetDamageText()
