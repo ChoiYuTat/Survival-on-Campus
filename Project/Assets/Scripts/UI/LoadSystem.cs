@@ -49,8 +49,8 @@ public class LoadSystem : MonoBehaviour
                 FileTime[i].text = "No Data";
             }
         }
-
         LoadData();
+
     }
 
     public void LoadGame(int ID) 
@@ -61,6 +61,7 @@ public class LoadSystem : MonoBehaviour
 
     private void LoadData()
     {
+
         if (GameObject.FindGameObjectWithTag("SaveID") && (player != null))
         {
             GameObject SaveObject = GameObject.FindGameObjectWithTag("SaveID");

@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+
+
 public class PlayerData
 {
+   
     public int HP;
     public int MaxHP;
     public int Attack;
@@ -42,6 +45,7 @@ public class PlayerData
 
     public void SetDefaultValue()
     {
+        
         HP = 20;
         MaxHP = 20;
         Attack = 5;
@@ -49,7 +53,7 @@ public class PlayerData
         Level = 1;
         CurrentExp = 0;
         RequiredExp = 20;
-        PlayerPosition = new Vector3(-3.62f,1,3.34f);
+        //PlayerPosition = new Vector3(-3.62f,1,3.34f);
         Skills.Add(new PlayerSkillData { name = "God's Slap", type = "group", damageMultiplier = 1.0f });
     }
 }
@@ -75,6 +79,7 @@ public class PlayerInvertory
 
 public class LoadPlayerData : MonoBehaviour
 {
+
     public PlayerData data = new PlayerData();
 
     private void Start()
