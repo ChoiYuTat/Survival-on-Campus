@@ -2732,13 +2732,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6964425629434817417}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.35005134, y: 0.11418438, z: -1.4210855e-17}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: -12.016, y: 5.403, z: 4.501}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7360429977594553719}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -180}
 --- !u!4 &1213157232401464491
 Transform:
   m_ObjectHideFlags: 0
@@ -2747,13 +2747,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3261711051717493449}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.03254616, y: 0.13038841, z: 0.04800017}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: -15.438, y: 5.528, z: 4.266}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7360429977594553719}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
 --- !u!23 &1423600865921990070
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2867,7 +2867,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -481473260747937079, guid: 9dfee63974a31c34bbb1547c7719f909, type: 3}
+  - {fileID: 2100000, guid: 316332ffe457d1547ab4c1ceaf9e310b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2912,7 +2912,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -481473260747937079, guid: 9dfee63974a31c34bbb1547c7719f909, type: 3}
+  - {fileID: 2100000, guid: 316332ffe457d1547ab4c1ceaf9e310b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3352,13 +3352,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2655126432783982632}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.35005134, y: 0.2524632, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 5.723, y: 2.128, z: -1.401}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7360429977594553719}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!23 &5992671159911476956
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3382,7 +3382,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -481473260747937079, guid: 9dfee63974a31c34bbb1547c7719f909, type: 3}
+  - {fileID: 2100000, guid: fa2f4498b7e7a48459d397c519ab20df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3712,8 +3712,6 @@ Transform:
   - {fileID: 6325070242533706835}
   - {fileID: 349255789410846115}
   - {fileID: 693026300041301577}
-  - {fileID: 5642824840387507243}
-  - {fileID: 8452881463159198130}
   - {fileID: 781425131017939675}
   - {fileID: 1131068926752947244}
   m_Father: {fileID: 0}
@@ -3831,12 +3829,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9205551507808544818}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.35005134, y: 0.5410821, z: 0}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 19.768349, y: -2.729832, z: -5.903531}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7360429977594553719}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8934183835286077385
 MeshFilter:
@@ -3919,3 +3917,5 @@ SceneRoots:
   - {fileID: 7360429977594553719}
   - {fileID: 806252621355878159}
   - {fileID: 807791970926741638}
+  - {fileID: 5642824840387507243}
+  - {fileID: 8452881463159198130}
