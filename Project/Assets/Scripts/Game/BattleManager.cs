@@ -195,7 +195,7 @@ public class BattleManager : MonoBehaviour
 
     void PlayCriticalSound() 
     {
-        audioSource.PlayOneShot(criticalSound, 0.3f);
+        audioSource.PlayOneShot(criticalSound, 0.2f);
     }
 
     public void EndTrun() 
