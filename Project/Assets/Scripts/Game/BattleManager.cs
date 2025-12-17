@@ -48,6 +48,7 @@ public class BattleManager : MonoBehaviour
 
     public Slider energySlider;
     public Text energyText, playerHP, earnedEXP_txt;
+    public AudioClip enemyHit, playerHit, enemyDead, playerDead, criticalSound, dodge;
 
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -56,6 +57,7 @@ public class BattleManager : MonoBehaviour
     private int earnedExp = 0;
     private int energyUseIndex;
     private Vector3 playerOriginalPosition;
+    private AudioSource audioSource;
 
     public BattleState state;
 
@@ -75,6 +77,7 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         energyText.text = energySlider.value.ToString();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void StartBattle(List<EnemyData> enemies)
@@ -99,6 +102,7 @@ public class BattleManager : MonoBehaviour
         player.transform.position = playerPosition.transform.position;
         player.GetComponent<PlayerControl>().enabled = false;
         player.GetComponent<OpenDoor>().enabled = false;
+        player.GetComponent<AudioSource>().mute = true;
         playerSprite.SetActive(false);
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
         battleCanvas.enabled = true;
@@ -170,19 +174,28 @@ public class BattleManager : MonoBehaviour
                     - enemy.GetComponent<Enemy>().GetEnemyData().defense, 1);
             if (qteSuccess)
             {
+                audioSource.PlayOneShot(enemyHit);
+                Invoke("PlayCriticalSound", 0.13f);
                 enemy.GetComponent<Enemy>().HeavyDamageEffect(criticalEffectPrefab);
                 cameraReceiver.InduceStress(0.10f);
             }
             else 
             {
+                audioSource.PlayOneShot(enemyHit);
                 cameraReceiver.InduceStress(0.04f);
             }
 
             enemy.GetComponent<Enemy>().TakeDamage(hitEffectPrefab, damage);
         }
+
         energyUseIndex = 0;
 
         EndTrun();
+    }
+
+    void PlayCriticalSound() 
+    {
+        audioSource.PlayOneShot(criticalSound, 0.3f);
     }
 
     public void EndTrun() 
@@ -263,17 +276,25 @@ public class BattleManager : MonoBehaviour
         UseSkill(Multiplier, success);
     }
 
+    public void PlayerDodge() 
+    {
+        audioSource.PlayOneShot(dodge);
+    }
+
     void ExecutePlayerAttack(Enemy target, float n, bool qteSuccess)
     {
         Debug.Log("��ҹ��� " + target.GetEnemyData().name);
         int damage = (int)Mathf.Max((playerData.data.Attack * n) - target.GetEnemyData().defense, 1);
         if (qteSuccess)
         {
+            audioSource.PlayOneShot(enemyHit);
+            Invoke("PlayCriticalSound", 0.13f);
             cameraReceiver.InduceStress(0.10f);
             target.HeavyDamageEffect(criticalEffectPrefab);
         }
         else
         {
+            audioSource.PlayOneShot(enemyHit);
             cameraReceiver.InduceStress(0.04f);
         }
         target.TakeDamage(hitEffectPrefab, damage);
@@ -290,6 +311,7 @@ public class BattleManager : MonoBehaviour
         {
             if (!enemies[i].GetComponent<Enemy>().IsAlive())
             {
+                audioSource.PlayOneShot(enemyDead, 1.2f);
                 earnedExp += enemies[i].GetComponent<Enemy>().GetEnemyData().exp;
                 enemies[i].GetComponent<Enemy>().DeadAnimation();
                 Destroy(enemies[i], 3f);
@@ -348,6 +370,7 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTakeDamage()
     {
+        audioSource.PlayOneShot(playerHit);
         cameraReceiver.InduceStress(0.2f);
         int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
                     - player.gameObject.GetComponent<LoadPlayerData>().data.Defense);
@@ -377,6 +400,7 @@ public class BattleManager : MonoBehaviour
         }
         else if (playerData.data.HP <= 0)
         {
+            audioSource.PlayOneShot(playerDead);
             state = BattleState.Defeat;
             state = BattleState.BattleOver;
             GameOver();
@@ -401,6 +425,7 @@ public class BattleManager : MonoBehaviour
         playerSprite.SetActive(true);
         player.GetComponent<PlayerControl>().enabled = true;
         player.GetComponent<OpenDoor>().enabled = true;
+        player.GetComponent<AudioSource>().mute = false;
         battleCanvas.enabled = false;
         MenuCanvas.enabled = true;
         for (int i = 0; i < enemies.Count; i++)

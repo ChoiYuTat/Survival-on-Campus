@@ -8,6 +8,8 @@ public class OpenDoor : MonoBehaviour
     public bool isOpen = false;
     public GameObject door;
     public DoorSystem doorSystem;
+    private AudioSource audioSource;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Door")
@@ -15,6 +17,7 @@ public class OpenDoor : MonoBehaviour
             classroom = other.transform.parent.gameObject;
             cameral = classroom.transform.GetChild(0).gameObject;
             door = other.gameObject;
+            audioSource = other.gameObject.GetComponent<AudioSource>();
             doorSystem = other.gameObject.GetComponent<DoorSystem>();
             isOpen = true;
         }
@@ -33,6 +36,7 @@ public class OpenDoor : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E) && isOpen == true && classroom != null)
         {
+            audioSource.PlayOneShot(audioSource.clip);
             doorSystem.openDoor(door);
         }
     }
