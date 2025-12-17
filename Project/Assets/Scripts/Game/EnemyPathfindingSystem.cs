@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +11,9 @@ public class EnemyPathfindingSystem : MonoBehaviour
     public float sightRange = 20f;
     public float viewAngle = 70f;
     public float loseSightTime = 2f;
+    public EnemyManager enemyManager;
+    public BattleManager battleManager;
+    public Animator animator;
 
     private int currentIndex = 0;
     private NavMeshAgent agent;
@@ -28,6 +32,7 @@ public class EnemyPathfindingSystem : MonoBehaviour
 
     void Update()
     {
+
         playerVector = player.position;
         playerVector.y = transform.position.y;
 
@@ -47,6 +52,8 @@ public class EnemyPathfindingSystem : MonoBehaviour
 
     void Patrol()
     {
+        animator.SetFloat("Walk", 1f);
+        animator.SetFloat("Run", 0f);
         if (agent.pathStatus == NavMeshPathStatus.PathPartial || agent.pathStatus == NavMeshPathStatus.PathInvalid)
         {
             agent.SetDestination(waypoints[currentIndex].position);
@@ -61,6 +68,7 @@ public class EnemyPathfindingSystem : MonoBehaviour
 
     void DetectPlayer()
     {
+
         Vector3 dirToPlayer = (playerVector - transform.position).normalized;
         //Debug.Log($"Direction to player: {dirToPlayer}");
 
@@ -85,11 +93,20 @@ public class EnemyPathfindingSystem : MonoBehaviour
         }
     }
 
-        void Chase()
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player") 
         {
-            agent.destination = player.position;
-
+            battleManager.StartBattle(enemyManager.getEnemyData());
+            Destroy(gameObject);    
         }
+    }
+
+    void Chase()
+    {
+        animator.SetFloat("Run", 1f);
+        agent.destination = player.position;
+    }
 
         void LosePlayerCheck()
         {

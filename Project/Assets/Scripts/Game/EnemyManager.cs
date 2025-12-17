@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
+
 
 [System.Serializable]
 public class SkillData
@@ -11,14 +13,16 @@ public class SkillData
 }
 
 [System.Serializable]
-public class EnemyData
+public struct EnemyData
 {
     public int id;
     public string name;
     public int hp;
+    public int maxHp;
     public int attack;
     public int defense;
     public int exp;
+    public int instanceID;
     public SkillData[] skills;
 }
 
@@ -31,39 +35,74 @@ public class EnemyDatabase
 public class EnemyManager : MonoBehaviour
 {
     private EnemyDatabase enemyDatabase;
+    private Dictionary<int, EnemyData> enemyDict;
+
+    public EnemyGroupSO enemyGroup;
+    public BattleManager battleManager;
 
     void Start()
     {
         LoadEnemyData();
-        PrintEnemyInfo(1); 
     }
 
     void LoadEnemyData()
     {
         TextAsset jsonFile = Resources.Load<TextAsset>("enemies");
         enemyDatabase = JsonUtility.FromJson<EnemyDatabase>(jsonFile.text);
-    }
 
-    public EnemyData GetEnemyById(int id)
-    {
+        enemyDict = new Dictionary<int, EnemyData>();
         foreach (var enemy in enemyDatabase.enemies)
         {
-            if (enemy.id == id)
-                return enemy;
+            enemyDict[enemy.id] = enemy;
         }
-        return null;
+
+        //for (int i = 0; i < enemyGroup.enemies.Count; i++)
+        //{
+        //    if (enemyDict.ContainsKey(enemyGroup.enemies[i].id)) 
+        //    {
+        //        enemyGroup.enemies[i] = enemyDict[enemyGroup.enemies[i].id];
+        //    }
+        //}
     }
 
-    void PrintEnemyInfo(int id)
+    public List<EnemyData> getEnemyData()
     {
-        EnemyData enemy = GetEnemyById(id);
-        if (enemy != null)
+        for (int i = 0; i < enemyGroup.enemies.Count; i++)
         {
-            Debug.Log($"敌人: {enemy.name}, HP: {enemy.hp}, 攻击: {enemy.attack}, 经验: {enemy.exp}");
-            foreach (var skill in enemy.skills)
+            if (enemyDict.ContainsKey(enemyGroup.enemies[i].id))
             {
-                Debug.Log($"技能: {skill.name}, 持续时间: {skill.duration}");
+                enemyGroup.enemies[i] = enemyDict[enemyGroup.enemies[i].id];
             }
         }
+        bool allNull = true;
+        foreach (var enemy in enemyGroup.enemies)
+        {
+            if (IsValid(enemy))
+            {
+                allNull = false;
+            }
+        }
+
+        if (!allNull)
+            return new List<EnemyData>(enemyGroup.enemies);
+        else return null;
+    }
+    public EnemyData? GetEnemyById(int id)
+    {
+        if (enemyDict.TryGetValue(id, out EnemyData enemy))
+        {
+            return enemy; 
+        }
+        return null; 
+    }
+
+    public bool IsValid(EnemyData enemy)
+    {
+        return enemy.id > 0 && !string.IsNullOrEmpty(name);
+    }
+
+    public void EnterBattle() 
+    {
+        battleManager.StartBattle(getEnemyData());
     }
 }

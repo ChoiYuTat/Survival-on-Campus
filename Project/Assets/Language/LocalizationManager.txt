@@ -9,3 +9,42 @@ Language
 Back
 Option_Title
 Load_Title
+Status
+Item
+Use
+Save
+Result
+>Plot
+P1_01
+P1_02
+P1_03
+P1_04
+P2_01
+P2_02
+>Item
+Bandage
+Hamburger
+Medical kit
+Lock picking tools
+Principal's Key
+Ban_txt
+Ham_txt
+Med_txt
+Tools_txt
+P_Key_txt
+>Door
+C_Lock_1
+C_Lock_2
+P_Lock
+C_Unlock
+P_Unlock
+>description
+I0
+I1
+I2
+I3
+I4
+>Enemy
+E1
+E2
+E3

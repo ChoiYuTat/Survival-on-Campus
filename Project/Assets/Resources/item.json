@@ -6,7 +6,7 @@
       "itemID": 0,
       "quantity": 1,
       "description": "The simplest medical tools, suitable for treating minor wounds. +10HP",
-      "effect": "AddHP10",
+      "effect": "Heal10",
       "isUsable": true
       
     }
@@ -15,8 +15,8 @@
       "itemName": "Hamburger",
       "itemID": 1,
       "quantity": 1,
-      "description": "Who doesn't like hamburgers? +12HP",
-      "effect": "AddHP12",
+      "description": "Who doesn't like hamburgers? +14HP",
+      "effect": "Heal14",
       "isUsable": true
     }
     ,
@@ -24,8 +24,8 @@
       "itemName": "Medical kit",
       "itemID": 2,
       "quantity": 1,
-      "description": "Who doesn't like hamburgers? +35HP",
-      "effect": "AddHP35",
+      "description": "Powerful Healing, needs no further explanation. +35HP",
+      "effect": "Heal35",
       "isUsable": true
     }
     ,
@@ -34,7 +34,7 @@
       "itemID": 3,
       "quantity": 1,
       "description": "Used to unlock the classroom lock",
-      "effect": "UnlockClassroom",
+      "effect": "OpenClassroom",
       "isUsable": false
     }
     ,
@@ -43,7 +43,7 @@
       "itemID": 4,
       "quantity": 1,
       "description": "Used to open the principal's office door",
-      "effect": "UnlockPrincipalroom",
+      "effect": "OpenPrincipalroom",
       "isUsable": false
     }
   ]

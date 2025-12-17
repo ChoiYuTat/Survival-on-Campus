@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Door
+  - SaveID
+  - LocalizationSource
+  - OptionSetter
+  - Description
+  - Enemy
+  - CombatDescription
   layers:
   - Default
   - TransparentFX
@@ -13,7 +19,7 @@ TagManager:
   - Water
   - UI
   - canvas
-  - 
+  - Ground
   - 
   - 
   - 

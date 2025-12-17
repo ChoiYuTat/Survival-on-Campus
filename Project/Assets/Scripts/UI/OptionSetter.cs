@@ -97,4 +97,14 @@ public class OptionSetter : MonoBehaviour
             SetDefaltValue();
         }
     }
+
+    public int getLanguageIndex()
+    {
+        return languageIndex;
+    }
+
+    public void setLanguageIndex(int index) 
+    {
+        languageIndex = index;
+    }
 }
