@@ -38,6 +38,7 @@ public class EnemyManager : MonoBehaviour
     private Dictionary<int, EnemyData> enemyDict;
 
     public EnemyGroupSO enemyGroup;
+    public BattleManager battleManager;
 
     void Start()
     {
@@ -98,5 +99,10 @@ public class EnemyManager : MonoBehaviour
     public bool IsValid(EnemyData enemy)
     {
         return enemy.id > 0 && !string.IsNullOrEmpty(name);
+    }
+
+    public void EnterBattle() 
+    {
+        battleManager.StartBattle(getEnemyData());
     }
 }

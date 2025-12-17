@@ -14,7 +14,7 @@ public class DialogueController : MonoBehaviour
     public Localization_KEY key;
     public Localization_SOURCE source;
     public OptionSetter setter;
-    public luna player;
+    public PlayerControl player;
     public EnemyPathfindingSystem[] enemies;
 
     private bool typing = false;
