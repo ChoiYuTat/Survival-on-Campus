@@ -23,6 +23,7 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+
         HandleMovement();
         HandleRotation();
     }
