@@ -21,6 +21,7 @@ public class PlayerData
     public List<PlayerInvertory> Inventory = new List<PlayerInvertory>();
     public Vector3 PlayerPosition;
     public List<int> interactiveItemsID = new List<int>();
+    public List<string> plotID = new List<string>();
     public string currentTime;
 
     public void AddExperience(int exp)

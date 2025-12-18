@@ -34,13 +34,14 @@ public class DialogueController : MonoBehaviour
         key.keyID = message;
         source.RefreshTextElementsAndKeys();
         source.LoadLanguage(setter.getLanguageIndex());
+        PauseGame(); // Pause the game
 
         string[] textIndex = textBuffer.text.Split('/'); //Plot Design(Name:/Dialogue)
         NameText.text = textIndex[0];
         StartCoroutine(TypeSentence(textIndex[1]));
 
 
-        PauseGame(); // Pause the game
+
         director.playableGraph.GetRootPlayable(0).SetSpeed(1); // Ensure timeline is playing
         waitingForInput = true;
         director.Pause(); 
