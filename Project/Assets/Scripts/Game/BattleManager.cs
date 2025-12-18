@@ -80,9 +80,18 @@ public class BattleManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void StartBattle(List<EnemyData> enemies)
+    public void Teleport() 
     {
         playerOriginalPosition = player.transform.position;
+        player.GetComponent<PlayerControl>().enabled = false;
+        player.GetComponent<OpenDoor>().enabled = false;
+        player.GetComponent<AudioSource>().mute = true;
+        playerSprite.SetActive(false);
+    }
+
+    public void StartBattle(List<EnemyData> enemies)
+    {
+        player.transform.position = playerPosition.transform.position;
         battleScene.SetActive(true);
         currentEnemies = enemies;
         energySlider.value = 2;
@@ -99,11 +108,6 @@ public class BattleManager : MonoBehaviour
 
     void BeginBattle()
     {
-        player.transform.position = playerPosition.transform.position;
-        player.GetComponent<PlayerControl>().enabled = false;
-        player.GetComponent<OpenDoor>().enabled = false;
-        player.GetComponent<AudioSource>().mute = true;
-        playerSprite.SetActive(false);
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
         battleCanvas.enabled = true;
         MenuCanvas.enabled = false;
