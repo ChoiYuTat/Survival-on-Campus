@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using System.Collections;
+using DG.Tweening;
 
 public enum BattleState
 {
@@ -48,7 +49,8 @@ public class BattleManager : MonoBehaviour
 
     public Slider energySlider;
     public Text energyText, playerHP, earnedEXP_txt;
-    public AudioClip enemyHit, playerHit, enemyDead, playerDead, criticalSound, dodge;
+    public AudioClip enemyHit, playerHit, enemyDead, playerDead, criticalSound, dodge, heal;
+    public Image hitImage, healImage;
 
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -219,10 +221,12 @@ public class BattleManager : MonoBehaviour
 
     public void UseItem() 
     {
+        StartCoroutine(HealAnimation());
+        audioSource.PlayOneShot(heal);
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
         itemCanvas.enabled = false;
         state = BattleState.EnemyTurn;
-        EnemyTurn();
+        Invoke("EnemyTurn", 1.5f);
     }
 
     public void OnTargetSelected(int target)
@@ -376,6 +380,7 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTakeDamage()
     {
+        StartCoroutine(HitAnimation());
         audioSource.PlayOneShot(playerHit);
         cameraReceiver.InduceStress(0.2f);
         int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
@@ -385,7 +390,25 @@ public class BattleManager : MonoBehaviour
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
     }
 
+    IEnumerator HitAnimation() 
+    {
+        hitImage.transform.gameObject.SetActive(true);
+        hitImage.DOFade(0.2f, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        hitImage.DOFade(0, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        hitImage.transform.gameObject.SetActive(false);
+    }
 
+    IEnumerator HealAnimation()
+    {
+        healImage.transform.gameObject.SetActive(true);
+        healImage.DOFade(0.2f, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        healImage.DOFade(0, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        healImage.transform.gameObject.SetActive(false);
+    }
 
     void CheckBattleEnd()
     {
