@@ -1566,7 +1566,7 @@ MonoBehaviour:
     type: 0
     targetKey: 101
     rapidPressCount: 1
-    timeLimit: 1
+    timeLimit: 0.8
     onSuccess:
       m_PersistentCalls:
         m_Calls:
@@ -13942,7 +13942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 42229.223}
+  m_AnchoredPosition: {x: 0, y: 66025.19}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1170119572
@@ -25809,7 +25809,7 @@ PlayableDirector:
   - key: {fileID: 0}
     value: {fileID: 1722884757}
   - key: {fileID: -8278619581151592575, guid: eddbb1d0462a1884c902760765879276, type: 2}
-    value: {fileID: 1722884757}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &2138707540
