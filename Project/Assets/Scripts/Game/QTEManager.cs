@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.Audio;
 
 public enum QTEType
 {
@@ -22,6 +25,7 @@ public class QTEEvent
     public UnityEvent onSuccess;
     public UnityEvent onFailure;
 
+
     // ��������������
     public List<KeyCode> keySequence = new List<KeyCode>();
 }
@@ -39,11 +43,14 @@ public class QTEManager : MonoBehaviour
     public UnityEngine.UI.Slider timeSlider;
     public TMPro.TextMeshProUGUI rapidPressCounter;
     public GameObject criticalArea;
+    public Image tipsImage, atterntionTipsImage;
+    public AudioClip tipSound, attentionSound;
 
     private QTEEvent currentQTE;
     private Coroutine currentQTECoroutine;
     private int currentRapidPressCount = 0;
     private bool isQTEActive = false;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -52,6 +59,7 @@ public class QTEManager : MonoBehaviour
             Instance = this;
         }
 
+        audioSource = GetComponent<AudioSource>();
         HideQTEUI();
     }
 
@@ -334,5 +342,42 @@ public class QTEManager : MonoBehaviour
 
             EndQTE();
         }
+    }
+
+    public void ShowQTETips() 
+    {
+        StartCoroutine(QTETipsAniamtion());
+    }
+
+    public void ShowAttentionTips() 
+    {
+        StartCoroutine(AttentionAniamation());
+    }
+
+    IEnumerator AttentionAniamation() 
+    {
+        atterntionTipsImage.rectTransform.localPosition = new Vector3(atterntionTipsImage.rectTransform.localPosition.x,
+                                                             250, 
+                                                             atterntionTipsImage.rectTransform.localPosition.z);
+        audioSource.PlayOneShot(attentionSound);
+        atterntionTipsImage.gameObject.SetActive(true);
+        atterntionTipsImage.DOFade(1, 0.25f);
+        atterntionTipsImage.rectTransform.DOLocalMoveY(220, 0.5f);
+        yield return new WaitForSeconds(0.25f);
+        atterntionTipsImage.DOFade(0, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        atterntionTipsImage.gameObject.SetActive(false);
+    }
+
+    IEnumerator QTETipsAniamtion() 
+    {
+        audioSource.PlayOneShot(tipSound);
+        tipsImage.gameObject.SetActive(true);
+        tipsImage.DOFade(1, 0.25f);
+        tipsImage.transform.DORotate(new Vector3(0, 0, Random.Range(100, 360)), 0.5f);
+        yield return new WaitForSeconds(0.25f);
+        tipsImage.DOFade(0, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        tipsImage.gameObject.SetActive(false);
     }
 }

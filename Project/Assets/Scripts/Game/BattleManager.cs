@@ -147,7 +147,8 @@ public class BattleManager : MonoBehaviour
         {
             //UseSkill();
             battleButton.SetActive(false);
-            StartCoroutine(WaitAndTriggerSkillQTE(0.5f));
+            QTEmanager.ShowQTETips();
+            StartCoroutine(WaitAndTriggerSkillQTE(1f));
         }
     }
 
@@ -226,10 +227,10 @@ public class BattleManager : MonoBehaviour
 
     public void OnTargetSelected(int target)
     {
-
+        QTEmanager.ShowQTETips();
         targetPanel.SetActive(false);
         battleButton.SetActive(false);
-        StartCoroutine(WaitAndTriggerFightQTE(0.5f));
+        StartCoroutine(WaitAndTriggerFightQTE(1f));
         targetIndex = target;
     }
 
@@ -332,6 +333,7 @@ public class BattleManager : MonoBehaviour
             EnemyData enemy = currentEnemies[currentEnemyIndex];
             if (enemy.hp > 0 && enemy.skills.Length > 0)
             {
+                QTEmanager.ShowAttentionTips();
                 skillIndex = enemySkillIndex[enemy];
                 Debug.Log(skillIndex);
                 SkillData skill = enemy.skills[skillIndex];
