@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BattleManager
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: aa88018b5156e1c45969358b5bb9c805, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: battleScene
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enemyPrefab
+    value: 
+    objectReference: {fileID: 5433540144654025127, guid: 81bd93f7426d40848b77356f7577dbea, type: 3}
+  - target: {fileID: 0}
+    propertyPath: enemyTargetManager
+    value: 
+    objectReference: {fileID: 2163847233617846595, guid: 37c45c24ca26440468929c641f816f6e, type: 3}
+  - target: {fileID: 0}
+    propertyPath: targetPanel
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: battleButton
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: player
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: playerSprite
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: playerPosition
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: LevelUPTXT
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enemyPosition.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: 'enemyPosition.Array.data[0]'
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: 'enemyPosition.Array.data[1]'
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: 'enemyPosition.Array.data[2]'
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: hitEffectPrefab
+    value: 
+    objectReference: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
+  - target: {fileID: 0}
+    propertyPath: criticalEffectPrefab
+    value: 
+    objectReference: {fileID: 2054803858064431036, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
+  - target: {fileID: 0}
+    propertyPath: cameraReceiver
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: menuManager
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: QTEmanager
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: targetContent
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: playerData
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: battleCanvas
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: MenuCanvas
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: itemCanvas
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: resultCanvas
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: gameOverCanvas
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: energySlider
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: energyText
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: playerHP
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: earnedEXP_txt
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enemyHit
+    value: 
+    objectReference: {fileID: 8300000, guid: b7e5dd0915499404fab9f0a1bab46c65, type: 3}
+  - target: {fileID: 0}
+    propertyPath: playerHit
+    value: 
+    objectReference: {fileID: 8300000, guid: e866d28852c8d344f82d227f3b3f40d3, type: 3}
+  - target: {fileID: 0}
+    propertyPath: enemyDead
+    value: 
+    objectReference: {fileID: 8300000, guid: fee6cd795e8c096428fc6f781a80372a, type: 3}
+  - target: {fileID: 0}
+    propertyPath: playerDead
+    value: 
+    objectReference: {fileID: 8300000, guid: 61e44d9a32cd6024eb2ec9e833b7e2e6, type: 3}
+  - target: {fileID: 0}
+    propertyPath: criticalSound
+    value: 
+    objectReference: {fileID: 8300000, guid: bf19e83c1c2cad044aa3da26ca17ee9e, type: 3}
+  - target: {fileID: 0}
+    propertyPath: dodge
+    value: 
+    objectReference: {fileID: 8300000, guid: c97327ce6c1833549a9492c3bb59b11e, type: 3}
+  - target: {fileID: 0}
+    propertyPath: heal
+    value: 
+    objectReference: {fileID: 8300000, guid: 67d22b62049c5054e95270152e5d2b51, type: 3}
+  - target: {fileID: 0}
+    propertyPath: hitImage
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: healImage
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: state
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []
+  m_CoupledType:
+    m_NativeTypeID: 0
+    m_ManagedTypePPtr: {fileID: 0}
+    m_ManagedTypeFallback: 
+  m_CoupledProperties: []

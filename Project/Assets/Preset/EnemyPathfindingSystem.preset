@@ -6,10 +6,10 @@ Preset:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DoorSystem
+  m_Name: EnemyPathfindingSystem
   m_TargetType:
     m_NativeTypeID: 114
-    m_ManagedTypePPtr: {fileID: 11500000, guid: 626d3e14c244d3442900016dd78352a7, type: 3}
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 05cfc9edf23623a4ab8982bf145fffda, type: 3}
     m_ManagedTypeFallback: 
   m_Properties:
   - target: {fileID: 0}
@@ -25,20 +25,48 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: targetDoor
+    propertyPath: waypoints.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: 'waypoints.Array.data[0]'
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: existPosition
+    propertyPath: 'waypoints.Array.data[1]'
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: targetCamera
+    propertyPath: player
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: enterState
-    value: 0
+    propertyPath: sightRange
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: viewAngle
+    value: 100
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: loseSightTime
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: enemyManager
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: battleManager
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: animator
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: battleUIController
+    value: 
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
   m_CoupledType:

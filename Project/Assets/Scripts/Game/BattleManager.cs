@@ -30,7 +30,7 @@ public class BattleManager : MonoBehaviour
     public GameObject player;
     public GameObject playerSprite;
     public GameObject playerPosition;
-    public GameObject LevelUP;
+    public GameObject LevelUPTXT;
     public GameObject[] enemyPosition;
 
     [SerializeField]
@@ -43,7 +43,7 @@ public class BattleManager : MonoBehaviour
     public MenuManager menuManager;
     public QTEManager QTEmanager;
 
-    public Transform content;
+    public Transform targetContent;
     public LoadPlayerData playerData;
     public Canvas battleCanvas, MenuCanvas, itemCanvas, resultCanvas, gameOverCanvas;
 
@@ -141,7 +141,7 @@ public class BattleManager : MonoBehaviour
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                targets.Add(Instantiate(enemyTargetManager, content));
+                targets.Add(Instantiate(enemyTargetManager, targetContent));
                 targets[i].GetComponent<EnemyTargetManager>().SetTarget(enemies[i], i);
             }
         }
@@ -442,7 +442,7 @@ public class BattleManager : MonoBehaviour
         earnedEXP_txt.text = "+" + earnedExp.ToString();
         if (earnedExp >= playerData.data.RequiredExp)
         {
-            LevelUP.SetActive(true);
+            LevelUPTXT.SetActive(true);
         }
         playerData.data.AddExperience(earnedExp);
         earnedExp = 0;
@@ -465,7 +465,7 @@ public class BattleManager : MonoBehaviour
         currentEnemies.Clear();
         enemySkillIndex.Clear();
         menuManager.ResetEnemy();
-        LevelUP.SetActive(false);
+        LevelUPTXT.SetActive(false);
         battleScene.SetActive(false);
     }
 
