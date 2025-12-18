@@ -14,6 +14,7 @@ public class EnemyPathfindingSystem : MonoBehaviour
     public EnemyManager enemyManager;
     public BattleManager battleManager;
     public Animator animator;
+    public BattleUIController battleUIController;
 
     private int currentIndex = 0;
     private NavMeshAgent agent;
@@ -95,11 +96,18 @@ public class EnemyPathfindingSystem : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player") 
+        if (collision.gameObject.tag == "Player")
         {
-            battleManager.StartBattle(enemyManager.getEnemyData());
-            Destroy(gameObject);    
+            battleManager.Teleport();
+            battleUIController.PlayTransitionAnimation();
+            Invoke("EnterBattle", 1.1f);
         }
+    }
+
+    void EnterBattle() 
+    {
+        battleManager.StartBattle(enemyManager.getEnemyData());
+        Destroy(gameObject);
     }
 
     void Chase()

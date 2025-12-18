@@ -39,6 +39,7 @@ public class DialogueController : MonoBehaviour
         NameText.text = textIndex[0];
         StartCoroutine(TypeSentence(textIndex[1]));
 
+
         PauseGame(); // Pause the game
         director.playableGraph.GetRootPlayable(0).SetSpeed(1); // Ensure timeline is playing
         waitingForInput = true;
@@ -47,11 +48,13 @@ public class DialogueController : MonoBehaviour
 
     public void PauseGame() 
     {
+        player.GetComponent<AudioSource>().Pause();
         Time.timeScale = 0f;
     }
 
     public void ResumeGame()
     {
+        player.GetComponent<AudioSource>().Play();
         dialogueBox.enabled = false;
         Time.timeScale = 1f;
     }

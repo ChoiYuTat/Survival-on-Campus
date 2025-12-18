@@ -105,6 +105,7 @@ public class Enemy : MonoBehaviour
             {
 
             }
+            yield return new WaitForSeconds(0.5f);
             yield return StartCoroutine(JumpAttack(skill));
         }
         else if (config.attackCount >= 2)
@@ -113,7 +114,7 @@ public class Enemy : MonoBehaviour
             {
 
             }
-
+            yield return new WaitForSeconds(0.5f);
             yield return StartCoroutine(KeepAttack(skill));
         }
         else 
@@ -122,7 +123,7 @@ public class Enemy : MonoBehaviour
             {
 
             }
-
+            yield return new WaitForSeconds(0.5f);
             yield return StartCoroutine(Attack(skill));
         }
 

@@ -39,6 +39,7 @@ public class EnemyManager : MonoBehaviour
 
     public EnemyGroupSO enemyGroup;
     public BattleManager battleManager;
+    public BattleUIController battleUIController;
 
     void Start()
     {
@@ -102,6 +103,13 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void EnterBattle() 
+    {
+        battleManager.Teleport();
+        battleUIController.PlayTransitionAnimation();
+        Invoke("PlayTransitionAndEnter", 1.1f);
+    }
+
+    void PlayTransitionAndEnter() 
     {
         battleManager.StartBattle(getEnemyData());
     }

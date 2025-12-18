@@ -5,6 +5,7 @@ public class TimelineTrigger : MonoBehaviour
 {
     public PlayableDirector director; 
     public DialogueController dialogueController;
+    public GameObject otherTrigger;
 
     private bool triggered = false;
 
@@ -17,6 +18,14 @@ public class TimelineTrigger : MonoBehaviour
             Debug.Log("Player entered trigger zone, playing timeline.");
             triggered = true;
             director.Play(); 
+        }
+    }
+
+    public void EnableOtherTrigger() 
+    {
+        if (otherTrigger != null) 
+        {
+            otherTrigger.GetComponent<Collider>().enabled = true;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using System.Collections;
+using DG.Tweening;
 
 public enum BattleState
 {
@@ -48,7 +49,8 @@ public class BattleManager : MonoBehaviour
 
     public Slider energySlider;
     public Text energyText, playerHP, earnedEXP_txt;
-    public AudioClip enemyHit, playerHit, enemyDead, playerDead, criticalSound, dodge;
+    public AudioClip enemyHit, playerHit, enemyDead, playerDead, criticalSound, dodge, heal;
+    public Image hitImage, healImage;
 
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -80,9 +82,18 @@ public class BattleManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void StartBattle(List<EnemyData> enemies)
+    public void Teleport() 
     {
         playerOriginalPosition = player.transform.position;
+        player.GetComponent<PlayerControl>().enabled = false;
+        player.GetComponent<OpenDoor>().enabled = false;
+        player.GetComponent<AudioSource>().mute = true;
+        playerSprite.SetActive(false);
+    }
+
+    public void StartBattle(List<EnemyData> enemies)
+    {
+        player.transform.position = playerPosition.transform.position;
         battleScene.SetActive(true);
         currentEnemies = enemies;
         energySlider.value = 2;
@@ -99,11 +110,6 @@ public class BattleManager : MonoBehaviour
 
     void BeginBattle()
     {
-        player.transform.position = playerPosition.transform.position;
-        player.GetComponent<PlayerControl>().enabled = false;
-        player.GetComponent<OpenDoor>().enabled = false;
-        player.GetComponent<AudioSource>().mute = true;
-        playerSprite.SetActive(false);
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
         battleCanvas.enabled = true;
         MenuCanvas.enabled = false;
@@ -143,7 +149,8 @@ public class BattleManager : MonoBehaviour
         {
             //UseSkill();
             battleButton.SetActive(false);
-            StartCoroutine(WaitAndTriggerSkillQTE(0.5f));
+            QTEmanager.ShowQTETips();
+            StartCoroutine(WaitAndTriggerSkillQTE(1f));
         }
     }
 
@@ -214,18 +221,20 @@ public class BattleManager : MonoBehaviour
 
     public void UseItem() 
     {
+        StartCoroutine(HealAnimation());
+        audioSource.PlayOneShot(heal);
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
         itemCanvas.enabled = false;
         state = BattleState.EnemyTurn;
-        EnemyTurn();
+        Invoke("EnemyTurn", 1.5f);
     }
 
     public void OnTargetSelected(int target)
     {
-
+        QTEmanager.ShowQTETips();
         targetPanel.SetActive(false);
         battleButton.SetActive(false);
-        StartCoroutine(WaitAndTriggerFightQTE(0.5f));
+        StartCoroutine(WaitAndTriggerFightQTE(1f));
         targetIndex = target;
     }
 
@@ -328,6 +337,7 @@ public class BattleManager : MonoBehaviour
             EnemyData enemy = currentEnemies[currentEnemyIndex];
             if (enemy.hp > 0 && enemy.skills.Length > 0)
             {
+                QTEmanager.ShowAttentionTips();
                 skillIndex = enemySkillIndex[enemy];
                 Debug.Log(skillIndex);
                 SkillData skill = enemy.skills[skillIndex];
@@ -370,6 +380,7 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerTakeDamage()
     {
+        StartCoroutine(HitAnimation());
         audioSource.PlayOneShot(playerHit);
         cameraReceiver.InduceStress(0.2f);
         int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
@@ -379,7 +390,25 @@ public class BattleManager : MonoBehaviour
         playerHP.text = playerData.data.HP.ToString() + "/" + playerData.data.MaxHP.ToString();
     }
 
+    IEnumerator HitAnimation() 
+    {
+        hitImage.transform.gameObject.SetActive(true);
+        hitImage.DOFade(0.2f, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        hitImage.DOFade(0, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        hitImage.transform.gameObject.SetActive(false);
+    }
 
+    IEnumerator HealAnimation()
+    {
+        healImage.transform.gameObject.SetActive(true);
+        healImage.DOFade(0.2f, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        healImage.DOFade(0, 0.25f);
+        yield return new WaitForSeconds(0.25f);
+        healImage.transform.gameObject.SetActive(false);
+    }
 
     void CheckBattleEnd()
     {

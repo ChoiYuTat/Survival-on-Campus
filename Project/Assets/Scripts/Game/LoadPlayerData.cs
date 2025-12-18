@@ -53,7 +53,7 @@ public class PlayerData
         Level = 1;
         CurrentExp = 0;
         RequiredExp = 20;
-        //PlayerPosition = new Vector3(-3.62f,1,3.34f);
+        PlayerPosition = new Vector3(-3.62f,1,3.34f);
         Skills.Add(new PlayerSkillData { name = "God's Slap", type = "group", damageMultiplier = 1.0f });
     }
 }
