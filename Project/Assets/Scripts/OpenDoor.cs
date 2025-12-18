@@ -36,7 +36,7 @@ public class OpenDoor : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E) && isOpen == true && classroom != null)
         {
-            //audioSource.PlayOneShot(audioSource.clip);
+            audioSource.PlayOneShot(audioSource.clip);
             doorSystem.openDoor(door);
         }
     }
