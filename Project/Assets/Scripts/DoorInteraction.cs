@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 public class DoorInteraction : MonoBehaviour
 {
-    public GameObject interactionButton;
+    public GameObject interactionimage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (interactionButton != null)
+        if (interactionimage != null)
         {
-            interactionButton.SetActive(false);
+            interactionimage.SetActive(false);
         }
 
     }
@@ -18,7 +18,7 @@ public class DoorInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Player entered the door trigger area.");
-            ShowButton();
+            ShowImage();
         }
     }
 
@@ -26,23 +26,23 @@ public class DoorInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HideButton();
+            HideImage();
         }
     }
 
-    void  ShowButton()
+    void  ShowImage()
     {
-        if (interactionButton != null)
+        if (interactionimage != null)
         {
-            interactionButton.SetActive(true);
+            interactionimage.SetActive(true);
         }
     }
 
-    void HideButton()
+    void HideImage()
     {
-        if (interactionButton != null)
+        if (interactionimage != null)
         {
-            interactionButton.SetActive(false);
+            interactionimage.SetActive(false);
         }
     }
     
