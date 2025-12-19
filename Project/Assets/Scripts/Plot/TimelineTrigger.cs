@@ -47,7 +47,14 @@ public class TimelineTrigger : MonoBehaviour
     {
         if (otherTrigger != null) 
         {
-            otherTrigger.GetComponent<Collider>().enabled = true;
+            otherTrigger.SetActive(true);
+            if (otherTrigger.GetComponent<TimelineTrigger>() != null)
+                otherTrigger.GetComponent<TimelineTrigger>().ResetTrigger();
         }
     }
+
+    public void ResetTrigger()
+    {
+        triggered = false;
+    }   
 }
