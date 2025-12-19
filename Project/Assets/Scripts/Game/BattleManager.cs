@@ -52,7 +52,7 @@ public class BattleManager : MonoBehaviour
     public Text energyText, playerHP, earnedEXP_txt;
     public AudioClip enemyHit, playerHit, enemyDead, playerDead, criticalSound, dodge, heal;
     public Image hitImage, healImage;
-    public Button fight, skill, closeResult;
+    public Button fight, skill, closeResult, skip;
 
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -89,6 +89,7 @@ public class BattleManager : MonoBehaviour
         });
         skill.onClick.AddListener(() => PlayerAction(1));
         closeResult.onClick.AddListener(() => CloseResult());
+        skip.onClick.AddListener(() => SkipBattle());
     }
 
     public void Teleport() 
