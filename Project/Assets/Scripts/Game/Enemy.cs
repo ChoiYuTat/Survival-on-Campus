@@ -21,8 +21,11 @@ public class Enemy : MonoBehaviour
 
     private QTEManager qteManager;
 
-    public void SetEnemyData(EnemyData data,int number,Transform position, QTEManager manager)
+    private BattleManager battleManager;
+
+    public void SetEnemyData(EnemyData data,int number,Transform position, QTEManager manager, BattleManager ins)
     {
+        battleManager = ins;
         enemyData = data;
         enemyData.instanceID = GetInstanceID() + number;
         qteManager = manager;
@@ -128,7 +131,7 @@ public class Enemy : MonoBehaviour
         }
 
         yield return 1f;
-        BattleManager.Instance.EnemyActionComplete();
+        battleManager.EnemyActionComplete();
     }
     private IEnumerator Attack(SkillData skill)
     {

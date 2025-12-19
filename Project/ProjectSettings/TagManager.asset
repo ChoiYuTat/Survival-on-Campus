@@ -11,6 +11,7 @@ TagManager:
   - Description
   - Enemy
   - CombatDescription
+  - BattleManager
   layers:
   - Default
   - TransparentFX

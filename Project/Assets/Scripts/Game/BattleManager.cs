@@ -20,7 +20,7 @@ public enum BattleState
 
 public class BattleManager : MonoBehaviour
 {
-    public static BattleManager Instance;
+    private BattleManager Instance;
 
     public GameObject battleScene;
     public GameObject enemyPrefab;
@@ -131,7 +131,7 @@ public class BattleManager : MonoBehaviour
             GameObject gameObject = Instantiate(enemyPrefab, enemyPosition[i].transform.position,
                 enemyPosition[i].transform.rotation, enemyPosition[i].transform);
             enemies.Add(gameObject);
-            enemies[i].GetComponent<Enemy>().SetEnemyData(currentEnemies[i], i, enemyPosition[i].transform, QTEmanager);
+            enemies[i].GetComponent<Enemy>().SetEnemyData(currentEnemies[i], i, enemyPosition[i].transform, QTEmanager, Instance);
             //enemies[i].transform.Translate(new Vector3(0, 1f));
         }
 
@@ -156,7 +156,7 @@ public class BattleManager : MonoBehaviour
             for (int i = 0; i < enemies.Count; i++)
             {
                 targets.Add(Instantiate(enemyTargetManager, targetContent));
-                targets[i].GetComponent<EnemyTargetManager>().SetTarget(enemies[i], i);
+                targets[i].GetComponent<EnemyTargetManager>().SetTarget(enemies[i], i, Instance);
             }
         }
         else if (actionType == 1)

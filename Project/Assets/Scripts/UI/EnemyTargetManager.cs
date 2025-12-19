@@ -15,6 +15,7 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     private Localization_SOURCE source;
     private OptionSetter setter;
+    private BattleManager battleManager;
 
     public Localization_KEY key;
     public void HighlightTarget(GameObject enemy)
@@ -30,10 +31,10 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
         var renderer = enemy.GetComponent<Renderer>();
         renderer.GetComponent<Outline>().enabled = false;
     }
-    public void SetTarget(GameObject enemy, int index)
+    public void SetTarget(GameObject enemy, int index, BattleManager ins)
     {
 
-
+        battleManager = ins;
         target = enemy;
         HPSlider.maxValue = enemy.GetComponent<Enemy>().GetEnemyData().maxHp;
         HPSlider.value = enemy.GetComponent<Enemy>().GetEnemyData().hp;
@@ -61,7 +62,7 @@ public class EnemyTargetManager : MonoBehaviour, IPointerEnterHandler, IPointerE
         var renderer = target.GetComponent<Renderer>();
         renderer.GetComponent<Outline>().enabled = false;
         Debug.Log("Selected target index: " + targetIndex);
-        BattleManager.Instance.OnTargetSelected(targetIndex);
+        battleManager.OnTargetSelected(targetIndex);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
