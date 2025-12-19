@@ -32,6 +32,7 @@ public class BattleManager : MonoBehaviour
     public GameObject playerPosition;
     public GameObject LevelUPTXT;
     public GameObject[] enemyPosition;
+    public GameObject battleCameraPosition;
 
     [SerializeField]
     private GameObject hitEffectPrefab, criticalEffectPrefab;
@@ -51,7 +52,7 @@ public class BattleManager : MonoBehaviour
     public Text energyText, playerHP, earnedEXP_txt;
     public AudioClip enemyHit, playerHit, enemyDead, playerDead, criticalSound, dodge, heal;
     public Image hitImage, healImage;
-    public Button fight, skill;
+    public Button fight, skill, closeResult;
 
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -87,6 +88,7 @@ public class BattleManager : MonoBehaviour
             targetPanel.SetActive(true);
         });
         skill.onClick.AddListener(() => PlayerAction(1));
+        closeResult.onClick.AddListener(() => CloseResult());
     }
 
     public void Teleport() 
@@ -101,6 +103,7 @@ public class BattleManager : MonoBehaviour
     public void StartBattle(List<EnemyData> enemies)
     {
         player.transform.position = playerPosition.transform.position;
+        battleCameraPosition.SetActive(true);
         battleScene.SetActive(true);
         currentEnemies = enemies;
         energySlider.value = 2;
