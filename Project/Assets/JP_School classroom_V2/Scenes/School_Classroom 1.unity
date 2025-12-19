@@ -29974,7 +29974,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5433540144654025127, guid: 81bd93f7426d40848b77356f7577dbea, type: 3}
   enemyTargetManager: {fileID: 2163847233617846595, guid: 37c45c24ca26440468929c641f816f6e, type: 3}
   targetPanel: {fileID: 3324822590891146140}
-  battleButton: {fileID: 6723598223831025451}
+  battleButton: {fileID: 8006209704726202771}
   player: {fileID: 5011473869293760207}
   playerSprite: {fileID: 5011473869293760207}
   playerPosition: {fileID: 549592682}
@@ -47262,7 +47262,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5433540144654025127, guid: 81bd93f7426d40848b77356f7577dbea, type: 3}
   enemyTargetManager: {fileID: 2163847233617846595, guid: 37c45c24ca26440468929c641f816f6e, type: 3}
   targetPanel: {fileID: 3324822590891146140}
-  battleButton: {fileID: 6723598223831025451}
+  battleButton: {fileID: 8006209704726202771}
   player: {fileID: 5011473869293760207}
   playerSprite: {fileID: 5011473869293760207}
   playerPosition: {fileID: 965410317}
@@ -47998,7 +47998,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5433540144654025127, guid: 81bd93f7426d40848b77356f7577dbea, type: 3}
   enemyTargetManager: {fileID: 2163847233617846595, guid: 37c45c24ca26440468929c641f816f6e, type: 3}
   targetPanel: {fileID: 3324822590891146140}
-  battleButton: {fileID: 6723598223831025451}
+  battleButton: {fileID: 8006209704726202771}
   player: {fileID: 5011473869293760207}
   playerSprite: {fileID: 5011473869293760207}
   playerPosition: {fileID: 965410317}
@@ -81729,7 +81729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 6937458.5}
+  m_AnchoredPosition: {x: 0, y: 6948549.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8220975952832441904
