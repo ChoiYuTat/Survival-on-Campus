@@ -51,6 +51,7 @@ public class BattleManager : MonoBehaviour
     public Text energyText, playerHP, earnedEXP_txt;
     public AudioClip enemyHit, playerHit, enemyDead, playerDead, criticalSound, dodge, heal;
     public Image hitImage, healImage;
+    public Button fight, skill;
 
     private List<EnemyData> currentEnemies = new List<EnemyData>();
     private List<GameObject> enemies = new List<GameObject>();
@@ -80,6 +81,12 @@ public class BattleManager : MonoBehaviour
     {
         energyText.text = energySlider.value.ToString();
         audioSource = GetComponent<AudioSource>();
+
+        fight.onClick.AddListener(() => { 
+            PlayerAction(0);
+            targetPanel.SetActive(true);
+        });
+        skill.onClick.AddListener(() => PlayerAction(1));
     }
 
     public void Teleport() 
@@ -130,6 +137,9 @@ public class BattleManager : MonoBehaviour
 
     public void PlayerAction(int actionType)
     {
+        if (battleScene == null)
+            return;
+
         state = BattleState.SelectTarget;
         for (int i = 0; i < targets.Count; i++)
         {
