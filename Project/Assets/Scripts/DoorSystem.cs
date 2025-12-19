@@ -7,14 +7,12 @@ public class DoorSystem : MonoBehaviour
     private GameObject targetDoor, existPosition;
 
     [SerializeField]
-    private GameObject targetCamera;
-
-    [SerializeField]
-    private bool enterState;
+    private GameObject targetCamera, currenCamera;
 
     public void openDoor(GameObject door) 
     {
         existPosition.transform.position = targetDoor.transform.position;
-        targetCamera.SetActive(enterState);
+        targetCamera.SetActive(true);
+        currenCamera.SetActive(false);
     }
 }
