@@ -29997,7 +29997,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 124524752904522530}
   energySlider: {fileID: 560677504355637637}
   energyText: {fileID: 4845740859466556122}
-  playerHP: {fileID: 2358259310095190943}
+  playerHP: {fileID: 3929855008922562952}
   earnedEXP_txt: {fileID: 7290888253370597868}
   enemyHit: {fileID: 8300000, guid: b7e5dd0915499404fab9f0a1bab46c65, type: 3}
   playerHit: {fileID: 8300000, guid: e866d28852c8d344f82d227f3b3f40d3, type: 3}
@@ -47285,7 +47285,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 124524752904522530}
   energySlider: {fileID: 560677504355637637}
   energyText: {fileID: 4845740859466556122}
-  playerHP: {fileID: 2358259310095190943}
+  playerHP: {fileID: 3929855008922562952}
   earnedEXP_txt: {fileID: 7290888253370597868}
   enemyHit: {fileID: 8300000, guid: b7e5dd0915499404fab9f0a1bab46c65, type: 3}
   playerHit: {fileID: 8300000, guid: e866d28852c8d344f82d227f3b3f40d3, type: 3}
@@ -48021,7 +48021,7 @@ MonoBehaviour:
   gameOverCanvas: {fileID: 124524752904522530}
   energySlider: {fileID: 560677504355637637}
   energyText: {fileID: 4845740859466556122}
-  playerHP: {fileID: 2358259310095190943}
+  playerHP: {fileID: 3929855008922562952}
   earnedEXP_txt: {fileID: 7290888253370597868}
   enemyHit: {fileID: 8300000, guid: b7e5dd0915499404fab9f0a1bab46c65, type: 3}
   playerHit: {fileID: 8300000, guid: e866d28852c8d344f82d227f3b3f40d3, type: 3}
@@ -81729,7 +81729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 6948549.5}
+  m_AnchoredPosition: {x: 0, y: 6985214.5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8220975952832441904
