@@ -21,8 +21,8 @@
     {
       "id": 2,
       "name": "Violent Infector",
-      "hp": 25,
-      "maxHp": 25,
+      "hp": 40,
+      "maxHp": 40,
       "attack": 12,
       "defense": 2,
       "exp": 15,
@@ -43,8 +43,8 @@
     {
       "id": 3,
       "name": "Parkour Infector",
-      "hp": 30,
-      "maxHp": 30,
+      "hp": 45,
+      "maxHp": 45,
       "attack": 8,
       "defense": 3,
       "exp": 12,
