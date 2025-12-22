@@ -6,7 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;      // 移动速度
-    [SerializeField] private float turnSpeed = 8f;      // 转向速度
+    //[SerializeField] private float turnSpeed = 8f;      // 转向速度
     [SerializeField] private float turnSmoothTime = 0.1f; // 转向平间
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject modelRotation;

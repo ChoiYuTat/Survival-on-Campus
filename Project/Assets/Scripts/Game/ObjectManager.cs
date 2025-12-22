@@ -156,6 +156,11 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        EButton.SetActive(false);
+    }
+
     void checkLocked() 
     {
         if (lockType != LockType.None)

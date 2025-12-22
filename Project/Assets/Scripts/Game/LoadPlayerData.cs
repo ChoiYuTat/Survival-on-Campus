@@ -85,7 +85,7 @@ public class LoadPlayerData : MonoBehaviour
 
     private void Start()
     {
-        Invoke("UpdatePosition", 0.01f);
+        Invoke("UpdatePosition", 0.05f);
     }
 
     void UpdatePosition() 

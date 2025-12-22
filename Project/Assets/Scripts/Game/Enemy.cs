@@ -138,11 +138,10 @@ public class Enemy : MonoBehaviour
     {
         //animator.SetTrigger("Attack");
         bool qteFinished = false;
-        bool qteSuccess = false;
 
         // 注册临时回调
-        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; qteSuccess = true; };
-        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true; qteSuccess = false; };
+        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; };
+        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true;  };
 
         // 找到对应的QTE事件并绑定回调
         var qte = qteManager.qteEvents.Find(e => e.eventName == "EnemyAttack");
@@ -170,11 +169,10 @@ public class Enemy : MonoBehaviour
     {
         //animator.SetTrigger("JumpAttack");
         bool qteFinished = false;
-        bool qteSuccess = false;
 
         // 注册临时回调
-        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; qteSuccess = true; };
-        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true; qteSuccess = false; };
+        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; };
+        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true;};
 
         // 找到对应的QTE事件并绑定回调
         var qte = qteManager.qteEvents.Find(e => e.eventName == "EnemyJumpAttack");
@@ -200,11 +198,10 @@ public class Enemy : MonoBehaviour
     {
         //animator.SetTrigger("JumpAttack");
         bool qteFinished = false;
-        bool qteSuccess = false;
 
         // 注册临时回调
-        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; qteSuccess = true; };
-        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true; qteSuccess = false; };
+        UnityEngine.Events.UnityAction successAction = () => { qteFinished = true; };
+        UnityEngine.Events.UnityAction failureAction = () => { qteFinished = true; };
 
         // 找到对应的QTE事件并绑定回调
         var qte = qteManager.qteEvents.Find(e => e.eventName == "EnemyKeepAttack");

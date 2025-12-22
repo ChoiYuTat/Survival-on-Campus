@@ -3,8 +3,8 @@
     {
       "id": 1,
       "name": "Infector",
-      "hp": 30,
-      "maxHp": 30,
+      "hp": 45,
+      "maxHp": 45,
       "attack": 7,
       "defense": 3,
       "exp": 10,
@@ -21,8 +21,8 @@
     {
       "id": 2,
       "name": "Violent Infector",
-      "hp": 40,
-      "maxHp": 40,
+      "hp": 65,
+      "maxHp": 65,
       "attack": 12,
       "defense": 2,
       "exp": 15,
@@ -43,8 +43,8 @@
     {
       "id": 3,
       "name": "Parkour Infector",
-      "hp": 45,
-      "maxHp": 45,
+      "hp": 65,
+      "maxHp": 65,
       "attack": 8,
       "defense": 3,
       "exp": 12,

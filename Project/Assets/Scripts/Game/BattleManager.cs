@@ -164,7 +164,8 @@ public class BattleManager : MonoBehaviour
             //UseSkill();
             battleButton.SetActive(false);
             QTEmanager.ShowQTETips();
-            StartCoroutine(WaitAndTriggerSkillQTE(1f));
+            if (gameObject.activeSelf)
+                StartCoroutine(WaitAndTriggerSkillQTE(1f));
         }
     }
 
@@ -198,7 +199,7 @@ public class BattleManager : MonoBehaviour
                 audioSource.PlayOneShot(enemyHit);
                 Invoke("PlayCriticalSound", 0.13f);
                 enemy.GetComponent<Enemy>().HeavyDamageEffect(criticalEffectPrefab);
-                cameraReceiver.InduceStress(0.4f);
+                cameraReceiver.InduceStress(0.3f);
             }
             else 
             {
@@ -248,7 +249,8 @@ public class BattleManager : MonoBehaviour
         QTEmanager.ShowQTETips();
         targetPanel.SetActive(false);
         battleButton.SetActive(false);
-        StartCoroutine(WaitAndTriggerFightQTE(1f));
+        if (gameObject.activeSelf)
+            StartCoroutine(WaitAndTriggerFightQTE(1f));
         targetIndex = target;
     }
 
@@ -257,6 +259,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         state = BattleState.PlayerAction;
         QTEmanager.TriggerQTE("Fight");
+        yield return null;
     }
 
     IEnumerator WaitAndTriggerSkillQTE(float waitTime)
@@ -281,6 +284,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         state = BattleState.PlayerAction;
         QTEmanager.TriggerQTE("Skill");
+        yield return null;
     }
 
     public void FightQTEBonues(float Multiplier) 
@@ -396,7 +400,7 @@ public class BattleManager : MonoBehaviour
     {
         StartCoroutine(HitAnimation());
         audioSource.PlayOneShot(playerHit);
-        cameraReceiver.InduceStress(0.5f);
+        cameraReceiver.InduceStress(0.4f);
         int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
                     - player.gameObject.GetComponent<LoadPlayerData>().data.Defense);
         playerData.data.HP -= damage;
