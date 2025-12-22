@@ -81,3 +81,16 @@ I4
 E1
 E2
 E3
+>Tutorial
+Tutorial
+Control
+WKey
+AKey
+SKey
+DKey
+EKey
+Battle
+B1
+B2
+B3
+B4

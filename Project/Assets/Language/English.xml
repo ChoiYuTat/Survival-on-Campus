@@ -81,3 +81,16 @@ I4=Used to open the principal's office door.
 E1=Infector
 E2=Violent Infector
 E3=Parkour Infector
+>Tutorial
+Tutorial=Tutorial
+Control=Control
+WKey=- Walk Forward
+AKey=- Go Left
+SKey=- Walk Backward
+DKey=- Go Right
+EKey=- Interact
+Battle=Battle
+B1=Players must press the corresponding button when the symbol moves into the yellow area of ​​that length.
+B2=Players must press the corresponding button repeatedly within a specified time.
+B3=Players must not press any button within a specified time.
+B4=Players must input the specified symbol in the shortest possible time.
