@@ -1248,6 +1248,7 @@ GameObject:
   - component: {fileID: 47073639}
   - component: {fileID: 47073641}
   - component: {fileID: 47073640}
+  - component: {fileID: 47073642}
   m_Layer: 0
   m_Name: 07
   m_TagString: Door
@@ -1514,6 +1515,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &47073642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47073635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 0}
 --- !u!1001 &52251109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1808,6 +1822,7 @@ MonoBehaviour:
   pickUpSound: {fileID: 8300000, guid: 4235aa6d11e568d4d9cf56efadaf16f0, type: 3}
   openDoorSound: {fileID: 8300000, guid: e42703f170097ee4585351bd7f598752, type: 3}
   lockSound: {fileID: 8300000, guid: 084775e5df070934499f10c6e92f0efb, type: 3}
+  EButton: {fileID: 1820741820}
   director: {fileID: 1840559994437418935}
   dialogueController: {fileID: 1614099291809150110}
   pickUpTimeline: {fileID: 11400000, guid: eddbb1d0462a1884c902760765879276, type: 2}
@@ -2886,6 +2901,7 @@ GameObject:
   - component: {fileID: 103746515}
   - component: {fileID: 103746514}
   - component: {fileID: 103746517}
+  - component: {fileID: 103746518}
   m_Layer: 0
   m_Name: corridor1/F
   m_TagString: Door
@@ -3042,6 +3058,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &103746518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103746513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &107615129
 GameObject:
   m_ObjectHideFlags: 0
@@ -5315,6 +5344,7 @@ GameObject:
   - component: {fileID: 148760389}
   - component: {fileID: 148760388}
   - component: {fileID: 148760390}
+  - component: {fileID: 148760391}
   m_Layer: 0
   m_Name: 40
   m_TagString: Door
@@ -5471,6 +5501,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &148760391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148760386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &149057646 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100068, guid: d25fad33b6e72f0498179f0855545337, type: 3}
@@ -6275,6 +6318,7 @@ GameObject:
   - component: {fileID: 192019037}
   - component: {fileID: 192019036}
   - component: {fileID: 192019038}
+  - component: {fileID: 192019039}
   m_Layer: 0
   m_Name: corridorG/F
   m_TagString: Door
@@ -6431,6 +6475,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &192019039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192019034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &194439567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6544,6 +6601,7 @@ GameObject:
   - component: {fileID: 198017331}
   - component: {fileID: 198017330}
   - component: {fileID: 198017332}
+  - component: {fileID: 198017333}
   m_Layer: 0
   m_Name: 30
   m_TagString: Door
@@ -6700,6 +6758,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &198017333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198017328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &198454251
 GameObject:
   m_ObjectHideFlags: 0
@@ -12804,9 +12875,7 @@ GameObject:
   - component: {fileID: 439281106}
   - component: {fileID: 439281105}
   - component: {fileID: 439281104}
-  - component: {fileID: 439281103}
   - component: {fileID: 439281107}
-  - component: {fileID: 439281108}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12814,14 +12883,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &439281103
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439281102}
-  m_Enabled: 0
 --- !u!124 &439281104
 Behaviour:
   m_ObjectHideFlags: 0
@@ -12940,21 +13001,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &439281108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439281102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ee1c62c905bb24ea7c9cf3d9d40b56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TraumaExponent: 1
-  MaximumAngularShake: {x: 5, y: 5, z: 5}
-  MaximumTranslationShake: {x: 0.75, y: 0.75, z: 0.75}
 --- !u!1 &440614364
 GameObject:
   m_ObjectHideFlags: 0
@@ -14623,6 +14669,7 @@ GameObject:
   - component: {fileID: 498703837}
   - component: {fileID: 498703839}
   - component: {fileID: 498703840}
+  - component: {fileID: 498703841}
   m_Layer: 0
   m_Name: 70
   m_TagString: Door
@@ -14792,6 +14839,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &498703841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498703835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &501084071
 GameObject:
   m_ObjectHideFlags: 0
@@ -18477,6 +18537,7 @@ GameObject:
   - component: {fileID: 615332805}
   - component: {fileID: 615332804}
   - component: {fileID: 615332803}
+  - component: {fileID: 615332806}
   m_Layer: 0
   m_Name: CinemachineCamera (1)
   m_TagString: Untagged
@@ -18575,6 +18636,21 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &615332806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615332801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ee1c62c905bb24ea7c9cf3d9d40b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TraumaExponent: 1
+  MaximumAngularShake: {x: 5, y: 5, z: 5}
+  MaximumTranslationShake: {x: 0.75, y: 0.75, z: 0.75}
 --- !u!1 &615731723
 GameObject:
   m_ObjectHideFlags: 0
@@ -19798,7 +19874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionimage: {fileID: 0}
+  interactionimage: {fileID: 1820741820}
 --- !u!82 &661158675
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20010,7 +20086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionimage: {fileID: 0}
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &667215950
 GameObject:
   m_ObjectHideFlags: 0
@@ -20913,7 +20989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionimage: {fileID: 0}
+  interactionimage: {fileID: 1820741820}
 --- !u!82 &693411576
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21385,6 +21461,7 @@ GameObject:
   - component: {fileID: 712237620}
   - component: {fileID: 712237619}
   - component: {fileID: 712237622}
+  - component: {fileID: 712237623}
   m_Layer: 0
   m_Name: 03
   m_TagString: Door
@@ -21541,6 +21618,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &712237623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712237618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &712923596 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: bed407a1c4322c2459ee187fd3237326, type: 3}
@@ -32119,7 +32209,7 @@ MonoBehaviour:
   battleCameraPosition: {fileID: 1159531852}
   hitEffectPrefab: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   criticalEffectPrefab: {fileID: 2054803858064431036, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
-  cameraReceiver: {fileID: 439281108}
+  cameraReceiver: {fileID: 1294237347}
   menuManager: {fileID: 3487457989434365399}
   QTEmanager: {fileID: 758557228}
   targetContent: {fileID: 6228670939182773082}
@@ -33062,7 +33152,7 @@ GameObject:
   - component: {fileID: 1190142992}
   - component: {fileID: 1190142991}
   - component: {fileID: 1190142990}
-  - component: {fileID: 1190142989}
+  - component: {fileID: 1190142995}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Door
@@ -33085,19 +33175,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1394187359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1190142989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1190142987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionimage: {fileID: 1820741820}
 --- !u!82 &1190142990
 AudioSource:
   m_ObjectHideFlags: 0
@@ -33285,6 +33362,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1190142987}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1190142995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190142987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &1191104472
 GameObject:
   m_ObjectHideFlags: 0
@@ -34973,6 +35063,7 @@ MonoBehaviour:
   pickUpSound: {fileID: 8300000, guid: 4235aa6d11e568d4d9cf56efadaf16f0, type: 3}
   openDoorSound: {fileID: 8300000, guid: e42703f170097ee4585351bd7f598752, type: 3}
   lockSound: {fileID: 8300000, guid: 084775e5df070934499f10c6e92f0efb, type: 3}
+  EButton: {fileID: 1820741820}
   director: {fileID: 8067887600219330109}
   dialogueController: {fileID: 1614099291809150110}
   pickUpTimeline: {fileID: 11400000, guid: d608d83b8da7abb4c8c99cb85ee2ff19, type: 2}
@@ -36377,6 +36468,7 @@ GameObject:
   - component: {fileID: 1294237346}
   - component: {fileID: 1294237345}
   - component: {fileID: 1294237344}
+  - component: {fileID: 1294237347}
   m_Layer: 0
   m_Name: CinemachineCamera (2)
   m_TagString: Untagged
@@ -36475,6 +36567,21 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &1294237347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294237342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ee1c62c905bb24ea7c9cf3d9d40b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TraumaExponent: 1
+  MaximumAngularShake: {x: 5, y: 5, z: 5}
+  MaximumTranslationShake: {x: 0.75, y: 0.75, z: 0.75}
 --- !u!1 &1299441700
 GameObject:
   m_ObjectHideFlags: 0
@@ -41470,6 +41577,7 @@ GameObject:
   - component: {fileID: 1542301069}
   - component: {fileID: 1542301068}
   - component: {fileID: 1542301067}
+  - component: {fileID: 1542301070}
   m_Layer: 0
   m_Name: CinemachineCamera (3)
   m_TagString: Untagged
@@ -41568,6 +41676,21 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
+--- !u!114 &1542301070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542301065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ee1c62c905bb24ea7c9cf3d9d40b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TraumaExponent: 1
+  MaximumAngularShake: {x: 5, y: 5, z: 5}
+  MaximumTranslationShake: {x: 0.75, y: 0.75, z: 0.75}
 --- !u!1 &1542781288
 GameObject:
   m_ObjectHideFlags: 0
@@ -46510,6 +46633,7 @@ GameObject:
   - component: {fileID: 1709266339}
   - component: {fileID: 1709266338}
   - component: {fileID: 1709266340}
+  - component: {fileID: 1709266341}
   m_Layer: 0
   m_Name: 04
   m_TagString: Door
@@ -46666,6 +46790,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1709266341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709266336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1001 &1711795930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48653,6 +48790,7 @@ MonoBehaviour:
   pickUpSound: {fileID: 8300000, guid: 4235aa6d11e568d4d9cf56efadaf16f0, type: 3}
   openDoorSound: {fileID: 8300000, guid: e42703f170097ee4585351bd7f598752, type: 3}
   lockSound: {fileID: 8300000, guid: 084775e5df070934499f10c6e92f0efb, type: 3}
+  EButton: {fileID: 1820741820}
   director: {fileID: 1840559994437418935}
   dialogueController: {fileID: 1614099291809150110}
   pickUpTimeline: {fileID: 11400000, guid: eddbb1d0462a1884c902760765879276, type: 2}
@@ -48913,6 +49051,7 @@ GameObject:
   - component: {fileID: 1807787112}
   - component: {fileID: 1807787115}
   - component: {fileID: 1807787116}
+  - component: {fileID: 1807787117}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -49070,6 +49209,21 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1807787111}
   m_Enabled: 1
+--- !u!114 &1807787117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807787111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ee1c62c905bb24ea7c9cf3d9d40b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TraumaExponent: 1
+  MaximumAngularShake: {x: 5, y: 5, z: 5}
+  MaximumTranslationShake: {x: 0.75, y: 0.75, z: 0.75}
 --- !u!1001 &1808596604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49369,7 +49523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1820741821
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51224,7 +51378,7 @@ GameObject:
   - component: {fileID: 1908846183}
   - component: {fileID: 1908846182}
   - component: {fileID: 1908846181}
-  - component: {fileID: 1908846180}
+  - component: {fileID: 1908846187}
   m_Layer: 0
   m_Name: Entry
   m_TagString: Door
@@ -51232,19 +51386,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1908846180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908846179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionimage: {fileID: 1820741820}
 --- !u!82 &1908846181
 AudioSource:
   m_ObjectHideFlags: 0
@@ -51447,6 +51588,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1394187359}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1908846187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908846179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionimage: {fileID: 1820741820}
 --- !u!1001 &1913866353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51720,7 +51874,7 @@ MonoBehaviour:
   battleCameraPosition: {fileID: 1873132430}
   hitEffectPrefab: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   criticalEffectPrefab: {fileID: 2054803858064431036, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
-  cameraReceiver: {fileID: 439281108}
+  cameraReceiver: {fileID: 615332806}
   menuManager: {fileID: 3487457989434365399}
   QTEmanager: {fileID: 618331209}
   targetContent: {fileID: 6228670939182773082}
@@ -52460,7 +52614,7 @@ MonoBehaviour:
   battleCameraPosition: {fileID: 1972555078}
   hitEffectPrefab: {fileID: 3042519775331041172, guid: 841004c4c6a39e244abe2257394de913, type: 3}
   criticalEffectPrefab: {fileID: 2054803858064431036, guid: 500c1d6ddd48f2c4092af85e4e941eb2, type: 3}
-  cameraReceiver: {fileID: 439281108}
+  cameraReceiver: {fileID: 1542301070}
   menuManager: {fileID: 3487457989434365399}
   QTEmanager: {fileID: 5818147071425001083}
   targetContent: {fileID: 6228670939182773082}
@@ -54133,7 +54287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionimage: {fileID: 0}
+  interactionimage: {fileID: 1820741820}
 --- !u!82 &1947749793
 AudioSource:
   m_ObjectHideFlags: 0
@@ -54843,7 +54997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionimage: {fileID: 0}
+  interactionimage: {fileID: 1820741820}
 --- !u!82 &1958756858
 AudioSource:
   m_ObjectHideFlags: 0
@@ -56704,7 +56858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9358552c7ded84c48a1ed7da75e9c899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionimage: {fileID: 0}
+  interactionimage: {fileID: 1820741820}
 --- !u!1 &2048744981
 GameObject:
   m_ObjectHideFlags: 0
@@ -64304,7 +64458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0012207, y: 161}
+  m_AnchoredPosition: {x: 0.0012207, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1454251803816475493
@@ -78063,6 +78217,7 @@ MonoBehaviour:
   pickUpSound: {fileID: 8300000, guid: 4235aa6d11e568d4d9cf56efadaf16f0, type: 3}
   openDoorSound: {fileID: 8300000, guid: e42703f170097ee4585351bd7f598752, type: 3}
   lockSound: {fileID: 8300000, guid: 084775e5df070934499f10c6e92f0efb, type: 3}
+  EButton: {fileID: 1820741820}
   director: {fileID: 1840559994437418935}
   dialogueController: {fileID: 1614099291809150110}
   pickUpTimeline: {fileID: 11400000, guid: eddbb1d0462a1884c902760765879276, type: 2}
@@ -85583,6 +85738,7 @@ MonoBehaviour:
   pickUpSound: {fileID: 8300000, guid: 4235aa6d11e568d4d9cf56efadaf16f0, type: 3}
   openDoorSound: {fileID: 8300000, guid: e42703f170097ee4585351bd7f598752, type: 3}
   lockSound: {fileID: 8300000, guid: 084775e5df070934499f10c6e92f0efb, type: 3}
+  EButton: {fileID: 1820741820}
   director: {fileID: 8067887600219330109}
   dialogueController: {fileID: 1614099291809150110}
   pickUpTimeline: {fileID: 11400000, guid: d608d83b8da7abb4c8c99cb85ee2ff19, type: 2}
@@ -86395,7 +86551,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 9854005}
+  m_AnchoredPosition: {x: 0, y: 10224769}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8220975952832441904

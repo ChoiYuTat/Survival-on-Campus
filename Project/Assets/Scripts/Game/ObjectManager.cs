@@ -53,6 +53,9 @@ public class ObjectManager : MonoBehaviour
     [SerializeField]
     private AudioClip pickUpSound, openDoorSound, lockSound;
 
+    [SerializeField]
+    private GameObject EButton;
+
     public PlayableDirector director;
     public DialogueController dialogueController;
     public TimelineAsset pickUpTimeline;
@@ -129,6 +132,8 @@ public class ObjectManager : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            EButton.SetActive(true);
+
             if (Input.GetKey(KeyCode.E))
             {
                 switch (objectType)
@@ -200,6 +205,7 @@ public class ObjectManager : MonoBehaviour
 
     void OpenDoor() 
     {
+        EButton.SetActive(false);
         GameObject door = transform.GetChild(0).gameObject;
         Debug.Log(door);
         door.SetActive(true);
@@ -210,6 +216,8 @@ public class ObjectManager : MonoBehaviour
 
     void PickUpObject(int id)
     {
+        EButton.SetActive(false);
+
         for (int i = 0; i < itemDatabase.item.Length; i++)
         {
             if (itemDatabase.item[i].itemID == objectItemID)
