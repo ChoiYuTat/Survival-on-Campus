@@ -13,17 +13,19 @@ public class TimelineTrigger : MonoBehaviour
 
     private void Start()
     {
-        LoadTrigger();
+        Invoke("LoadTrigger", 0.01f);
     }
 
     void LoadTrigger() 
     {
+        Debug.Log(playerData.GetComponent<LoadPlayerData>().data.plotID.Count);
         for (int i = 0; i < playerData.GetComponent<LoadPlayerData>().data.plotID.Count; i++) 
         {
-            if (playerData.GetComponent<LoadPlayerData>().data.plotID[i].Contains(ID))
+            Debug.Log("Checking triggered timelines: " + playerData.GetComponent<LoadPlayerData>().data.plotID[i]);
+            if (playerData.GetComponent<LoadPlayerData>().data.plotID[i] == ID)
             {
+                gameObject.SetActive(false);
                 triggered = true;
-                director.enabled = false;
                 Debug.Log("Timeline " + ID + " already triggered, disabling trigger.");
                 break;
             }

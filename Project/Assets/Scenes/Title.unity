@@ -2741,7 +2741,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: School_Classroom 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &620453775534363830
@@ -3068,7 +3068,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: School_Classroom 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1276090821904815682
@@ -3248,7 +3248,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: School_Classroom 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1398573558381655718
@@ -3347,7 +3347,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: School_Classroom 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1422077294906280912
@@ -4495,7 +4495,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: School_Classroom 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &3145823190767976987
@@ -5019,7 +5019,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: School_Classroom 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &3910553327754039745
@@ -5381,7 +5381,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: School_Classroom 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &4380829679080519479
@@ -7168,7 +7168,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: SampleScene
+          m_StringArgument: School_Classroom 1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &7050079118263225587
