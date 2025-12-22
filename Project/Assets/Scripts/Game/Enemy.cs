@@ -1,13 +1,14 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private EnemyData enemyData;
     [SerializeField]
-    private TMP_Text damageText;
+    private Text damageText;
     [SerializeField]
     private GameObject[] enemyModelPrefab;
 
@@ -33,7 +34,7 @@ public class Enemy : MonoBehaviour
         this.number = number;
         model = Instantiate(enemyModelPrefab[enemyData.id - 1], position.position, position.rotation, transform);
         model.transform.rotation = Quaternion.Euler(0, 180, 0);
-        model.transform.localScale = new Vector3(1.5f, 2f, 1.5f);
+        model.transform.localScale = new Vector3(1f, 1.5f, 1f);
         model.transform.position += new Vector3(0, -0.5f, 0);
         animator = model.GetComponent<Animator>();
 

@@ -198,12 +198,12 @@ public class BattleManager : MonoBehaviour
                 audioSource.PlayOneShot(enemyHit);
                 Invoke("PlayCriticalSound", 0.13f);
                 enemy.GetComponent<Enemy>().HeavyDamageEffect(criticalEffectPrefab);
-                cameraReceiver.InduceStress(0.10f);
+                cameraReceiver.InduceStress(0.4f);
             }
             else 
             {
                 audioSource.PlayOneShot(enemyHit);
-                cameraReceiver.InduceStress(0.04f);
+                cameraReceiver.InduceStress(0.1f);
             }
 
             enemy.GetComponent<Enemy>().TakeDamage(hitEffectPrefab, damage);
@@ -312,13 +312,13 @@ public class BattleManager : MonoBehaviour
         {
             audioSource.PlayOneShot(enemyHit);
             Invoke("PlayCriticalSound", 0.13f);
-            cameraReceiver.InduceStress(0.10f);
+            cameraReceiver.InduceStress(0.4f);
             target.HeavyDamageEffect(criticalEffectPrefab);
         }
         else
         {
             audioSource.PlayOneShot(enemyHit);
-            cameraReceiver.InduceStress(0.04f);
+            cameraReceiver.InduceStress(0.1f);
         }
         target.TakeDamage(hitEffectPrefab, damage);
 
@@ -396,7 +396,7 @@ public class BattleManager : MonoBehaviour
     {
         StartCoroutine(HitAnimation());
         audioSource.PlayOneShot(playerHit);
-        cameraReceiver.InduceStress(0.2f);
+        cameraReceiver.InduceStress(0.5f);
         int damage = (int)(currentEnemies[currentEnemyIndex].attack * currentEnemies[currentEnemyIndex].skills[skillIndex].damageMultiplier
                     - player.gameObject.GetComponent<LoadPlayerData>().data.Defense);
         playerData.data.HP -= damage;
