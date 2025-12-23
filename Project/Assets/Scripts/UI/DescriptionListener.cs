@@ -17,6 +17,7 @@ public class DescriptionListener : MonoBehaviour, IPointerEnterHandler, IPointer
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log(player);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

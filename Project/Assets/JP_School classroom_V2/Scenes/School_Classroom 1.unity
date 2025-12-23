@@ -36047,7 +36047,7 @@ MonoBehaviour:
   targetPanel: {fileID: 3324822590891146140}
   battleButton: {fileID: 8006209704726202771}
   player: {fileID: 5011473869293760207}
-  playerSprite: {fileID: 5011473869293760207}
+  playerSprite: {fileID: 7726105450395378481}
   playerPosition: {fileID: 549592682}
   LevelUPTXT: {fileID: 5692078217433391061}
   enemyPosition:
@@ -59104,7 +59104,7 @@ MonoBehaviour:
   targetPanel: {fileID: 3324822590891146140}
   battleButton: {fileID: 8006209704726202771}
   player: {fileID: 5011473869293760207}
-  playerSprite: {fileID: 5011473869293760207}
+  playerSprite: {fileID: 7726105450395378481}
   playerPosition: {fileID: 965410317}
   LevelUPTXT: {fileID: 5692078217433391061}
   enemyPosition:
@@ -60084,7 +60084,7 @@ MonoBehaviour:
   targetPanel: {fileID: 3324822590891146140}
   battleButton: {fileID: 8006209704726202771}
   player: {fileID: 5011473869293760207}
-  playerSprite: {fileID: 5011473869293760207}
+  playerSprite: {fileID: 7726105450395378481}
   playerPosition: {fileID: 965410317}
   LevelUPTXT: {fileID: 5692078217433391061}
   enemyPosition:
@@ -94122,7 +94122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 11959636}
+  m_AnchoredPosition: {x: 0, y: 12005539}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8220975952832441904
