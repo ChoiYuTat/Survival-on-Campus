@@ -2362,7 +2362,7 @@ Transform:
   m_GameObject: {fileID: 67485233}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.06, y: 0, z: 0}
+  m_LocalPosition: {x: -3.42, y: 0, z: -1.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5593,7 +5593,7 @@ Transform:
   m_GameObject: {fileID: 148468093}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.73, y: 0, z: 0}
+  m_LocalPosition: {x: 4.66, y: 0, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9174,7 +9174,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 265976791}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -12467,7 +12467,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 393242122}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -16042,7 +16042,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 524454528}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -22010,7 +22010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &664537444
 Transform:
   m_ObjectHideFlags: 0
@@ -22464,7 +22464,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 685534999}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -25033,7 +25033,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 751512872}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -25129,7 +25129,7 @@ Transform:
   m_GameObject: {fileID: 751512872}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.65, y: 0.393, z: -6.282}
+  m_LocalPosition: {x: 24.53, y: 0.393, z: -5.83}
   m_LocalScale: {x: 0.58281, y: 0.58281, z: 0.58281}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25727,7 +25727,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 760412513}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -46188,7 +46188,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1489992771}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -46815,7 +46815,7 @@ Transform:
   m_GameObject: {fileID: 1501916203}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.73, y: 0, z: 0}
+  m_LocalPosition: {x: 3.35, y: 0, z: 1.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48817,7 +48817,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1572583201}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -50762,7 +50762,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1610820964}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -54239,7 +54239,7 @@ Transform:
   m_GameObject: {fileID: 1751302490}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.06, y: 0, z: 0}
+  m_LocalPosition: {x: -3.36, y: 0, z: -1.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76076,7 +76076,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8455425031288133322}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.8
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -76502,7 +76502,7 @@ Transform:
   m_GameObject: {fileID: 8455425031288133322}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.396198, y: 0.393, z: -5.29}
+  m_LocalPosition: {x: 18.77, y: 0.393, z: -5.29}
   m_LocalScale: {x: 0.58281, y: 0.58281, z: 0.58281}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -94122,7 +94122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 11825769}
+  m_AnchoredPosition: {x: 0, y: 11959636}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &8220975952832441904
